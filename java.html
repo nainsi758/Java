@@ -1,0 +1,261 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <title>Java</title>
+        <style>
+            h1 {
+                color: red;
+            }
+            h3 {
+                color: darkblue;
+            }
+            h5 {
+                color: darkgreen;
+            }
+            table th {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Language Fundamentals</h1>
+        <h3>1. Identifiers</h3> a name which can be used for identification purpose. It can be class name, function name and label name </p>
+        <mark>We can't use reserved word as identifiers.
+        Predefined class name and interface names can be used as identifiers</mark>
+        
+        <h3>2. Reserved Words</h3>
+        <p>Some words are reserved to represent some meaning or functionality called reserved words.</p>
+        <mark>Total 53 reserved words are there.
+             In them 50 are keywords and 3 are reserved literals.
+        </mark>
+        <h5>keyword(Unused keywords - goto const)</h5>
+        <p>If the reserved word associated with functionality. 48 keywords are used keywords and 2 are unused.</p>
+        <p><h5>Reserved literals(true false null)</h5>If the reserved word only to represent value.
+        
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for data types(8)</h6><p>byte<br>short<br>int<br>long<br>float<br>double<br>boolean<br>char</p></div>                  
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Keywords for flow control(11)</h6><p>if<br>else<br>switch<br>case<br>default<br>while<br>do<br>for<br>break<br>continue<br>return</p></div>
+                <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for modifiers(11)</h6><p>public<br>private<br>protected<br>static<br>final<br>abstract<br>synchronized<br>native<br>strictfb<br>transient<br>volatile</p></div>
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Keywords for exception handling(6)</h6><p>try<br>catch<br>finally<br>throw<br>throws<br>assert</p></div>
+                <div class="col-sm-1" style="background-color:lavender;"><h6>Class related keywors(6)</h6><p>class<br>interface<br>extends<br>implements<br>package<br>import</p></div>
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Object related keywords(4)</h6><p>new<br>instanceof<br>super<br>this</p></div>
+                <div class="col-sm-1" style="background-color:lavender;"><h6>Void return type keyword(1)</h6><p>void</p></div>
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Enum Keyword(1)</h6><p>Enum</p></div>
+                <div class="col-sm-1" style="background-color:lavender;"><h6>Unused keywords(2)</h6><p>goto<br>const</p></div>
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Reserved literals(3)</h6><p>true<br>false<br>null</p></div>
+            </div>
+        </div>
+        <mark>Delete keyword is not there because destruction of the object is responsibility of garbage collector</mark>
+        <p>We can use enum to define a group of named constants</p>
+        <mark>In java return type is mandatory</mark>
+        <h3>3. Data Types</h3>
+        <p>In java every variable and every expression has some type. Each and every datatype is clearly defined. Every assignment should be checked by compiler for type compatibility because of above reasons we can conclude java language is strongly typed  programming language</p>
+        <div class="container-fluid">
+            <p class="bg-warning text-white">Is java pure oop language or not?</p>
+        
+            <p>Java is not considered as pure oop language because several oop feature is not supported by java. Like operator overloading and multiple inheritance etc. We are depending on primitive data types which are non-object</p>
+        </div>
+
+        <h5>Primitive data types(8)</h5>
+        <p>Numeric data types - Data types which can be used to represent only numbers</p>
+        <p>Non-Numeric data types - Data types which can be used to represent only numbers</p>
+        <p>Except char and boolean remaining data types are signed data types because we can represent both positive and negative numbers.</p>
+        <p>0 represents positive number and 1 represents negative number. Positive numers will be represented directly in a memory whereas as negative numbers will be represented in 2's compliment form.</p>
+        <p> If we want to handle data in terms of streams either from the file or from the network. file supported form or the the network supported form is byte data type</p>
+        <p>Short is the most rarely used data type in java</p>
+        <p>If we want 5 to 6 decimal places of accuracy go for float. Float follows single precision.</p>
+        <p>If we want 14 to 15 decimal places of accuracy go for double. Double follows double precision</p>
+        <table class="table table-striped" >
+            <thead class="thead-dark">
+              <tr>
+                <th colspan="3">Primitive data types(8)</th>
+              </tr>
+              <tr>
+                <th colspan="2">Numeric Data Type</th>
+                <th>Non numeric Data Type</th>
+              </tr>
+              <tr>
+                <th>Integral Data Type</th>
+                <th>Floating Point Data Type</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Byte(size 1 bytes 8 bits) -128 to +127 Wrapper class-Byte Default value-0</td>
+                <td>float(size 4 bytes) -3.4e38 to 3.4e38 means (-3.4*10<sup>38</sup> to 3.4*10<sup>38</sup>) Wrapper class-Float Default value-0.0</td>
+                <td>character(2 bytes) 0 to 65535 Wrapper class-Character Default value-0(represents space character)</td>
+              </tr>
+              <tr>
+                <td>Short(2 bytes 16 bits) -2<sup>15</sup>to 2<sup>15</sup>-1(-32768 to 32767) Wrapper class-Short Default value-0</td>
+                <td>double(size 8 bytes) -1.7e308 to 1.7e308 Wrapper class-Double Default value-0.0</td>
+                <td>boolean(true and false) Wrapper class-Boolean Default value-false</td>
+              </tr>
+              <tr>
+                <td>Int(4 bytes 32 bits) -2<sup>31</sup>to 2<sup>31</sup>-1(-2147483648 to 2147483647) Wrapper class-Integer Default value-0</td>
+              </tr>
+              <tr>
+                <td>Long(8 bytes 64 bits) -2<sup>63</sup>to 2<sup>63</sup>-1 Wrapper class-Long Default value-0</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <code>
+              <pre>
+                  int x=1;
+                  if(x) {
+                      SOP("Hii");
+                  } else {
+                      SOP("Bye");
+                  }
+                </pre>
+             </code>
+             
+             <p class="text-primary"> This code will give error because this was possible in old languages. Here it is expecting boolean so provide boolean only</p>
+             </div>
+        <div class="container-fluid">
+            <p class="bg-warning text-white">Why java uses 2 byte instead of 1 byte for char?</p>
+            <p>Because java uses unicode, old language uses ascii code</p>
+        </div>
+
+        <mark>Null is the default value for object reference so we can't use it for primitive types</mark>
+
+        <h3>4. Literals</h3>
+
+        
+        
+        <p>A constant value wich can be assigned to the variable is called literal</p>
+        <code>int x = 10;</code>
+        <p>Here 10 is literal</p>
+
+        <h5>Integral Literals</h5> <p>For integral data types byte short int long we can specify literal value in the following ways.</p>
+
+        <h5>Decimal Form (base-10 means allowed digits are 0 to 9)</h5>
+        <p>Bydefault decmal only</p>
+        <h5>Octal value(base-8 means allowed digits are 0 to 7)</h5>
+        <p>If a number prefixed with 0 is considered as octal value</p>
+        <h5>Hexadecimal form(base-16 means allowed digits are 0 to 9 and A to F)</h5>
+        <p>Java is case sensitive, here for extra digits(a to f) we can use both lower case and upper case characters. This is one of very few areas where java is not case sensitive. For prefix also x can be uppercase or lowercase.</p>
+
+        <p>If a number prefixed with 0x is considered as hexadecimal value</p>
+        
+        <code>
+          int x = 10;
+          int y = 010;
+          int z = 0x10;
+        </code>
+
+        <output>Output : 10 8 16</output>
+        
+        <p>By default every integral literal is of int type but we can specify explicitly as long type by suffixed with l or L</p>
+
+        <code>
+          int x = 10L;
+        </code>
+        <output>Wrong because assigning 8 byte to 4 byte</output>
+
+        <h5>Floating Point Literals</h5>
+
+        <p>By default every Floating type literal is of type double type and hence we cant assign directly to the float variable but we can specify floating point literal as float type by suffixed with f or F</p>
+        <code>float f = 123.456f;</code>
+
+        <p>Floating point literals we can specify only in decimal form</p>
+        <p>We can't use octal and hexa with floating point literals only can use with integral literal type</p>
+        <code>double d = 0123.456</code><output>Valid(treated as Decimal only)</output><br>
+        <code>double d = 0x123.456</code><output>Not Valid</output><br>
+        <code>double d = 0786</code><output>No decimal point is there so treated as integral type only and as being integral it is prefixed with 0 so it will be treated as octal hence octal allows (0 -7) here 8 is there CE: Integer number too large</output><br>
+        <code>double d = 0xFace</code><output>Valid It is integral literal. Starts with 0x so hexadecimal. Face is allowed value. And we can assign integral literal directly to floating point variable and that integral literal can be specified either in decimal or octal or hexadecimal.</output><br>
+        <code>double d = 10</code><output>10.0</output><br>
+        <code>double d = 0xFace.0</code><output>Invalid</output><br>
+        <code>double d = 0777</code><output>Valid</output><br>
+        <code>double d = 1.2e3</code><output>Valid</output><br>  
+        
+        <h5>Boolean Literals</h5>
+        <p>Only allowed values for boolean literals are true or false</p>
+
+        <h5>Char Literals</h5>
+        <p>We can specify char literal as integral literal which represents unicode value of the character and that integral literal can be specified either in decimat or octal or hexa forms but allowed range is 65535</p>
+        <code>char ch = "a"</code><output>Invalid string not allowed</output><br>
+        <code>char ch = 'abc'</code><output>Unclosed character literal, not a java statement</output><br>
+        <code>char ch = "97</code><output>a</output><br>
+        <code>char ch = 65536</code><output>Found int req char</output>
+
+        <table class="table table-striped" >
+          <thead class="thead-dark">
+            <tr>
+              <th>Escape characters</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\n</td>
+              <td>new line</td>
+            </tr>
+            <tr>
+              <td>\t</td>
+              <td>Horizontal tab</td>
+            </tr>
+            <tr>
+              <td>\r</td>
+              <td>carriage return</td>
+            </tr>
+            <tr>
+              <td>\b</td>
+              <td>backspace character</td>
+            </tr>
+            <tr>
+              <td>\f</td>
+              <td>form feed</td>
+            </tr>
+            <tr>
+              <td>\'</td>
+              <td>Single quote</td>
+            </tr>
+            <tr>
+              <td>\"</td>
+              <td>Double quote</td>
+            </tr>
+            <tr>
+              <td>\\</td>
+              <td>backslash character</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>String Literals</h5>
+        <code>string s = "a"</code><output></output>
+        <h5>Binary Literals(from 1.7v onwards)</h5>
+        <code>int b = 0b1111</code><output>15</output>
+
+        <h5>Using underscore with numeric literals for readibility(from 1.7v onwards)</h5>
+        <code>double d = 1_23_456.7_8_9</code>
+        <p>At the time of compilation these underscores symbols will be removed automatically
+          hence after compilation above lines will become 
+        </p>
+        <code>double d = 123456.789;</code><br>
+        <code>double d = 1_____23_____456.7_8_9</code><output>ALso valid</output>
+        <code>double d = _1_23_456.7_8_9</code><output>Invalid</output>
+        <p>We can use underscore symbols only with in the digits</p>
+
+        <p>byte(1B)-----> short(2B) ------> int(4B) -----> long(8B) -----> float(4B) -----> double(8B)</p>
+        <p>char(2B) -----> int(4B) -----> long(8B) -----> float(4B) -----> double(8B)</p>
+
+        <p>8 byte long value we can assign to 4 B float variable bcoz both are following diff memory representation internally.</p>
+        <h3>5. Arrays</h3>
+        <h3>6. Types of variables</h3>
+        <h3>7. Var-arg methods</h3>
+        <h3>8. main method</h3>
+        <h3>9. command line arguments</h3>
+        <h3>10. java coding standards</h3>
+        
+        
+    </body>
+</html>
