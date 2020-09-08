@@ -993,12 +993,220 @@
         </output></pre>
 
         <mark>Once we creates an array every array element by default initialized with default values irrespective of whether it is instance or static or local array</mark>
+<h3>7. Var-arg methods(came in 1.5v)</h3>
+<p>Until 1.4v we cant declare a method with variable number of arguments if there is a change in number of arguments compulsory we should go for new method
+  it increases length of the code and reduces readibility hence to overcome this problem some people introduced var args methods in 1.5v
+  According to this we can declare a method which can take variable number of arguments such type of methods are called var args methods
+</p>
 
-        <h3>7. Var-arg methods</h3>
-        <h3>8. main method</h3>
-        <h3>9. command line arguments</h3>
-        <h3>10. java coding standards</h3>
+<p>We can declare a var args method as follows</p>
+<pre><code>
+  m1(int... x);
+</code></pre>
+<p>We can call this method by passing any number of int values including 0 numbers</p>
+
+<pre><code>
+  m1();
+  m1(10);
+  m1(10, 20);
+  m1(10, 20, 30);
+</code></pre>
+
+<p>All calls to m1() method are valid</p>
+
+<pre><code>
+  class Test {
+    public static void m1(int... x) {
+      SOP("var-arg method");
+    }
+    p s v m(String[] args) {
+      m1();
+      m1(10);
+      m1(10, 20);
+      m1(10, 20, 30);
+    }
+  }
+  </code></pre>
+
+  <pre><output>
+    var-arg method
+    var-arg method
+    var-arg method
+    var-arg method
+  </output></pre>
+
+<p>Internally var-arg parameter will be converted into one dimensional array hence within the var-arg method we can 
+  differentiate values by using index.
+</p>
+
+<pre><code>
+  class Test {
+    public static void m1(int... x) {
+      SOP("The number of arguments : " + x.length);
+    }
+    p s v m(String[] args) {
+      m1();
+      m1(10);
+      m1(10, 20);
+      m1(10, 20, 30);
+    }
+  }
+  </code></pre>
+
+  <pre><output>
+    The number of arguments : 0
+    The number of arguments : 1
+    The number of arguments : 2
+    The number of arguments : 3
+  </output></pre>
+
+  <pre><code>
+    class Test {
+      public static void sum(int... x) {
+        int total = 0;
+        for(int x1 : x) {
+          total = total + x1;
+        }
+        SOP("The sum " + total);
+      }
+      p s v m(String[] args) {
+        sum();
+        sum(10, 20);
+        sum(10, 20, 30);
+        sum(10, 20, 30, 40);
+      }
+    }
+    </code></pre>
+
+    <pre><output>
+      The sum 0
+      The sum 30
+      The sum 60
+      The sum 100
+    </output></pre>
+
+  <h6>case 1:</h6>
+  <p>Which of the following are valid var-arg method declarations</p>
+  <pre><code>
+    m1(int... x); (valid)
+    m1(int ...x); (valid)
+    m1(int...x);  (valid)
+    m1(int x...); (invalid)
+    m1(int. ..x); (invalid)
+    m1(int .x..); (invalid)
+  </code></pre>
+
+<h6>case 2:</h6>
+<p>We can mix var-arg parameter with normal parameter</p>
+<pre><code>
+  m1(int x, int... y);      (valid)
+  m1(String s, double... y);(valid)
+</code></pre>
+
+<h6>case 3:</h6>
+<p>If I mix normal parameter with var-arg parameter then var-arg parameter should
+  be last parameter</p>
+  <pre><code>
+    m1(double... d, String s); (invalid)
+    m1(char ch, String... s);  (valid)
+  </code></pre>
+
+<h6>case 4:</h6>
+<p>Inside var-arg method we can take only one var-arg parameter and we cant take more than one var-arg parameter</p>
+<pre><code>
+  m1(int... x, double... d);
+</code></pre>
+
+<pre><code>
+  class Test {
+    p s v m(String[] args) {
+      
+    }
+  }
+  </code></pre>
+
+<h6>case 5:</h6>
+<p>Inside a class we cant declare var-arg method and corresponding array method simultaneously o/w we will get compile time error</p>
+<pre><code>
+  class Test {
+    p s v m1(int... x) {
+      SOP("int...");
+    }
+    p s v m(int[] x) {
+       SOP("int[]"); 
+    }
+  }
+  </code></pre>
+
+  <pre><output>CE: cannot declare both m1(int[]) and m(int...) in Test</output></pre>
+
+  <h6>case 6 :</h6>
+  <pre><code>
+    class Test {
+      p s v m1(int... x) {
+        SOP("var-arg method");
+      }
+      p s v m1(int x) {
+         SOP("General method"); 
+      }
+      p s v main(String[] args) {
+        m1();
+        m1(10, 20);
+        m1(10);
+      }
+    }
+    </code></pre>
+
+    <pre><output>
+      var-arg method
+      var-arg method
+      General method
+    </output></pre>
+
+<p>In general var-arg method will get least priority i.e if no other method matched then only var-arg method will 
+  get the chance. It is exactly same as default case inside switch
+</p>
+
+<h6>Equivalence between var-arg parameter and 1D array</h6>
+<h6>case 1:</h6>
+<p>Wherever 1D array present we can replace with var-arg parameter</p>
+<p>m1(int[] x)  ->  m1(int... x)</p>
+
+<p>Main of string array args can be replaced with main(String... x)</p>
+<p>main(String[] args)  ->  main(String... x)</p>
+
+<h6>case 2:</h6>
+<p>Wherever var-arg parameter present we cant replace with 1D array</p>
+<p>m1(int... x)   ->   m1(int[] x)    (invalid replacement)</p>
+
+<mark>Note: 
+  m1(int... x) we can call this method by passing a group of int values and x will become 1D array
+</mark>
+
+<mark>m1(int[]... x) we can call this method by passing a group of 1D int arrays and x will become 2D int array</mark>
+
+<pre><code>
+  class Test {
+    p s v m(String[] args) {
+      int[] a = {10, 20, 30};
+      int[] b = {40, 50, 60};
+      m1(a, b);
+    }
+    p s v m1(int[]... x) {
+      for(int[] x1 : x) {
+        SOP(x1[0]);
+      }
+    }
+  }
+  </code></pre>
+  <pre><output>
+    10 
+    40
+  </output></pre>
+<h3>8. main method</h3>
+<h3>9. command line arguments</h3>
+<h3>10. java coding standards</h3>
         
         
-    </body>
+</body>
 </html>
