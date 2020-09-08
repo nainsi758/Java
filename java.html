@@ -250,6 +250,352 @@
 
         <p>8 byte long value we can assign to 4 B float variable bcoz both are following diff memory representation internally.</p>
         <h3>5. Arrays</h3>
+        <h5>Introduction</h5>
+        <p>An array is an indexed collection of fixed number of homogeneous data elements.</p> 
+        <p>The main advantage of array is we can represent huge number of values by using single variable so that readibility of the code will
+          be improved. 
+        </p>
+        <p>The main disadvantage of the array is fixed in size i.e once we creates an array there is no chance of increasing 
+          or decreasing of size based on our requirement. Hence to use arrays concept compulsory we should know the size in advance which may not possible always.
+        </p>
+
+        <h5>Array Declaration</h5>
+        <h6>1-D array declaration</h6>
+        <code>int[] x;</code>(recommended because name is clearly separated from type.)<br>
+        <code>int []x;</code><br>
+        <code>int x[];</code><br>
+
+        <code>int[6] x;</code>(Invalid)
+        <p>At the time of declaration we cant specify the size o/w we will get compile time error</p>
+
+
+        <h6>2-D array declaration</h6>
+        <code>int[][] x;</code>(recommended)<br>
+        <code>int [][]x;</code><br>
+        <code>int x[][];</code><br>
+        <code>int[] []x;</code><br>
+        <code>int[] x[];</code><br>
+        <code>int []x[];</code><br>
+
+        <code>int[] a, b;</code>(a-1D b-1D)<br>
+        <code>int[] a[],b;</code>(a-2D b-1D)<br>
+        <code>int[] a[], b[];</code>(a-2D b-2D)<br>
+        <code>int[] []a, b;</code>(a-2D b-2D)<br>
+        <code>int[] []a, b[];</code>(a-2D b-3D)<br>
+        <code>int[] []a, []b;</code>(Invalid compilation error)<br>
+        <p>If we want to specify dimension before the variable that facility is applicable only for first variable in a declaration.
+          If we are trying to apply for remaining variable we will get Compile time error
+        </p>
+
+        <h6>3-D array declaration</h6>
+        <code>int[][][] x;</code><br>
+        <code>int [][][]x;</code><br>
+        <code>int x[][][];</code><br>
+        <code>int[] [][]x;</code><br>
+        <code>int[] x[][];</code><br>
+        <code>int[] []x[];</code><br>
+        <code>int[][] []x;</code><br>
+        <code>int [][]x[];</code><br>
+        <code>int []x[][];</code><br>
+
+        <h5>Array Creation</h5>
+        <h6>1-D Array Creation</h6>
+        <code>int[] x = new int[3];</code><br>
+        <p>Every array in java is an object only hence we can create arrays by using new operator.</p>
+        <p>For every array type corresponding classes are available and these classes are part of java language and not available to the programmer level.</p>
+        <code>SOP(a.getClass().getName());</code><output>[I</output><br>
+
+        <table class="table table-striped" >
+          <thead class="thead-dark">
+            <tr>
+              <th>Array Type</th>
+              <th>Corresponding Class Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>int[]</td>
+              <td>[I</td>
+            </tr>
+            <tr>
+              <td>int[][]</td>
+              <td>[[I</td>
+            </tr>
+            <tr>
+              <td>double[]</td>
+              <td>[D</td>
+            </tr>
+            <tr>
+              <td>short[]</td>
+              <td>[S</td>
+            </tr>
+            <tr>
+              <td>byte[]</td>
+              <td>[B</td>
+            </tr>
+            <tr>
+              <td>boolean[]</td>
+              <td>[Z</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h6>Loophole 1: </h6>
+        <p>At the time of array Creation compulsory we should specify the size o/w how the jvm will reserve the size and hence CE will come.</p>
+        <code>int[] x = new int[];</code>(CE)<br>
+        <code>int[] x = new int[6];</code>(Valid)<br>
+        <code>int[] x = new int[0];</code>(valid)<br>
+        <code>int[] x = new int[-3];</code>(valid at compile time but run time exception - negative array size exception)<br>
+        <code>int[] x = new int['a'];</code>(valid - char to int promotion acceptable so size will be 97)<br>
+
+        <p>byte(1B)-----> short(2B) ------> int(4B)</p>
+        <p>char(2B) -----> int(4B)</p>
+
+        <p>Only integer value allowed for size so till int every data type is acceptable means whose promotion to int is acceptable</p>
+
+        <code>int[] x = new int[10l];</code>(Invalid becuse long cant get promoted to int so we will get compile time error)<br>
+
+        <p>The maximum allowed array size in java is 2147483647(int max size). Even in this case we can get run time error if sufficient heap memory is not available</p>
+        
+        <h6>2-D Array Creation</h6>
+        <h6>Array of arrays</h6>
+        <p>In java 2D array not implemented by using matrix style some people followed array of arrays approach for multi dimensional array creation, the main adv of this approach is memory utilization will be improved</p>
+
+        <pre><code>
+        int[][] x = new int[2][];
+        x[0] = new int[2];
+        x[1] = new int[3];
+      </code></pre>
+
+      <h6>3-D Array Creation</h6>
+      <pre><code>
+        int[][][] x = new int[2][][];
+        x[0] = new int[3][];
+        x[0][0] = new int[1];
+        x[0][1] = new int[2];
+        x[0][2] = new int[3];
+        x[1] = new int[2][2];
+      </code></pre>
+
+      <mark>Once we creates an array every array element by default initialized by value 0</mark>
+      <mark>Whenever we are trying to print any reference variable internally to string method will be called which is implemented by default to return the string in classname@hashcode_in_hexadecimalform</mark>
+
+      <pre><code>
+        int[][] x = new int[2][];
+        SOP(x);
+        SOP(x[0]);
+        SOP(x[0][0]);
+      </code></pre>
+
+      <output>Output - [[I@0u5b7a null Null pointer Exception</output>
+      
+      <p>If we are trying to perform any operation on null then we will get RE by saying null pointer exception</p>
+
+        <h5>Array declaration, Creation and Initialization in a single line</h5>
+        <code>int[] x = {10, 20, 30};</code><br>
+        <code>int[][] x = {{10, 20}, {30, 40, 50}};</code><br>
+        <code>int[][][] x = {{{10, 20, 30}, {40, 50, 60}, {{70, 80}, {90, 100}}};</code><br>
+
+        <h5>length vs length()</h5>
+        <pre><code>
+        int[] x = new int[6];
+        SOP(x.length());
+      </code></pre>
+
+      <output>Cannot find symbol method length in location class int[] type</output>
+
+      <pre><code>
+        int[] x = new int[6];
+        SOP(x.length);
+      </code></pre>
+
+      <output>Output - 6</output><br>
+
+      <mark>Length is a final variable applicable for arrays. length variable represents the size of the array.</mark>
+
+      <pre><code>
+        String s = "durga";
+        SOP(s.length);
+      </code></pre>
+
+      <output>Cant find symbol variable length class java.lang.String</output>
+
+      <pre><code>
+        String s = "durga";
+        SOP(s.length());
+      </code></pre>
+
+      <output>Output - 5</output><br>
+
+      <p>length method is a final method applicable for string objects. length() returns number of characters present in the string</p>
+
+      <pre><code>
+        String s = {"a", "aa", "aaa"};
+        SOP(s.length);
+        SOP(s.length());
+        SOP(s[0].length);
+        SOP(s[0].length());
+      </code></pre>
+
+      <output>Output: 3 CE CE 1</output><br>
+
+      <pre><code>
+        int[][] x = new int[6][3];
+        SOP(x.length);
+        SOP(x[0].length());
+      </code></pre>
+
+      <output>Output: 6 3</output><br>
+
+      <mark>In multidimensional arrays length variable represents only base size but not total size.</mark>
+      <p>There is no direct way to find total length of multidimensional array but indirectly we can find as follows</p>
+      <p>x[0].length + x[1].length + x[2].length.............</p>
+
+        <h5>Annonymous arrays</h5>
+        <p>Sometimes we can declare an array without name such type of nameless arrays are called annonymous arrays</p>
+        <p>The main purpose of annonymous arrays is just for instant use(one time usage)</p>
+        <p>We can create annonymous arrays as follows- new int[]{10, 20, 30};</p>
+        <p>While creating annonymous arrays we can't create the size o/w we will get compile time error</p>
+        
+        <code>new int[]{10, 20, 30, 40, 50};</code>Valid<br>
+        <code>new int[5]{10, 20, 30, 40, 50};</code>Invalid
+
+        <pre><code>
+          class Test {
+            p s v m(String[] args) {
+              sum(new int[] {10, 20, 30, 40, 50});
+            }
+            p s v sum(int[] x) {
+                int total = 0;
+                for(int x1 : x) {
+                    total = total + x1;
+                }
+                SOP("The sum : " + total);
+            }
+          }
+          </code></pre>
+
+        <p>In the above example just to call sum method we required an array but after completing sum method call we are not using that array anymore hence for this one time requirement annonymous array is the best choice</p>
+
+        <p>We can create multidimensional annonymous arrays as follows- new int[][]{{10, 20}, {30, 40, 50}};</p>
+        
+        <p>Based on our requirement we can give the name for annonymous array then it is no longer annonymous</p>
+        <code>int[] x = new int[]{10, 20, 30};</code>
+
+
+        <h5>Array element assignments</h5>
+        <p>In the case of object type arrays as array elements we can provide either declared type objects or its child class objects</p>
+        <pre><code>
+        Object[] a = new Object[10];
+        a[0] = new Object();
+        a[1] = new String("durga");
+        a[2] = new Integer(10);
+        </code></pre>
+
+        <pre><code>
+          Number[] a = new Number[10];
+          a[0] = new Integer(10);
+          a[1] = new Double(10.5);
+          a[2] = new String("Durga");
+        </code></pre>
+
+        <p>Here a[2] is invalid because String is not the child class of Number</p>
+
+        <p>For interface type arrays as array elements its implementation class objects are allowed</p>
+        <pre><code>
+          Runnable[] r = new Runnable[10];
+          r[0] = new Thread();
+          r[1] = new String("durga");
+        </code></pre>
+
+        <table class="table table-striped" >
+          <thead class="thead-dark">
+            <tr>
+              <th>Array Type</th>
+              <th>Allowed Element Types</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primitive Arrays</td>
+              <td>Array type which can be implicitly promoted to declared type.</td>
+            </tr>
+            <tr>
+              <td>Object Type Arrays</td>
+              <td>Either declared type or its child class objects.</td>
+            </tr>
+            <tr>
+              <td>Abstract class type arrays</td>
+              <td>Its child class objects are allowed(Example - Number is an abstract class)</td>
+            </tr>
+            <tr>
+              <td>Interface type array</td>
+              <td>Its implementation class objects are allowed</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Array variabe assignments</h5>
+        <p>Element level promotion are not applicable at array level. For example char element can be promoted to int type whereas char array cant be promoted to int array</p>
+        <pre><code>
+          int[] x = {10, 20, 30, 40};
+          char[] ch = {'a', 'b', 'c', 'd'};
+          int[] b = x;(valid)
+          int[] c = ch;(CE: found char[] required int[])
+        </code></pre>
+
+        <div class="container">
+        <p class="bg-warning text-white">Which of the following promotions will be performed automatically</p>
+        <pre><code>
+        char     ---> int       (valid)
+        char[]   ---> int[]     (invalid)
+        int      ---> double    (valid)
+        int[]    ---> double[]  (invalid)
+        float    ---> int       (invalid)
+        float[]  ---> int[]     (invalid)
+        String   ---> Object    (Valid)
+        String[] ---> Object[]  (valid)
+        </code></pre>
+        <p>But in the case of object type arrays child class type array can be promoted to parent class type array.</p>
+        <pre><code>
+          String[] s = {'a', 'b', 'c'};
+          Object[] a = s;  (valid)
+        </code></pre> 
+        
+        <p>Whenever we are assigning one array to another array intrenal elements wont be copied just reference variable will be reassigned</p>
+        <pre><code>
+          int[] a = {10, 20, 30, 40, 50, 60};
+          int[] b = {70, 80};
+          a = b;  (valid)
+          b = a;  (valid)
+        </code></pre>
+      </div>
+
+      <p>Whenever we are assigning one array to another array the dimensions must be matched for ex in the place of 1D int array we should provide
+         1D array only if we are trying to provide any other dimension then we will get compile time error</p>
+      <pre><code>
+        int[][] a = new int[3][];
+        a[0] = new int[4][3];     (CE: incompatible types found int[][] required int[]);
+        a[0] = 10;                (CE: incompatible types found int required int[]);
+        a[0] = new int[2];        (valid)
+      </code></pre>
+
+      <p>Whenever we are assigning one array to another array both dimensions and types must be matched but sizes are not required to match</p> 
+       
+      <pre><code>
+        int[][] a = new int[4][3];
+        a[0] = new int[4];
+        a[1] = new int[2];
+        a = new int[3][2];
+      </code></pre>
+
+      <p style="color:red">Total how many objects created?</p>
+        <p>11</p>
+        <p style="color:red">Total how many objects eligible for garbage collector?</p>
+        <p>7</p>
+
+        <img src="ss1.png" alt="ss1" width="500" height="300">
+
         <h3>6. Types of variables</h3>
         <h3>7. Var-arg methods</h3>
         <h3>8. main method</h3>
