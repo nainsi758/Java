@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for data types(8)</h6><p>byte<br>short<br>int<br>long<br>float<br>double<br>boolean<br>char</p></div>                  
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Keywords for flow control(11)</h6><p>if<br>else<br>switch<br>case<br>default<br>while<br>do<br>for<br>break<br>continue<br>return</p></div>
-                <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for modifiers(11)</h6><p>public<br>private<br>protected<br>static<br>final<br>abstract<br>synchronized<br>native<br>strictfb<br>transient<br>volatile</p></div>
+                <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for modifiers(11)</h6><p>public<br>private<br>protected<br>static<br>final<br>abstract<br>synchronized<br>native<br>strictfp<br>transient<br>volatile</p></div>
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Keywords for exception handling(6)</h6><p>try<br>catch<br>finally<br>throw<br>throws<br>assert</p></div>
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Class related keywors(6)</h6><p>class<br>interface<br>extends<br>implements<br>package<br>import</p></div>
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Object related keywords(4)</h6><p>new<br>instanceof<br>super<br>this</p></div>
@@ -68,7 +68,7 @@
 
         <h5>Primitive data types(8)</h5>
         <p>Numeric data types - Data types which can be used to represent only numbers</p>
-        <p>Non-Numeric data types - Data types which can be used to represent only numbers</p>
+        <p>Non-Numeric data types - Data types which can be used to represent non-numeric data like char and boolean</p>
         <p>Except char and boolean remaining data types are signed data types because we can represent both positive and negative numbers.</p>
         <p>0 represents positive number and 1 represents negative number. Positive numers will be represented directly in a memory whereas as negative numbers will be represented in 2's compliment form.</p>
         <p> If we want to handle data in terms of streams either from the file or from the network. file supported form or the the network supported form is byte data type</p>
@@ -187,7 +187,7 @@
         <p>We can specify char literal as integral literal which represents unicode value of the character and that integral literal can be specified either in decimat or octal or hexa forms but allowed range is 65535</p>
         <code>char ch = "a"</code><output>Invalid string not allowed</output><br>
         <code>char ch = 'abc'</code><output>Unclosed character literal, not a java statement</output><br>
-        <code>char ch = "97</code><output>a</output><br>
+        <code>char ch = '97'</code><output>a</output><br>
         <code>char ch = 65536</code><output>Found int req char</output>
 
         <table class="table table-striped" >
@@ -244,7 +244,8 @@
           hence after compilation above lines will become 
         </p>
         <code>double d = 123456.789;</code><br>
-        <code>double d = 1_____23_____456.7_8_9</code><output>ALso valid</output>
+        <code>double d = 1_____23_____456.7_8_9</code><br>
+        <output>ALso valid</output><br>
         <code>double d = _1_23_456.7_8_9</code><output>Invalid</output>
         <p>We can use underscore symbols only with in the digits</p>
 
@@ -381,7 +382,7 @@
       </code></pre>
 
       <mark>Once we creates an array every array element by default initialized by value 0</mark>
-      <mark>Whenever we are trying to print any reference variable internally to string method will be called which is implemented by default to return the string in classname@hashcode_in_hexadecimalform</mark>
+      <mark>Whenever we are trying to print any reference variable internally toString() method will be called which is implemented by default to return the string in classname@hashcode_in_hexadecimalform</mark>
 
       <pre><code>
         int[][] x = new int[2][];
@@ -430,7 +431,7 @@
 
       <output>Output - 5</output><br>
 
-      <p>length method is a final method applicable for string objects. length() returns number of characters present in the string</p>
+      <p>length() method is a final method applicable for string objects. length() returns number of characters present in the string</p>
 
       <pre><code>
         String s = {"a", "aa", "aaa"};
@@ -1204,7 +1205,397 @@
     40
   </output></pre>
 <h3>8. main method</h3>
+<p>1. Whether class contains main method or not and whether main method is declared according to requirement or not. These things wont be checked by compiler.
+  At run time jvm is responsible to check these things. If jvm unable to find main method then we will get Run Time Exception saying no such method error : main
+</p>
+
+<pre><code>
+  class Test {
+  
+    
+  }
+  </code></pre>
+
+  <pre><output>
+    Exception in thread "main" java.lang.NoSuchMethodError: main
+  </output></pre>
+
+<p>2. At runtime jvm always searches for the main method with the following prototype</p>
+<pre><code>
+ public static void main(String[] args)
+</code></pre>
+
+<div class="container">
+  <p class="bg-warning text-white">Why main method is public</p>
+  <p>To call by jvm from anywhere it is a public</p>
+</div>
+
+<div class="container">
+  <p class="bg-warning text-white">Why main method is static</p>
+  <p>Without exist object also jvm has to call this method.</p>
+</div>
+
+<div class="container">
+  <p class="bg-warning text-white">Why return type is void</p>
+  <p>Main method wont return anything to jvm</p>
+</div>
+
+<div class="container">
+  <p class="bg-warning text-white">Why the name is main</p>
+  <p>This is name which is configured inside the jvm thats why jvm searches for main only</p>
+</div>
+
+<div class="container">
+  <p class="bg-warning text-white">What about string array</p>
+  <p>To pass command line arguments</p>
+</div>
+<h6>On removing static</h6>
+<pre><code>
+class Test {
+  public void main(String[] args) {
+      
+  }
+}
+</code></pre>
+
+<pre><output>
+Exception in thread "main" java.lang.NoSuchMethodError: main
+</output></pre>
+
+<h6>On changing void to int</h6>
+<pre><code>
+class Test {
+  public static int main(String[] args) {
+        
+  }
+}
+</code></pre>
+
+<pre><output>
+Exception in thread "main" java.lang.NoSuchMethodError: main
+</output></pre>
+
+<h6>On changin main to Main</h6>
+<pre><code>
+class Test {
+  public static void Main(String[] args) {
+          
+  }
+}
+</code></pre>
+
+<pre><output>
+Exception in thread "main" java.lang.NoSuchMethodError: main
+</output></pre>
+
+<h6>On changing String[] args to String args</h6>
+<pre><code>
+class Test {
+  public static void main(String args) {
+            
+  }
+}
+</code></pre>
+
+<pre><output>
+ Exception in thread "main" java.lang.NoSuchMethodError: main
+</output></pre>
+
+<p>3. The above syntax is very strict and if we perform any change then we will get run time exception saying no such method error: main</p>
+
+<p>4. Even though above syntax is very strict the following changes are acceptable</p>
+
+<p>Instead of public static we can take static public i.e the order of modifiers is not important</p>
+<pre><code>
+  class Test {
+    static public void main(String[] args) {
+              
+    }
+  }
+  </code></pre>
+<p>We can declare string array in any acceptable form</p>
+<pre><code>
+  class Test {
+    public static void main(String[] args) {
+              
+    }
+  }
+</code></pre>
+<pre><code>
+    class Test {
+      public static void main(String []args) {
+                
+      }
+    }
+</code></pre>
+<pre><code>
+      class Test {
+        public static void main(String args[]) {
+                  
+        }
+      }
+</code></pre>
+
+<p>Instead of args we can take any valid java identifier</p>
+<pre><code>
+  class Test {
+    public static void main(String[] nc) {
+              
+    }
+  }
+</code></pre>
+
+<p>We can replace string array with var-arg parameter</p>
+<pre><code>
+  class Test {
+    public static void main(String... args) {
+              
+    }
+  }
+</code></pre>
+
+<p>We can declare main method with the following modifiers final, synchonized and strictfp</p>
+
+<pre><code>
+  public class Test {
+    static final synchronized strictfp public void main(String... durga) {
+          System.out.println("Valid main method");
+    }
+  }
+</code></pre>
+
+<div class="container">
+  <p class="bg-warning text-white">Which of the following main method is valid?</p>
+  <p>public static void main(String args)<span style="color:red">Valid</span></p>
+  <p>public static void Main(String[] args)<span style="color:red">Valid</span></p>
+  <p>public void main(String[] args)<span style="color:red">Valid</span></p>
+  <p>public static int main(String[] args)<span style="color:red">Valid</span></p>
+  <p>final synchronized strictfp public void main(String[] args)<span style="color:red">Valid</span></p>
+  <p>final synchronized strictfp public static void main(String[] args)<span style="color:green">Valid</span></p>
+  <p>public static void main(String... args)<span style="color:green">Valid</span></p>
+</div>
+
+<div class="container">
+  <p class="bg-warning text-white">Which of the above cases we will get compile time error</p>
+  <p>We wont get compile time error anywhere but except last two cases in remaining we will get RE saying NoSuchMethodError: main</p>
+</div>
+
+<h6>Case 1:</h6>
+<p>Overloading of the main method is possible but JVM will always call String[] arg only. The other overloaded method we have to call explicitly like other normal method</p>
+<pre><code>
+  class Test {
+    public static void main(String[] args) {
+      SOP("String[]");
+    }
+    public static void main(int[] args)  {
+      SOP("int[]");
+    }
+  }
+</code></pre>
+
+<pre><output>
+  String[]
+</output></pre>
+
+<h6>Case 2:</h6>
+<p>Inheritance concept applicable for main method hence while executing child class if child doesn't contain main method then parent class main method will be executed.</p>
+<pre><code>
+  class P {
+    public static void main(String[] args) {
+      SOP("Parent main");
+    }
+  }
+  class C extends P {
+
+  }
+</code></pre>
+
+<img src="images/ss6.png" alt="ss6" width="300" height="300">
+
+<h6>case 3:</h6>
+<p></p>
+<pre><code>
+  class P {
+    public static void main(String[] args) {
+      SOP("Parent main");
+    }
+  }
+  class C extends P {
+    public static void main(String[] args) {
+      SOP("child main");
+    }
+  }
+</code></pre>
+<img src="images/ss7.png" alt="ss7" width="300" height="300">
+<p>It seems overriding concept applicable for main method but it is not overriding and it is method hiding</p>
+<mark>Note: For main method inheritance and overloading concepts are applicable but overriding concept is not applicable. But instead of overriding, method hiding is applicable</mark>
+
+<h6>1.7 version enhancements with respect to main method</h6>
+<p>Until 1.6v if the class doesn't contain main method then we will get run time exception NoSuchMethodError: main but from 1.7v onwards instead of NoSuchMethodError we will get more elaborated information</p>
+<p></p>
+
+<pre><code>
+  class Test {
+
+  }
+</code></pre>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+    <th>1.6V</th>
+    <th>1.7V</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        RE: NoSuchMethodError: main</pre>
+      </td>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        Error: Main method not found in class com.cts.java.Test, please define the main method as:
+        public static void main(String[] args)</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>From 1.7v onwards main method is mandatory to start program execution hence even though class contains static block it won't be executed if the class doesn't contain main method</p>
+
+
+<pre><code>
+  class Test {
+    static {
+      SOP("Static Block")
+    }
+  }
+</code></pre>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+    <th>1.6V</th>
+    <th>1.7V</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        Static Block
+        RE: NoSuchMethodError: main</pre>
+      </td>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        Error: Main method not found in class com.cts.java.Test, please define the main method as:
+        public static void main(String[] args)</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>From 1.7v onwards main method is mandatory to start program execution</p>
+<pre><code>
+  class Test {
+    static {
+      SOP("Static Block")
+      System.exit(0);
+    }
+  }
+</code></pre>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+    <th>1.6V</th>
+    <th>1.7V</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        Static Block
+      </td>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        Error: Main method not found in class com.cts.java.Test, please define the main method as:
+        public static void main(String[] args)</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code>
+  class Test {
+    static {
+      SOP("Static Block");
+    }
+    public static void main(String[] args) {
+      SOP("Main method");
+    }
+  }
+</code></pre>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+    <th>1.6V</th>
+    <th>1.7V</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        Static Block
+        Main Method</pre>
+      </td>
+      <td><pre>
+        Javac Test.java
+        Java Test
+        Static Block
+        Main method</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+    <th>1.6V Execution flow</th>
+    <th>1.7V Execution flow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="images/ss81.6.png" width="400" height="500">
+      </td>
+      <td>
+        <img src="images/ss81.7.png" width="400" height="500">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="container">
+  <p class="bg-warning">Without writing main method is it possible to print some statements to the console?</p>
+  <p>Yes by using static block but this rule is applicable until 1.6v but from 1.7v onwards it is impossible to
+     print some statement to the console without writing main method</p>
+</div>
+
+
 <h3>9. command line arguments</h3>
+
 <h3>10. java coding standards</h3>
         
         
