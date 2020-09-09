@@ -1595,6 +1595,80 @@ class Test {
 
 
 <h3>9. command line arguments</h3>
+<p>The arguments which are passing from command prompt are called command line arguments. With these command line 
+  arguments jvm will create an array and by passing that array as argument jvm will call main method
+</p>
+<p>Example</p>
+<p>Java test A B C<kbd>enter</kbd></p>
+<p><pre>
+  A - args[0]
+  B - args[1]
+  C - args[2]
+  length - args.length - 3
+</pre></p>
+
+<h6>Main objective of command line argument</h6>
+<p>We can customize behaviour of the main method</p>
+
+<h6>Why command line arguments are always string</h6>
+<p>String is the most common used object thats why some people gave priority to the string type and we can easily convert it into other types also</p>
+
+<h6>Case 1:</h6>
+<pre><code>
+  class Test {
+    public static void main(String[] args) {
+      String[] argh = {"x", "y", "z"};
+      args = argh;
+      for(String s : args) {
+        SOP(s);
+      }
+    }
+  }
+</code></pre>
+
+<pre><output>
+  java Test A B C
+  x
+  y
+  z
+  java Test A B
+  x
+  y
+  z
+  java Test 
+  x
+  y
+  z
+</output></pre>
+
+<h6>case 2:</h6>
+<p>Within main method commad line arguments are available in string form</p>
+<pre><code>
+  class P {
+    public static void main(String[] args) {
+      SOP(args[0] + args[1]);
+    }
+  }
+</code></pre>
+<pre><output>
+java test 10 20
+1020
+</output></pre>
+
+<h6>case 3:</h6>
+<p>Usually space itself is the separator between command line arguments. If our command line argument itself contain space then we have to enclose that command line argument within double quotes</p>
+<pre><code>
+  class P {
+    public static void main(String[] args) {
+      SOP(args[0]);
+    }
+  }
+</code></pre>
+
+<pre><output>
+  javac Test "Note Book"
+  Note Book
+</output></pre>
 
 <h3>10. java coding standards</h3>
         
