@@ -1671,7 +1671,154 @@ java test 10 20
 </output></pre>
 
 <h3>10. java coding standards</h3>
+<p>Whenever we are writing java code it is highly recommended to follow coding standards. Whenever we are writing any component its name should reflect the purpose of that component(functionality)</p>
+<p>The main advantage of this approach is readibility and the maintainability of the code will be improved</p>
+<p>If you are asked to write sum program</p>
+<pre><code>
+  class A {
+    public int m1(int x, int y) {
+      return x + y;
+    }
+  }
+</code></pre>
+
+<pre><code>
+  package com.cts.java
+  public class Calculator {
+    public static int add(int number1, int number2) {
+      return number1 + number2;
+    }
+  }
+</code></pre>
         
-        
+<h6>Mistakes explained</h6>
+<p>Every class should be part of some package use proper naming convention for package name(client internet domain name in reverse)</p>
+<p>Code should be reachable to maximum people. Highly recommended our class should be public</p>
+<p>The name of the class should represent its purpose</p>
+<p>We are not using any instance variable here then what is the need of declaring this method as instance method. Instance method can be called by creating an object and then call
+  method using that object so declare this method as static method.
+</p>If not declared as static then this much extra code we needed to write</p>
+<pre><code>
+package com.cts.java;
+
+public class Calculator {
+
+	public static void main(String[] args) {
+		Calculator calculator = new Calculator();
+		System.out.println(calculator.add(10, 20));
+	}
+
+	public int add(int number1, int number2) {
+		return number1 + number2;
+	}
+}
+</code></pre>
+
+<p>The name of the method should represent its purpose</p>
+<p>The name of the variables should represent its purpose</p>
+
+<h6>Coding standard for classes</h6>
+<p>Usually class names are nouns. Should starts with uppercase character and if it contains multiple words then every innerword should start with uppercase character</p>
+<p>Example: String StringBuffer  Account Dog</p>
+
+<h6>Coding standards for interfaces</h6>
+<p>Usually interface names are adjectives should starts with uppercase characters and if it contains multiple words every inner word should start with uppercase character</p>
+<p>Example: Runnable  Serializable  Comparable</p>
+
+<h6>Coding standard for method()</h6>
+<p>Usually method names are either verbs or verb noun combination. Should starts with lowercase alphabet symbol and if it contains multiple words then every inner word should start with uppercase character (camel case convention)</p>
+<p>Verb example for method: sleep() run() eat()</p>
+<p>Verb noun combination example : getName()  setSalary()</p>
+
+<h6>Coding standards for variables</h6>
+<p>Usually varable names are nouns should starts with lowercase alphabet symbols and if it contains multiple words then every inner word should starts with uppercase characters(Camel case convention)</p>
+<p>Example: name  age   salary    mobileNumber</p>
+
+<h6>Coding standard for constants</h6>
+<p>Usually constant names are nouns should contain only uppercase characters and if it contain multiple words then these words are separated with underscore symbol</p>
+<p>Example: MAX_VALUE   MAX_PRIORITY    NORM_PRIORITY   MIN_PRIORITY  PI</p>
+<p>Usually we can declare constants with public static and final modifiers</p>
+
+<h6>Java bean coding standards</h6>
+<p>A java bean is a simple java class with private properties and public getter and setter methods</p>
+<pre><code>
+  public class StudentBean {
+    private String name;
+    public void setName(String name) {
+      this.name = name;    
+    }
+    public String getName() {
+      return name;
+    }
+  }
+</code></pre>
+
+<p>Class name ends with bean is not official convention from sun microsystem</p>
+
+<h6>Syntax for setter method</h6>
+<p>1. It should be public method</p>
+<p>2. The return type should be void</p>
+<p>3. Method name should be prefixed with set</p>
+<p>4. It should take some argument. It should not be no-argument method</p>
+
+<h6>Syntax for getter method</h6>
+<p>1. It should be public method </p>
+<p>2. The return type should not be void</p>
+<p>3. Method name should prefixed with get</p>
+<p>4. It should not take any argument</p>
+
+<h6>About boolean properties</h6>
+<mark>Note: For boolean properties getter method name can be prefixed with either get or is but recommended to use is.</mark>
+<pre><code>
+  public class Test {
+
+    private boolean empty;
+  
+    public boolean isEmpty() {
+      return empty;
+    }
+  
+    public void setEmpty(boolean empty) {
+      this.empty = empty;
+    }
+  
+  }
+</code></pre>
+
+<pre><code>
+  public class Test {
+
+    private boolean empty;
+  
+    public boolean getEmpty() {
+      return empty;
+    }
+  
+    public void setEmpty(boolean empty) {
+      this.empty = empty;
+    }
+  
+  }
+</code></pre>
+
+<h6>Coding standard for listeners</h6>
+<h6>Case 1: To register a listener</h6>
+<p>Method name should be prefixed with add.</p>
+<pre><code>
+  public void addMyActionListener(myActionListener l); <span style="color:green">valid</span>
+  public void registerMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
+  public void addMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
+</code></pre>
+
+<h6>Case 2: To unregister a listener</h6>
+<p>Method name should be prefixed with remove</p>
+<pre><code>
+  public void removeMyActionListener(myActionListener l); <span style="color:green">valid</span>
+  public void unRegisterMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
+  public void removeMyActionListener(ActionListener l); <span style="color:red">Invalid</span>
+  public void deleteMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
+</code></pre>
+
+
 </body>
 </html>
