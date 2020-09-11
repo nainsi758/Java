@@ -50,7 +50,7 @@
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Class related keywors(6)</h6><p>class<br>interface<br>extends<br>implements<br>package<br>import</p></div>
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Object related keywords(4)</h6><p>new<br>instanceof<br>super<br>this</p></div>
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Void return type keyword(1)</h6><p>void</p></div>
-                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Enum Keyword(1)</h6><p>Enum</p></div>
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Enum Keyword(1)</h6><p>enum</p></div>
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Unused keywords(2)</h6><p>goto<br>const</p></div>
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Reserved literals(3)</h6><p>true<br>false<br>null</p></div>
             </div>
@@ -140,11 +140,11 @@
 
         <h5>Integral Literals</h5> <p>For integral data types byte short int long we can specify literal value in the following ways.</p>
 
-        <h5>Decimal Form (base-10 means allowed digits are 0 to 9)</h5>
+        <h6>Decimal Form (base-10 means allowed digits are 0 to 9)</h6>
         <p>Bydefault decmal only</p>
-        <h5>Octal value(base-8 means allowed digits are 0 to 7)</h5>
+        <h6>Octal value(base-8 means allowed digits are 0 to 7)</h6>
         <p>If a number prefixed with 0 is considered as octal value</p>
-        <h5>Hexadecimal form(base-16 means allowed digits are 0 to 9 and A to F)</h5>
+        <h6>Hexadecimal form(base-16 means allowed digits are 0 to 9 and A to F)</h6>
         <p>Java is case sensitive, here for extra digits(a to f) we can use both lower case and upper case characters. This is one of very few areas where java is not case sensitive. For prefix also x can be uppercase or lowercase.</p>
 
         <p>If a number prefixed with 0x is considered as hexadecimal value</p>
@@ -391,14 +391,18 @@
         SOP(x[0][0]);
       </code></pre>
 
-      <output>Output - [[I@0u5b7a null Null pointer Exception</output>
+      <pre><output>
+        [[I@0u5b7a 
+        null 
+        NullPointerException
+      </output></pre>
       
       <p>If we are trying to perform any operation on null then we will get RE by saying null pointer exception</p>
 
         <h5>Array declaration, Creation and Initialization in a single line</h5>
         <code>int[] x = {10, 20, 30};</code><br>
         <code>int[][] x = {{10, 20}, {30, 40, 50}};</code><br>
-        <code>int[][][] x = {{{10, 20, 30}, {40, 50, 60}, {{70, 80}, {90, 100}}};</code><br>
+        <code>int[][][] x = {{{10, 20, 30}, {40, 50, 60}}, {{70, 80}, {90, 100}}};</code><br>
 
         <h5>length vs length()</h5>
         <pre><code>
@@ -406,14 +410,21 @@
         SOP(x.length());
       </code></pre>
 
-      <output>Cannot find symbol method length in location class int[] type</output>
+      <pre><output>
+        cannot find symbol
+        System.out.println(x.length());
+                                    ^
+        symbol:   method length()
+          location: variable x of type int[]
+
+      </output>
 
       <pre><code>
         int[] x = new int[6];
         SOP(x.length);
       </code></pre>
 
-      <output>Output - 6</output><br>
+      <output>6</output><br>
 
       <mark>Length is a final variable applicable for arrays. length variable represents the size of the array.</mark>
 
@@ -422,7 +433,14 @@
         SOP(s.length);
       </code></pre>
 
-      <output>Cant find symbol variable length class java.lang.String</output>
+      <pre><output>
+        error: cannot find symbol
+                System.out.println(s.length);
+                                    ^
+                symbol:   variable length
+                location: variable s of type String
+
+      </output></pre>
 
       <pre><code>
         String s = "durga";
@@ -441,7 +459,13 @@
         SOP(s[0].length());
       </code></pre>
 
-      <output>Output: 3 CE CE 1</output><br>
+      <pre><output>
+        3
+        CE
+        CE
+        1
+      </output></pre>
+      
 
       <pre><code>
         int[][] x = new int[6][3];
@@ -512,6 +536,13 @@
           r[1] = new String("durga");
         </code></pre>
 
+        <pre><output>
+          incompatible types: String cannot be converted to Runnable
+                r[1] = new String("durga");
+                       ^
+
+        </output></pre>
+
         <table class="table table-striped" >
           <thead class="thead-dark">
             <tr>
@@ -545,44 +576,75 @@
           int[] x = {10, 20, 30, 40};
           char[] ch = {'a', 'b', 'c', 'd'};
           int[] b = x;(valid)
-          int[] c = ch;(CE: found char[] required int[])
+          int[] c = ch;(incompatible types: char[] cannot be converted to int[])
         </code></pre>
 
         <div class="container">
         <p class="bg-warning text-white">Which of the following promotions will be performed automatically</p>
         <pre><code>
-        char     ---> int       (valid)
-        char[]   ---> int[]     (invalid)
-        int      ---> double    (valid)
-        int[]    ---> double[]  (invalid)
-        float    ---> int       (invalid)
-        float[]  ---> int[]     (invalid)
-        String   ---> Object    (Valid)
-        String[] ---> Object[]  (valid)
+        char     ---> int       
+        char[]   ---> int[]     
+        int      ---> double    
+        int[]    ---> double[]  
+        float    ---> int       
+        float[]  ---> int[]    
+        String   ---> Object    
+        String[] ---> Object[]  
         </code></pre>
+
+        <pre><output>
+          valid
+          invalid
+          valid
+          invalid
+          invalid
+          invalid
+          valid
+          <span class="bg-danger text-white">valid</span>
+        </output></pre>
         <p>But in the case of object type arrays child class type array can be promoted to parent class type array.</p>
         <pre><code>
           String[] s = {'a', 'b', 'c'};
-          Object[] a = s;  (valid)
+          Object[] a = s; 
         </code></pre> 
+
+        <pre><output>
+          valid
+        </output></pre>
         
         <p>Whenever we are assigning one array to another array intrenal elements wont be copied just reference variable will be reassigned</p>
         <pre><code>
           int[] a = {10, 20, 30, 40, 50, 60};
           int[] b = {70, 80};
-          a = b;  (valid)
-          b = a;  (valid)
+          a = b;  
+          b = a;  
         </code></pre>
+        <pre><output>
+          valid
+          valid
+        </output></pre>
       </div>
 
       <p>Whenever we are assigning one array to another array the dimensions must be matched for ex in the place of 1D int array we should provide
          1D array only if we are trying to provide any other dimension then we will get compile time error</p>
       <pre><code>
         int[][] a = new int[3][];
-        a[0] = new int[4][3];     (CE: incompatible types found int[][] required int[]);
-        a[0] = 10;                (CE: incompatible types found int required int[]);
-        a[0] = new int[2];        (valid)
+        a[0] = new int[4][3];     
+        a[0] = 10;               
+        a[0] = new int[2];        
       </code></pre>
+
+      <pre><output>
+        CE: incompatible types 
+        found: int[][] 
+        required: int[]
+
+        CE: incompatible types 
+        found: int 
+        required: int[]
+
+        valid
+      </output></pre>
 
       <p>Whenever we are assigning one array to another array both dimensions and types must be matched but sizes are not required to match</p> 
        
@@ -640,7 +702,7 @@
           }
         </code></pre>
 
-        <p>8. For instance variables jvm will always provide defayult values and we are not required to perform initialization explicitly</p>
+        <p>8. For instance variables jvm will always provide default values and we are not required to perform initialization explicitly</p>
 
         <pre><code>
           class Test {
@@ -690,7 +752,7 @@
 
         <p>5.Static variables will be stored in method area</p>
         <p>6. We can access static variables either by object reference or by class name but recommended to use class name. Within the same class 
-           it is not required to use class name and we can access directly</p>
+it is not required to use class name and we can access directly</p>
          
         <pre><code>
             class Test {
@@ -1120,11 +1182,23 @@
 
 <pre><code>
   class Test {
-    p s v m(String[] args) {
+    
+	public static void main(String[] args) {
+		
+    m1(10, 20);
       
     }
+  
+    private static void m1(int... x, int...y) {
+      System.out.println(x[0]);
+    }
+    
   }
   </code></pre>
+
+  <pre><output>
+    error : varargs parameter must be the last parameter
+  </output></pre>
 
 <h6>case 5:</h6>
 <p>Inside a class we cant declare var-arg method and corresponding array method simultaneously o/w we will get compile time error</p>
@@ -1204,6 +1278,8 @@
     10 
     40
   </output></pre>
+
+  <img src="images/ss11.png" alt="ss11" width="300" height="300">
 <h3>8. main method</h3>
 <p>1. Whether class contains main method or not and whether main method is declared according to requirement or not. These things wont be checked by compiler.
   At run time jvm is responsible to check these things. If jvm unable to find main method then we will get Run Time Exception saying no such method error : main
@@ -1227,7 +1303,7 @@
 
 <div class="container">
   <p class="bg-warning text-white">Why main method is public</p>
-  <p>To call by jvm from anywhere it is a public</p>
+  <p>To call by jvm from anywhere it is a public. Because jvm could be installed in any location and workspace could be in another location</p>
 </div>
 
 <div class="container">
@@ -1242,7 +1318,7 @@
 
 <div class="container">
   <p class="bg-warning text-white">Why the name is main</p>
-  <p>This is name which is configured inside the jvm thats why jvm searches for main only</p>
+  <p>This is name which is configured inside the jvm thats why jvm searches for main only. We can configure to change to another name also</p>
 </div>
 
 <div class="container">
@@ -1366,13 +1442,22 @@ class Test {
 
 <div class="container">
   <p class="bg-warning text-white">Which of the following main method is valid?</p>
-  <p>public static void main(String args)<span style="color:red">Valid</span></p>
-  <p>public static void Main(String[] args)<span style="color:red">Valid</span></p>
-  <p>public void main(String[] args)<span style="color:red">Valid</span></p>
-  <p>public static int main(String[] args)<span style="color:red">Valid</span></p>
-  <p>final synchronized strictfp public void main(String[] args)<span style="color:red">Valid</span></p>
-  <p>final synchronized strictfp public static void main(String[] args)<span style="color:green">Valid</span></p>
-  <p>public static void main(String... args)<span style="color:green">Valid</span></p>
+  <p>public static void main(String args)
+  <p>public static void Main(String[] args)
+  <p>public void main(String[] args)
+  <p>public static int main(String[] args)
+  <p>final synchronized strictfp public void main(String[] args)
+  <p>final synchronized strictfp public static void main(String[] args)
+  <p>public static void main(String... args)
+  <pre><output>
+    invalid
+    invalid
+    invalid
+    invalid
+    invalid
+    valid
+    valid
+  </output></pre>
 </div>
 
 <div class="container">
@@ -1816,7 +1901,7 @@ public class Calculator {
   public void removeMyActionListener(myActionListener l); <span style="color:green">valid</span>
   public void unRegisterMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
   public void removeMyActionListener(ActionListener l); <span style="color:red">Invalid</span>
-  public void deleteMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
+  public void deleteMyActionListener(ActionListener l); <span style="color:red">Invalid</span>
 </code></pre>
 
 
