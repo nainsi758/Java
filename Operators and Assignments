@@ -1,0 +1,1371 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>Java</title>
+<style>
+h1 {
+    color: red;
+}
+h3 {
+    color: darkblue;
+}
+h6 {
+    color:crimson; 
+}
+h5 {
+    color:darkmagenta;
+}
+table {
+    
+}
+</style>
+</head>
+<body>
+    <h1>1. Operators And Assignments</h1>
+    <h3>1. Increment And Decrement Operators</h3>
+    <h5>Increment operator</h5>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Expression</th>
+                <th>Initial value of x</th>
+                <th>Value of y</th>
+                <th>Final value of x</th>
+            </tr>
+        </thead>
+            <tr>
+                <td>y = ++x;</td>
+                <td>10</td>
+                <td>11</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>y = x++;</td>
+                <td>10</td>
+                <td>10</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>y = --x;</td>
+                <td>10</td>
+                <td>9</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>y = x--;</td>
+                <td>10</td>
+                <td>10</td>
+                <td>9</td>
+            </tr>
+        <tbody>
+        </tbody>
+    </table>
+
+    <h6>Loophole 1:</h6>
+
+    <pre><code>
+        int x = 10;
+        int y = ++10;
+        SOP(y);
+    </code></pre>
+    <pre><output>
+        CE: unexpected type 
+        found : value
+        required: variable
+    </output></pre>
+    <p>We can apply Increment and Decrement operators only for variables but not for constant values. If we are trying to apply for constant values then we will get compile time error</p>
+    
+    <h6>Loophole 2:</h6>
+    <pre><code>
+        int x = 10;
+        int y = ++(++x);
+        SOP(y);
+    </code></pre>
+    <pre><output>
+        CE: unexpected type 
+        found : value
+        required: variable
+    </output></pre>
+    <p>Nesting of Increment and Decrement operators not allowed</p>
+
+    <h6>Loophole 3:</h6>
+    <pre><code>
+        final int x = 10;
+        x = 11;
+        SOP(x);
+    </code></pre>
+    <pre><output>
+        CE: cannot assign a value to final variable x
+    </output></pre>
+    <p>For final variables reassignments not possible</p>
+
+    <h6>Loophole 4:</h6>
+    <pre><code>
+        final int x = 10;
+        x++;
+        SOP(x);
+    </code></pre>
+    <pre><output>
+        CE: cannot assign a value to find variable x
+    </output></pre>
+    <p>For final variables we cant apply Increment and Decrement operators</p>
+    <mark>We can apply increment and decrement operators for every primitive type except boolean</mark>
+
+    <pre><code>
+        int x = 10;
+        x++;
+        SOP(x);
+    </code></pre>
+    <pre><output>
+        11
+    </output></pre>
+
+    <pre><code>
+        char ch = 'a';
+        ch++;
+        SOP(ch);
+    </code></pre>
+    <pre><output>
+        b
+    </output></pre>
+
+    <pre><code>
+        double d = 10.5;
+        d++;
+        SOP(d);
+    </code></pre>
+    <pre><output>
+        11.5
+    </output></pre>
+
+    <pre><code>
+        boolean b = true;
+        b++;
+        SOP(b);
+    </code></pre>
+    <pre><output>
+        CE: operator ++ can't be applied to boolean.
+    </output></pre>
+
+    <h6>Difference between b++ and b = b + 1;</h6>
+    <p class="bg-primary text-white">If we apply any Arithmetic operator between two variables a and b the result type is always max(int, type of a, type of b)
+        but in the case of increment and decrement operators internal typecasting will be performed automatically b = (type of b)(b + 1);
+    </p>
+    <pre><code>
+        byte b = 10;
+        b = b + 1;
+        SOP(b);
+    </code></pre>
+    <pre><output>
+        CE: incompatible types: possible lossy conversion from int to byte
+    </output></pre>
+
+    <pre><code>
+        byte b = 10;
+        b = (byte)(b + 1);
+        SOP(b);
+    </code></pre>
+    <pre><output>
+        11
+    </output></pre>
+
+    <pre><code>
+        byte b = 10;
+        b = b++;            (means b = (byte)(b + 1))
+        SOP(b);
+    </code></pre>
+    <pre><output>
+        11
+    </output></pre>
+
+    <pre><code>
+        byte a = 10;
+        byte b = 20;
+        byte c = a + b;
+        SOP(c);
+    </code></pre>
+    <pre><output>
+        CE: incompatible types: possible lossy conversion from int to byte
+    </output></pre>
+
+    <pre><code>
+        byte a = 10;
+        byte b = 20;
+        byte c = (byte)(a + b);
+        SOP(c);
+    </code></pre>
+    <pre><output>
+        11
+    </output></pre>
+    
+    <h3>2. Arithmetic Operators(+ - * / %)</h3>
+    <p class="bg-primary text-white">If we apply any Arithmetic operator between two variables a and b the result type is always max(int, type of a, type of b)</p>
+    
+<pre><code>
+    byte + byte = int
+    byte + short = int
+    short + short = int
+    byte + long = long
+    long + double = double
+    float + long = float
+    char + char = int
+    char + double = double
+</code></pre>
+
+<h6>Example 1: </h6>
+
+<pre><code>
+    SOP('a' + 'b');      97 + 98 = 195
+    SOP('a' + 0.89);     97 + 0.89 = 97.89
+</code></pre>
+
+<mark>In integral Arithmetic(byte short int long) there is no way to represent infinity hence if infinity is a result we will get Arithmetic exception in integral Arithmetic</mark>
+<pre><code>
+    SOP(10 / 0);
+</code></pre>
+
+
+<pre><output>
+    Exception in thread "main" java.lang.ArithmeticException: / by zero
+</output></pre>
+
+<mark>But in floating point Arithmetic(float and double) there is a way to represent infinity. For this float and double classes contains the following two constants i.e
+    POSITIVE_INFINITY and NEGATIVE_INFINITY. Hence even though the result is infinity we wont get any Arithmetic exception in floating point Arithmetic
+</mark>
+<pre><code>
+    SOP(10 / 0.0);
+</code></pre>
+
+<pre><output>
+   Infinity
+</output></pre>
+
+<pre><code>
+    SOP(-10 / 0.0);
+</code></pre>
+
+<pre><output>
+   -Infinity
+</output></pre>
+
+<mark>In integral Arithmetic(byte short int long) there is no way to represent undefined results hence if the result is undefined 
+    we will get RE saying Arithmetic Exception
+</mark>
+<pre><code>
+    SOP(0 / 0);
+</code></pre>
+
+<pre><output>
+    Exception in thread "main" java.lang.ArithmeticException: / by zero
+</output></pre>
+
+<mark>But in floating point Arithmetic(float and double) there is a way to represent undefined results. For this float and double classes contains NaN constants. 
+    Hence we wont get any Arithmetic exception in floating point Arithmetic
+</mark>
+<pre><code>
+    SOP(0.0 / 0);
+</code></pre>
+
+<pre><output>
+    NaN
+</output></pre>
+
+<pre><code>
+    SOP(-0.0 / 0);
+</code></pre>
+
+<pre><output>
+    NaN
+</output></pre>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Expression</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+        <tr>
+            <td>SOP(10 / 0)</td>
+            <td>RE: Exception in thread "main" java.lang.ArithmeticException: / by zero</td>
+        </tr>
+        <tr>
+            <td>SOP(10 / 0.0)</td>
+            <td>Infinity</td>
+        </tr>
+        <tr>
+            <td>SOP(0 / 0)</td>
+            <td>RE: Exception in thread "main" java.lang.ArithmeticException: / by zero</td>
+        </tr>
+        <tr>
+            <td>SOP(0.0 / 0)</td>
+            <td>NaN</td>
+        </tr>
+    <tbody>
+    </tbody>
+</table>
+
+<mark>For any x value including NaN the following Expressions returns false</mark>
+<pre>
+    x < NaN
+    x <= NaN
+    x > NaN
+    x >= NaN
+    x == NaN
+</pre>
+<mark>For any x value including NaN the following Expressions returns true</mark>
+<pre>x != NaN</pre>
+
+<pre>
+        System.out.println(10 < Float.NaN);
+	System.out.println(10 <= Float.NaN);
+	System.out.println(10 > Float.NaN);
+	System.out.println(10 >= Float.NaN);
+	System.out.println(10 == Float.NaN);
+	System.out.println(Float.NaN == Float.NaN);
+	System.out.println(10 != Float.NaN);
+	System.out.println(Float.NaN != Float.NaN);
+</pre>
+
+
+<pre><output>
+false
+false
+false
+false
+false
+false
+true
+true
+</output></pre>
+
+<h5>Arithmetic Exception</h5>
+<p>1. Run Time Exception but not compile time error</p>
+<p>2. It is possible only in integral arithmetic but not in floating point arithmetic</p>
+<p>3. The only operator which cause AE are / and %</p>
+
+    <h3>3. String concatenation operator(+)</h3>
+    <p>The only overloaded operator in java is + operator. Sometimes it acts as arithmetic addition operator and Sometimes it acts as string concatenation
+        operator</p>
+<p>If atleast one argument is string type then + operator acts as concatenation operator and if both arguments are number type then +
+    operator acts as arithmetic addition operator</p>
+<p>If more than one operator  then based on the precedence they will be evaluated but if multiple operators with same precedence then evaluation will be from 
+    left to right</p>
+<pre><code>
+    String a = "durga"
+    int b = 10, c = 20, d = 30;
+    SOP(a + b + c + d);
+    SOP(b + c + d + a);
+    SOP(b + c + a + d);
+    SOP(b + a + c + d);
+</code></pre>
+
+<pre><output>
+    durga102030
+    60durga
+    30durga30
+    10durga2030
+</output></pre>
+
+<p>Which of the following expressions are valid?</p>
+<pre><code>
+    String a = "durga"
+    int b = 10, c = 20, d = 30;
+    a = b + c + d;
+    a = a + b + c;
+    b = a + c + d;
+    b = b + c + d;
+</code></pre>
+
+<pre><output>
+    CE: incompatible types found: int req: java.lang.String
+    durga1020
+    CE: incompatible types found: java.lang.String req: int
+    60
+</output></pre>
+
+
+    
+
+    <h3>4. Relational operators(<,  <=,  >,  >=)</h3>
+    <mark>We can apply relational operators for every primitive type except boolean</mark>
+    <pre><code>
+        SOP(10 < 20);
+        SOP('a' < 10);
+        SOP('a' < 97.6);
+        SOP('a' > 'A');
+        SOP(true > false);
+    </code></pre>
+    
+    <pre><output>
+        true
+        false
+        true
+        true
+        The operator > is undefined for the argument type(s) boolean, boolean
+    </output></pre>
+
+    <mark>We cant apply relational operators for object type</mark>
+    <pre><code>
+        System.out.println("durga" > "durga");
+    </code></pre>
+
+    <pre><output>
+        The operator > is undefined for the argument type(s) java.lang.String, java.lang.String
+    </output></pre>
+
+    <mark>Nesting of relational operators is not allowed o/w we will get compile time error</mark>
+    
+<pre><code>
+    SOP(10 < 20 < 30);
+</code></pre>
+<pre><output>
+    The operator < is undefined for the argument type(s) boolean, int
+</output></pre>
+
+    <h3>5. equality operators(==, !=)</h3>
+    <p>We can apply equality operators for every primitive type including boolean also</p>
+    
+<pre><code>
+    SOP(10 == 20);
+    SOP('a' == 'b');
+    SOP('a' == 97.0);
+    SOP(false == false);
+</code></pre>
+<pre><output>
+    false
+    false
+    true(small type will automatically converted to bigger type)
+    true
+</output></pre>
+
+<mark>We can apply equality operators for object type also. For object references r1, r2 
+    <p>r1 == r2</p>
+    returns true if and only if both references pointing to the same object(references comparison or address comparison)
+</mark><br>
+
+<img src="images/ss9.png" alt="ss9" width="300" height="300">
+
+
+<pre><code>
+    Thread t1 = new Thread();
+    Thread t2 = new Thread();
+    Thread t3 = t1;
+    SOP(t1 == t2);
+    SOP(t1 == t3);
+</code></pre>
+
+<pre><output>
+    false
+    true
+</output></pre>
+
+<img src="images/ss10.png" alt="ss9" width="300" height="300">
+
+<pre><code>
+    Thread t = new Thread();
+    Object o = new Object();
+    String s = new String();
+    SOP(t == o);
+    SOP(o == s);
+    SOP(s == t);
+</code></pre>
+
+<pre><output>
+    false
+    false
+    CE: Incompatible operand types String and Thread
+</output></pre>
+
+<h6>Loophole</h6>
+<p>If we apply equality operators for object type then compulsory there should be some relation between argument types
+    either child to parent or parent to child or same type o/w we will get compile time error saying
+    incomparable types java.lang.String, java.lang.Thread 
+</p>
+
+<div class="container">
+    <p class="bg-warning text-white">What is the difference between == operator & equals() method</p>
+    <p>In general we can use == operator for reference comparison(address comparison) and .equals() method for content comparison</p>
+    <pre><code>
+        String s1 = new String("durga");
+        String s1 = new String("durga");
+        SOP(s1 == s2);
+        SOP(s1.equals(s2));
+    </code></pre>
+    
+    <pre><output>
+        false
+        true
+    </output></pre>
+</div>
+
+<mark class="bg-primary text-white">For any object reference r, r == null is always false but null == null is always true</mark>
+
+
+<pre><code>
+    String s = new String("durga");
+    SOP(s == null);
+</code></pre>
+<pre><output>
+    false
+</output></pre>
+
+<pre><code>
+    String s = null;
+    SOP(s == null);
+</code></pre>
+<pre><output>
+    true
+</output></pre>
+
+<pre><code>
+    SOP(null == null);
+</code></pre>
+<pre><output>
+    true
+</output></pre>
+
+
+
+
+    <h3>6. instanceof operator</h3>
+    <p>We can use instanceof operator to check whether the given object is of particular type or not</p>
+    <p>Arraylist object can be of any type we don't know it may be string type customer type or student type. I want 
+        check whether it is customer type or student type then we should go for instanceof operator</p>
+    
+    <pre><code>
+        Object o = l.get(0);
+        if(o instanceof Student) {
+            Student s = (Student)o;
+            //perform Student specific functionality
+        } else if(o instanceof Customer){
+            Customer c = (Customer)c;
+            //perform Customer related functionality
+        }
+    </code></pre>
+
+    <h6>Syntax</h6>
+    <p>r instanceof X</p>
+    <p>r is object reference and X is Class or Interface name</p>
+
+    <h6>Example 1:</h6>
+    <pre><code>
+        public class Test {
+	
+            public static void main(String[] args) {
+                
+                Thread t = new Thread();
+                System.out.println(t instanceof Thread);
+                System.out.println(t instanceof Object);
+                System.out.println(t instanceof Runnable);
+            }
+        
+        }
+    </code></pre>
+    <pre><output>
+        true
+        true
+        true
+    </output></pre>
+    <p>Every implemented class object by default is interface type</p>
+    
+    <h6>Example 2:</h6>
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+        
+                Thread t = new Thread();
+                System.out.println(t instanceof String);
+        
+            }
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: incompatible types: Thread cannot be converted to String
+    </output></pre>
+
+    <p>To use instanceof operator compulsory there should be some relation between argument types(either child to
+        parent or parent to child or same type o/w we will get CE saying incompatible types)</p>
+
+    
+<h6>Example 3:</h6>
+<mark>For any class or interface X <span class="bg-primary text-white">null instanceof X</span> is always false</mark>
+<pre><code>
+    public class Test {
+
+        public static void main(String[] args) {
+    
+            Thread t = new Thread();
+            System.out.println(null instanceof String);
+            System.out.println(null instanceof Thread);
+            System.out.println(null instanceof Runnable);
+            System.out.println(null instanceof Object);
+        }
+    }
+</code></pre>
+<pre><output>
+    false
+    false
+    false
+    false
+</output></pre>
+
+    <h3>7. bitwise operators(&, |, ^)</h3>
+    <p>& -> AND = Returns true iff both arguments are true</p>
+    <p>| -> OR = Returns true iff atleast one argument is true</p>
+    <p>^ -> XOR = Returns true iff both arguments are different</p>
+
+    <h6>Example</h6>
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+        
+                System.out.println(true & false);
+                System.out.println(true | false);
+                System.out.println(true ^ false);
+        
+            }
+        }
+    </code></pre>
+    
+    <pre><output>
+        false
+        true
+        true
+    </output></pre>
+
+    <pre><code>
+        SOP(4 & 5)
+        SOP(4 | 5)
+        SOP(4 ^ 5)
+    </code></pre>
+
+    <pre><output>
+        4
+        5
+        1
+    </output></pre>
+
+    <mark>We can apply these operators for integral types also.</mark>
+
+    <h5>Bitwise compliment operator(~)</h5>
+    <p>We can apply this operator only for integral types but not for boolean types if we are trying to apply for boolean type then we will get compile time error</p>
+    <pre><code>
+        SOP(~true)
+    </code></pre>
+    
+    <pre><output>
+        CE error: bad operand type boolean for unary operator '~'
+    </output></pre>
+
+    <pre><code>
+        SOP(~4)
+    </code></pre>
+    
+    <pre><output>
+        -5
+    </output></pre>
+
+    <img src="images/ss12.png" alt="ss12" width="300" height="300">
+
+    <p>So 32bit compliment we have to perform not for just 3 bits or 2 bits</p>
+    <mark>Note: The MSB acts as sign bit. 0 means positive number. 1 means negative number. Positive numbers will be presented directly in a memory whereas negative numbers will be represented indirectly
+        in the menory in 2's compliment form
+    </mark>
+
+    <h5>Boolean compliment operator(!)</h5>
+    <pre><code>
+        SOP(!4)
+    </code></pre>
+    
+    <pre><output>
+        CE: The operator ! is undefined for the argument type(s) int
+    </output></pre>
+
+    <pre><code>
+        SOP(!false)
+    </code></pre>
+    
+    <pre><output>
+        true
+    </output></pre>
+
+    <p>We can apply this operator only for boolean types but not for integral types</p>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Operators</th>
+                <th>Use</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>&, |, ^</td>
+                <td>Applicable for both boolean and integral types</td>
+            </tr> 
+            <tr>
+                <td>~</td>
+                <td>Applicable for only integral types but not for boolean type</td>
+            </tr> 
+            <tr>
+                <td>!</td>
+                <td>Applicable for only boolean but not for integral types</td>
+            </tr> 
+        </tbody>
+    </table>
+
+
+    <h3>8. short circuit operators(&&, ||)</h3>
+    <p>These are exactly same as bitwise operators(&, |) except the following differences</p>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>&,  |</th>
+                <th>&&, ||</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Both arguments should be evaluated always</td>
+                <td>Second argument evaluation is optional</td>
+            </tr> 
+            <tr>
+                <td>Relatively performance is low</td>
+                <td>Relatively performance is high</td>
+            </tr>
+            <tr>
+                <td>x && y = y will be evaluated iff x is true i.e if x is false then y won't be evaluated</td>
+                <td>x || y = y will be evaluated iff x is false i.e if x is true. Then y won't be evaluated</td>
+            </tr>
+            <tr>
+                <td>Applicable for both boolean and integral types</td>
+                <td>Applicable for boolean but not for integral types</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h6>Example 1:</h6>
+
+    <pre><code>
+        int x = 10, y = 15;
+        if(++x < 10 & ++y > 15) {
+            x++;
+        } else {
+            y++;
+        }
+        SOP(x + "....." + y);
+    </code></pre>
+    
+    <pre><output>
+        11.....17
+    </output></pre>
+
+    <pre><code>
+        int x = 10, y = 15;
+        if(++x < 10 && ++y > 15) {
+            x++;
+        } else {
+            y++;
+        }
+        SOP(x + "....." + y);
+    </code></pre>
+    
+    <pre><output>
+        11.....16
+    </output></pre>
+
+    <pre><code>
+        int x = 10, y = 15;
+        if(++x < 10 | ++y > 15) {
+            x++;
+        } else {
+            y++;
+        }
+        SOP(x + "....." + y);
+    </code></pre>
+    
+    <pre><output>
+        12.....16
+    </output></pre>
+    
+    <pre><code>
+        int x = 10, y = 15;
+        if(++x < 10 || ++y > 15) {
+            x++;
+        } else {
+            y++;
+        }
+        SOP(x + "....." + y);
+    </code></pre>
+    
+    <pre><output>
+        12.....16
+    </output></pre>
+
+    <h6>Example 2:</h6>
+    <pre><code>
+        int x = 10, y = 15;
+        if(++x < 10 && x / 0 > 10) {
+            SOP("Hello")
+        } else {
+            SOP("Hii")
+        }
+    </code></pre>
+    
+    <pre><output>
+        Hii
+    </output></pre>
+
+    <pre><code>
+        int x = 10, y = 15;
+        if(++x < 10 & x / 0 > 10) {
+            SOP("Hello")
+        } else {
+            SOP("Hii")
+        }
+    </code></pre>
+    
+    <pre><output>
+        RE: ArithmeticException
+    </output></pre>
+
+    
+
+    <h3>9. type cast operators</h3>
+    <p>There are two types of typecasting</p>
+    <p>1. Implicit typecasting</p>
+    <p>2. Explicit typecasting</p>
+
+    <h6>Implicit typecasting</h6>
+    <p>1. Compiler is responsible to perform Implicit typecasting</p>
+    <p>2. Whenever we are assigning smaller data type value to bigger data type variable Implicit typecasting will be performed</p>
+    <p>3. It is also known as widening or upcasting</p>
+    <p>4. There is no loss of information in this typecasting</p>
+    <p>5. The following are various possible conversions where Implicit typecasting will be performed</p>
+    <img src="images/ss13.png" alt="ss12" width="300" height="300">
+    <pre><code>
+        int x = 'a';
+        SOP(x);
+    </code></pre>
+    
+    <pre><output>
+        97
+    </output></pre>
+
+    <p>Compiler converts char to int automatically by Implicit typecasting</p>
+
+    <pre><code>
+        double d = 10;
+        SOP(d);
+    </code></pre>
+    
+    <pre><output>
+        10.0
+    </output></pre>
+
+    <p>Compiler converts int to double automatically by Implicit typecasting</p>
+
+    <h6>Explicit typecasting</h6>
+    <p>1. Programmer is responsible to perform Explicit typecasting</p>
+    <p>2. Whenever we are assigning bigger data type value to smaller datatype variable then 
+        explicit typecasting is required.</p>
+    <p>3. It is also called as narrowing or downcasting</p>
+    <p>4. There may be a chance of loss of information in this typecasting</p>
+    <p>5. The following are various possible conversions where explicit typecasting is required</p>
+    
+    <img src="images/ss14.png" alt="ss12" width="300" height="300">
+    <pre><code>
+        int x = 130;
+        byte b = x;
+    </code></pre>
+    
+    <pre><output>
+        CE: error: incompatible types: possible lossy conversion from int to byte
+    </output></pre>
+
+    <pre><code>
+        int x = 130;
+        byte b = (byte)x;
+        SOP(b);
+    </code></pre>
+    
+    <pre><output>
+        -126
+    </output></pre>
+
+    <p> Whenever we are assigning bigger data type value to smaller datatype variable by explicit typecating then 
+        the most significant bits will be lost. We have to consider only LSB</p>
+
+        <img src="images/ss15.png" alt="ss15" width="300" height="300">
+
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+                int x = 150;
+                short s = (short)x;
+                byte b = (byte)x;
+                System.out.println(b);
+                System.out.println(s);
+                }
+        }
+    </code></pre>
+    
+    <pre><output>
+        150
+        -106
+    </output></pre>
+
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+                double d = 130.456;
+                int x = (int) d;
+                System.out.println(x);
+                byte b = (byte) d;
+                System.out.println(b);
+        
+            }
+        }
+    </code></pre>
+    
+    <pre><output>
+        130
+        -126
+    </output></pre>
+
+    <mark>If we assign floating point values to the integral type by explicit typecasting the digits after the decimal point will be lost</mark>
+    
+    <h3>10. assignment operators</h3>
+    <p>There are three types of assignment operators</p>
+    <h6>1. Simple assignment</h6>
+    <pre><code>
+        int x = 10;
+    </code></pre>
+
+    <h6>2. Chained assignment</h6>
+    <pre><code>
+        int a, b, c, d;
+        a = b = c = d = 20;
+        SOP(a + " " + b + " " + c + " " d);
+    </code></pre>
+
+    <pre><output>
+        20 20 20 20
+    </output></pre>
+
+    <pre><code>
+        int a = b = c = d = 20;
+        SOP(a + " " + b + " " + c + " " d);
+    </code></pre>
+
+    <pre><output>
+CE  error: cannot find symbol
+                int a = b = c = d = 20;
+                        ^
+  symbol:   variable b
+  location: class Test
+Test.java:5: error: cannot find symbol
+                int a = b = c = d = 20;
+                            ^
+  symbol:   variable c
+  location: class Test
+Test.java:5: error: cannot find symbol
+                int a = b = c = d = 20;
+                                ^
+  symbol:   variable d
+  location: class Test
+
+    </output></pre>
+
+    <mark>Can't perform chained assignment directly at the time of declaration</mark>
+
+    <pre><code>
+        int b, c, d;
+        int a = b = c = d = 20;
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+    
+<h6>Compound assignment operator</h6>
+<p>Sometimes assignment operator mixed with some other operator such type of assignment operators are called compound assignment operators</p>
+<pre><code>
+    int a = 10;
+    a += 20;
+    SOP(a);
+</code></pre>
+    
+<pre><output>
+    30
+</output></pre>
+
+<p>The following are all possible compound assignment operators in java</p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2" style="background-color:lavender;"><p>+=<br>-=<br>*=<br>/=<br>%=<br></div>                  
+        <div class="col-sm-2" style="background-color:lavenderblush;"><p>&=<br>|=<br>^=<br></div>
+        <div class="col-sm-2" style="background-color:lavender;"><p>>>=<br>>>>=<br><<=</div>
+    </div>
+</div>
+
+<pre><code>
+    byte b = 10;
+    b = b + 1;
+    SOP(b)
+</code></pre>
+
+<pre><output>
+    CE:  error: incompatible types: possible lossy conversion from int to byte
+</output></pre>
+
+<pre><code>
+    byte b = 10;
+    b = b++;
+    SOP(b)
+</code></pre>
+
+<pre><output>
+    11
+</output></pre>
+
+<pre><code>
+    byte b = 10;
+    b += 1;
+    SOP(b)
+</code></pre>
+
+<pre><output>
+    11
+</output></pre>
+
+<pre><code>
+    byte b = 127;
+    b += 3;
+    SOP(b)
+</code></pre>
+
+<pre><output>
+    -126
+</output></pre>
+
+<mark>In the case of compound assignment operators internal typecasting will be perfomed automatically</mark>
+
+<pre><code>
+    int a, b, c, d;
+    a = b = c = d = 20;
+    a += b -= c *= d /= 2;
+    SOP(a + " " + b + " " + " " + c + " " + d);
+</code></pre>
+
+<pre><output>
+    -160 -180 200 10
+</output></pre>
+
+<p>Assignment operator associativity is right to left</p>
+
+
+
+    <h3>11. conditional operator(?:)</h3>
+    <p>The only possible ternary operator in java is conditonal operator</p>
+    <pre><code>
+        int x = (10 < 20) ? 30 : 40;
+        SOP(x);
+    </code></pre>
+        
+    <pre><output>
+        30
+    </output></pre>
+    
+    <h3>12. new operator</h3>
+    <p>We can use new operator to create object</p>
+    <h6>Example</h6>
+    <p>Test t = new test();</p>
+    <mark>Note: After creating an object constructor will be executed to perform initialization of an object. Hence constructor is
+        not for creation of object and it is for initialization of an object
+    </mark>
+    <p>In java we have only new keyword but not delete keyword because destruction of useless objects is the responsibility of garbage collector
+    </p>
+
+
+    <h3>13. [] operator</h3>
+    <p>We can use this operator to declare and create arrays</p>
+    <h6>Example</h6>
+    <p>int[] x = new int[10];</p>
+
+    <h3>14. operator precedence</h3>
+    <p>In which order all operands will be evaluated is decided by java operator precedence</p>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Operators</th>
+                <th>Precedence</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Unary operators</td>
+                <td>[],  x++,  x--<br>++x,  --x,  ~,  !<br>new,  &lttype></td>
+            </tr> 
+            <tr>
+                <td>Arithmetic Operators</td>
+                <td>*,  /,  %<br>+,  -</td>
+            </tr> 
+            <tr>
+                <td>Shift operators</td>
+                <td>>>,  >>>,  <<</td>
+            </tr> 
+            <tr>
+                <td>Comparison operators</td>
+                <td><,  <=,  >,  >=,  instanceof</td>
+            </tr> 
+            <tr>
+                <td>equality operators</td>
+                <td>==,  !=</td>
+            </tr> 
+            <tr>
+                <td>Bitwise operators</td>
+                <td>&<br>^<br>|</td>
+            </tr> 
+            <tr>
+                <td>Short circuit operators</td>
+                <td>&&<br>||</td>
+            </tr> 
+            <tr>
+                <td>Conditional operators</td>
+                <td>?:</td>
+            </tr>
+            <tr>
+                <td>Assignment operators</td>
+                <td>=,  +=,  -=,  *= </td>
+            </tr>  
+        </tbody>
+    </table>
+ 
+
+    <h3>15. Evaluation order of operands</h3>
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+                System.out.println(m1(1) + m1(2) * m1(3) / m1(4) + m1(5) * m1(6));
+        
+            }
+        
+            private static int m1(int i) {
+                System.out.println(i);
+                return i;
+            }
+        }
+    </code></pre>
+    
+<pre><output>
+1
+2
+3
+4
+5
+6
+32
+</output></pre>
+    
+<mark>In java we have only operator precedence but not operand precedence. Before applying any operator all operands will
+    be evaluated from left to right.
+</mark>
+
+    <h3>16. new vs newInstance()</h3>
+    <p>We can use new operator to create an object if we know class name at the beginning</p>
+    <pre><code>
+        Test t = new Test();
+        Student s = new Student();
+        Customer c = new Customer();
+    </code></pre>
+
+    <p>newInstance is a method present in class Class. We can use newInstance method to create an object if we don't know
+        class name at the beginning and it is available dynamically at the run time.
+    </p>
+    <pre><code>
+        class Student {
+
+        }
+        class Customer {
+
+        }
+        public class Test {
+
+            public static void main(String[] args) throws Exception {
+                Object o = Class.forName(args[0]).newInstance();
+                System.out.println("Object created for:" + o.getClass().getName());
+        
+            }
+        
+        }
+    </code></pre>
+    
+    <pre><output>
+        java Test Student<kbd>enter</kbd>
+        Object created for Student
+        java Test Customer<kbd>enter</kbd>
+        Object created for Customer
+        java Test java.lang.String<kbd>enter</kbd>
+        Object created for java.lang.String
+    </output></pre>
+
+    <mark>In the case of new operator based on our requirement we can invoke any constructor</mark>
+    <h6>Example</h6>
+    <pre><code>
+        Test t = new Test();
+        Test t1 = new Test(10);
+        Test t2 = new Test("durga");
+    </code></pre>   
+    
+    <mark>But newInstance method internally calls no-arg constructor hence to use newInstance method 
+        compulsory corresponding class should contain no-arg constructor o/w we will get RE saying InstantiationException
+    </mark><br><br>
+
+   <mark>While using new operator at run time if the corresponding .class file is not available then we will get RE saying
+       NoClassDefFoundError: Test
+   </mark> 
+
+   <pre><code>
+    public class Test {
+
+        public static void main(String[] args) throws Exception {
+            Student s = new Student();
+    
+        }    
+</code></pre>
+
+<pre><output>
+    CE: NoClassDefFoundError: Test
+</output></pre>
+
+<mark>
+    While using newInstance method at run time if the corresponding .class file not available then we will get RE 
+    saying ClassNotFoundException
+</mark>
+
+<pre><code>
+    public class Test {
+
+        public static void main(String[] args) throws Exception {
+            Object o = Class.forName(args[0]).newInstance();
+        }
+    
+    }
+</code></pre>
+
+<pre><output>
+    java Test Student<kbd>enter</kbd>
+    RE: ClassNotFoundException: Student
+</output></pre>
+
+<p>At run time if Student.class file not available then we will get RE saying ClassNotFoundException: Student
+<h6>Differences between new and newInstance</h6>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>new</th>
+                <th>newInstance()</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>It is operator in java</td>
+                <td>It is a method present in java.lang.Class</td>
+            </tr> 
+            <tr>
+                <td>We can use new operator to create an object if we know class name at the beginning</td>
+                <td>We can use newInstance method to create an object if we don't know class name at the beginning and it is available dynamically at the run time.</td>
+            </tr> 
+            <tr>
+                <td>To use new operator class not required to contain no-arg constructor</td>
+                <td>To use newInstance() compulsory class should contain no-arg constructor o/w we will get RE: InstantiationException</td>
+            </tr>
+            <tr>
+                <td>At runtime if .class file not available then we get RE: NoClassDefFoundError which is unchecked</td>
+                <td>At runtime if .class file not available then we get RE: ClassNotFoundException, which is checked</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>17. instanceof vs isInstance()</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>instanceof</th>
+                <th>isInstance()</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>instanceof is an operator in java. We can use instanceof to check whether the given object is of particular type or not and we know the type at the beginning<br>
+                 Example:<br> 
+        <pre><code>
+        Thread t = new Thread();
+        SOP(t instanceof Runnable);
+        SOP(t instanceof Object);
+        </code></pre>
+        </td>
+                <td>isInstance() is a method present in java.lang.class. We can use isInstance method to check whether the given object is of particular type or not and we don't know the type at the beginning
+                    and it is available dynamically at run time
+                    <br>Example:<br>
+        <pre><code>
+        class Test {
+            public static void main(String[] args) {
+                Thread t = new Thread();
+                SOP(Class.forName(args[0].isInstance(t));
+                }
+         }
+        </code></pre>
+        <pre><output>
+        java Test Runnable<kbd>enter</kbd>
+        true
+        java Test String<kbd></kbd>
+        false
+        </output></pre>
+                 </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <mark>isInstance() is method equivalent of instanceof operator</mark>
+    
+
+    <h3>18. ClassNotFoundException vs NoClassDefFoundError</h3>
+    <h6>Difference between ClassNotFoundException and NoClassDefFoundError</h6>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ClassNotFoundException</th>
+                <th>NoClassDefFoundError</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>For hardcoded class names, at run time if the corresponding .class file is not available then we will get RE saying NoClassDefFoundError which is unchecked<br>
+                 Example:<br> Test t = new Test();<br>At run time if test.class file is not available then we will get RE saying NoClassDefFoundError : Test</td>
+                <td>For dynamically provided class names at run time if the corresponding .class file is not available then we will get RE saying ClassNotFoundException, which is checked exception
+                    <br>Example:<br>
+                    Object 0 = Class.forName(args[0]).newInstance();
+                    
+                    <br>java Test Student<kbd>enter</kbd><br>
+                    At run time if Student .class file not available then we will get RE saying ClassNotFoundException: Student
+                 </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
