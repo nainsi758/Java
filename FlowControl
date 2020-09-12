@@ -1,0 +1,1307 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>Java</title>
+<style>
+h1 {
+    color: red;
+}
+h3 {
+    color: darkblue;
+}
+h6 {
+    color:crimson; 
+}
+h5 {
+    color:darkmagenta;
+}
+</style>
+</head>
+<body>
+    <h1>Flow Control</h1>
+    <p>Flow control describes the order in which the statements will be executed at run time</p>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Flow Control Statements</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Selection Statements</td>
+                <td>1. if-else<br>2. switch()</td>
+            </tr>
+            <tr>
+                <td>Iterative Statements</td>
+                <td>1. while()<br>2. do-while()<br>3. for()<br>4. for-each(1.5v)</td>
+            </tr>
+            <tr>
+                <td>Transfer Statements</td>
+                <td>1. break<br>2. continue<br>3. return<br>4. try catch finally<br>5. assert</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Selection Statements</h3>
+    <h5>if-else</h5>
+    <p>The argument to the if statements should be boolean type. By mistake if we are trying to provide
+        any other type then we will get CE
+    </p>
+    <pre><code>
+        int x = 0;
+        if(x) {
+            SOP("Hello")
+        } else {
+            SOP("Hii")
+        }
+    </code></pre>
+    <pre><output>
+        Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	Type mismatch: cannot convert from int to boolean
+    </output></pre>
+
+    <pre><code>
+        int x = 10;
+        if(x = 20) {
+            SOP("Hello")
+        } else {
+            SOP("Hii")
+        }
+    </code></pre>
+    <pre><output>
+        Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	Type mismatch: cannot convert from int to boolean
+    </output></pre>
+
+    <pre><code>
+        int x = 10;
+        if(x == 20) {
+            SOP("Hello")
+        } else {
+            SOP("Hii")
+        }
+    </code></pre>
+    <pre><output>
+        Hii
+    </output></pre>
+
+    <pre><code>
+        boolean b = true;
+        if(b = false) {
+            SOP("Hello")
+        } else {
+            SOP("Hii")
+        }
+    </code></pre>
+    <pre><output>
+        Hii
+    </output></pre>
+
+    <pre><code>
+        boolean b = false;
+        if(b == false) {
+            SOP("Hello")
+        } else {
+            SOP("Hii")
+        }
+    </code></pre>
+    <pre><output>
+        Hello
+    </output></pre>
+
+    <mark>Else part and curly braces are optional. Without curly braces only one statement is allowed under if, which should not be declarative statement</mark>
+
+    <pre><code>
+        if(true) 
+            SOP("Hello")
+    </code></pre>
+    
+    <pre><output>
+        Hello
+    </output></pre>
+
+    <pre><code>
+        if(true);
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+
+    <pre><code>
+        if(true);;;;;;;;;;;;;;;;;;;;;;
+    </code></pre>
+    
+    <pre><output>
+        valid(we can add any number of semicolons it will be treated as empty statements)
+    </output></pre>
+
+    <mark>Semicolon is a valid java statements which is also known as empty statement</mark>
+
+    <pre><code>
+        if(true)
+            int x = 10;
+    </code></pre>
+    
+    <pre><output>
+        Unresolved compilation problems: 
+	Syntax error, insert ". class" to complete Expression
+	Syntax error, insert "AssignmentOperator Expression" to complete Assignment
+	Syntax error, insert ";" to complete Statement
+	The left-hand side of an assignment must be a variable
+	x cannot be resolved to a variable
+    </output></pre>
+
+    <pre><code>
+        if(true) {
+            int x = 10;
+        }
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+
+    <pre><code>
+        if(true)
+            if(true)
+                SOP("Hello");
+        else
+            SOP("Hii")
+    </code></pre>
+    
+    <pre><output>
+        Hello
+    </output></pre>
+
+    <mark>There is no dangling else problem in java. Every else is mapped to the nearest if statement</mark>
+
+    <h5>Switch Statements</h5>
+    <p>If several options are available then its not recommended to use nested if esle because it reduces readibility.
+        To handle this requirement we should go for switch statement</p>
+    <p>The allowed arguments types for the switch statement are byte short char int until 1.4v but from 1.5v onwards corresponding
+        wrapper classes and enum type also allowed. From 1.7v onwards string type also allowed
+    </p>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>1.4V</th>
+                <th>1.5V</th>
+                <th>1.7V</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>byte</td>
+                <td>Byte</td>
+                <td>String</td>
+            </tr> 
+            <tr>
+                <td>short</td>
+                <td>Short</td>
+            </tr>
+            <tr>
+                <td>char</td>
+                <td>Character</td>
+            </tr>
+            <tr>
+                <td>int</td>
+                <td>Integer</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <mark>Curly braces are mandatory. Except switch everywhere curly braces are optional</mark>
+    <p>Both case and default are optional i.e an empty switch statement is a valid java syntax</p>
+    <pre><code>
+        int x = 10;
+        swicth(x) {
+
+        }
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+
+    <pre><code>
+        int x = 10;
+        swicth(x) {
+            SOP("Hello")
+        }
+    </code></pre>
+    
+    <pre><output>
+        Test.java:6: error: case, default, or '}' expected
+    </output></pre>
+
+    <p>Inside switch every statements should be under some case or default i.e independent
+        statements are not allowed inside switch o/w we will get compile time error
+    </p>
+
+    <pre><code>
+        int x = 10;
+        int y = 20;
+        switch(x) {
+            case 10:
+                SOP(10);
+                break;
+            case y:
+                SOP(20);
+                break;
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: case expressions must be constant expressions
+    </output></pre>
+
+    <pre><code>
+        int x = 10;
+        final int y = 20;
+        switch(x) {
+            case 10:
+                SOP(10);
+                break;
+            case y:
+                SOP(20);
+                break;
+        }
+    </code></pre>
+    
+    <pre><output>
+        10
+    </output></pre>
+
+    <mark>Every case label should be compile time constant i.e constant expression</mark>
+    <p>If we declare y as final then we wont get any compile time error</p>
+
+    <pre><code>
+        int x = 59;
+        switch(x + 1) {
+            case 10:
+                SOP(10)
+            case 10 + 20+ 30:
+                SOP(60)
+        }
+    </code></pre>
+        
+    <pre><output>
+        60
+    </output></pre>
+    <mark>Both switch argument and case label can be expressions but case label should be constant expression</mark>
+
+    <pre><code>
+        byte b = 10;
+        switch(b) {
+            case 10:
+                SOP(10);
+                break;
+            case 100:
+                SOP(100);
+                break;
+            case 1000:
+                SOP(1000);
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: possible loss of precision 
+        found: int
+        required: byte
+    </output></pre>
+
+    <pre><code>
+        byte b = 10;
+        switch(b + 1) {
+            case 11:
+                SOP(10);
+                break;
+            case 100:
+                SOP(100);
+                break;
+            case 1000:
+                SOP(1000);
+        }
+    </code></pre>
+    
+    <pre><output>
+        10
+    </output></pre>
+
+    <p>Every case label should be in the range of switch argument type o/w we will get compile time error</p>
+
+    <pre><code>
+        int x = 10;
+        swicth(x) {
+            case 97:
+                SOP(97);
+                break;
+            case 98:
+                SOP(98);
+                break;
+            case 99:
+                SOP(99);
+                break;
+            case 'a':
+                SOP('a')
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: Duplicate case label 
+    </output></pre>
+
+    <p>Duplicate case labels are not allowed p/w we will get compile time error</p>
+
+    <h6>Case label</h6>
+    <p>1. It should be constant expression</p>
+    <p>2. The value should be in the range of switch argument type</p>
+    <p>3. Dupliacte case labels are not allowed</p>
+
+    <h6>Fall through inside switch</h6>
+    <pre><code>
+        switch(x) {
+            case 0:
+                SOP(0);
+            case 1:
+                SOP(1);
+                break;
+            case 2:
+                SOP(2);
+            default: 
+                SOP("def")
+        }
+    </code></pre>
+    
+    <pre><output>
+        x = 0
+        0
+        1
+        x = 1
+        1
+        x = 2
+        2
+        def
+        x = 3
+        def
+    </output></pre>
+
+    <pre><code>
+        switch(x) {
+            case 1:
+            case 2:
+            case 3:
+                SOP("Q-1")
+                break;
+            case 4:
+            case 5:
+            case 6:
+                SOP("Q-2")
+                break;
+        }
+    </code></pre>
+
+    <mark>Within the switch if any case is matched from that case onwards all statements will be executed until break
+        or end of the switch. This is called fall through inside switch. The main advantage of fall through inside switch is we can define
+        common action for multiple cases(code reusability)
+    </mark>
+
+    <h6>Default case</h6>
+    <p>1. Within the switch we can take default case atmost once</p>
+    <p>2. Default case will be executed if and only if there is no case matched</p>
+    <p>3. Within the switch we can write default case anywhere but it is recommended to write as last case</p>
+
+    <pre><code>
+        switch(x) {
+            default: 
+                SOP("def");
+            case 0:
+                SOP(0);
+                break;
+            case 1:
+                SOP(1);
+            case 2:
+                SOP(2); 
+        }
+    </code></pre>
+    
+    <pre><output>
+        x = 0
+        0
+        x = 1
+        1
+        2
+        x = 2
+        2
+        x = 3
+        def
+        0
+    </output></pre>
+
+    <h5>Iterative Statements</h5>
+    <h6>while()</h6>
+    <p>If we dont know number of iterations in advance then we should go for while loop.</p>
+    <p>The argument should be boolean type if we are trying to provide any other type then we will get CE</p>
+    <h6>Example</h6>
+
+    <pre><code>
+        while(rs.next()) {
+            
+        }
+    </code></pre>
+    
+    <pre><code>
+        while(e.hasMoreElements()) {
+
+        }
+    </code></pre>
+
+    <pre><code>
+        while(itr.hasNext()) {
+
+        }
+    </code></pre>
+
+    <pre><code>
+        while(1) {
+            SOP("Hello")
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: incompatible types
+        found: int
+        required: boolean
+    </output></pre>
+    
+    <pre><code>
+        while(true)
+            SOP("Hello");
+    </code></pre>
+    
+    <pre><output>
+        Infinite times print Hello
+    </output></pre>
+
+    <pre><code>
+        while(true);
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+
+    <pre><code>
+        while(true)
+            int x = 10;
+    </code></pre>
+    
+    <pre><output>
+        Unresolved compilation problems: 
+	Syntax error, insert ". class" to complete Expression
+	Syntax error, insert "AssignmentOperator Expression" to complete Assignment
+	Syntax error, insert ";" to complete Statement
+	The left-hand side of an assignment must be a variable
+	x cannot be resolved to a variable
+    </output></pre>
+    
+    <pre><code>
+        while(true) {
+            int x = 10;
+        }
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+    <mark>Curly braces are optional and without curly braces we can take only one statement under while which should not be declarative statement</mark>
+
+    <pre><code>
+        while(true) {
+            SOP("Hello")
+        }
+        SOP("Hii")
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code( i.e SOP("Hii"))
+    </output></pre>
+
+    <pre><code>
+        while(false) {
+            SOP("Hello")
+        }
+        SOP("Hii")
+    </code></pre>
+        
+    <pre><output>
+        CE: unreachable code(i.e first curly brace of while)
+    </output></pre>
+
+    <pre><code>
+        int a = 10, b = 20;
+        while(a < b) {
+            SOP("Hello")
+        }
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        Hello infinite number of times
+    </output></pre>
+
+    <pre><code>
+        int a = 10, b = 20;
+        while(a > b) {
+            SOP("Hello")
+        }
+        SOP("Hii")
+    </code></pre>
+    
+    <pre><output>
+        Hii
+    </output></pre>
+
+    <pre><code>
+        final int a = 10, b = 20;
+        while(a < b) {
+            SOP("Hello");
+        }
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e SOP("Hii"))
+    </output></pre>
+
+    <pre><code>
+        final int a = 10, b = 20;
+        while(a > b) {
+            SOP("Hello")
+        }
+        SOP("Hii")
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e first curly brace of while loop)
+    </output></pre>
+
+    <mark class="bg-primary text-white">Note: Every final variable will be replaced by the value at compile time only.</mark>
+    <pre><code>
+        final int a = 10;
+        int b = 20;
+        SOP(a);
+        SOP(b);
+    </code></pre>
+
+    <h6>After compilation</h6>
+    <pre><output>
+        final int a = 10;
+        int b = 20;
+        SOP(10);
+        SOP(b);
+    </output></pre>
+    <mark class="bg-primary text-white">If every argument is a fianl variable(compile time constant then that operation should be performed at compile time only)</mark>
+    <pre><code>
+        final int a = 10, b = 20;
+        int c = 20;
+        SOP(a + b);
+        SOP(a + c);
+        SOP(a < b);
+        SOP(a < c);
+    </code></pre>
+
+    <h6>After compilation</h6>
+
+    <pre><output>
+        final int a = 10, b = 20;
+        int c = 20;
+        SOP(30);
+        SOP(10 + c);
+        SOP(true);
+        SOP(10 < c);
+    </output></pre>
+
+    <h5>do-while()</h5>
+    <p>If we want to execute loop body atleast once then we should go for do while</p>
+    <pre><code>
+        do {
+            body
+        }while(b);
+    </code></pre>
+
+    <p>Mandatory b should always be boolean type</p>
+    
+    <pre><code>
+        do
+            SOP("Hello");
+        while(true);
+    </code></pre>
+    
+    <pre><output>
+        Infinite times hello
+    </output></pre>
+
+    <pre><code>
+        do;
+        while(true);
+    </code></pre>
+
+    <pre><output>
+        valid
+    </output></pre>
+
+    <pre><code>
+        do
+            int x = 10;
+        while(true);
+    </code></pre>
+    
+    <pre><output>
+        invalid
+    </output></pre>
+
+    <mark>Curly braces are optional and without curly braces we can take only on one statement between do and while
+        which should not be declarative statement</mark>
+
+    <pre><code>
+        do {
+            int x = 10;
+        }while(true);
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+
+    <pre><code>
+        do
+        while(true);
+    </code></pre>
+    
+    <pre><output>
+        invalid(Between do and while no body is there, atleast semicolon is required,
+         without having the body what is the need of taking the loop)
+    </output></pre>
+
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+        
+                do
+                    while (true)
+                        System.out.println("Hello");
+                while (false);
+            }
+        
+        }
+    </code></pre>
+    
+    <pre><output>
+        Infinite times hello
+    </output></pre>
+
+    <mark class="bg-primary text-white">This total thing is one do while statement. We entered into do while already thats why
+        total syntax is by default reachable. First half is reachable an second half is not reachable my compiler is never going 
+        to check that. Is do while reachable or not? Yes because I can able to enter already in do while
+    </mark>
+
+    <pre><code>
+        do {
+            SOP("Hello");
+        }while(true);
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e SOP("Hii"))
+    </output></pre>
+
+    <pre><code>
+        do {
+            SOP("Hello");
+        }while(false);
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        Hello
+        Hii
+    </output></pre>
+    <pre><code>
+        int a = 10, b = 20;
+        do {
+            SOP("Hello");
+        }while(a < b);
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        Infinite times hello
+    </output></pre>
+
+    <pre><code>
+        int a = 10, b = 20;
+        do {
+            SOP("Hello");
+        }while(a > b);
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        Hello
+        Hii
+    </output></pre>
+
+    <pre><code>
+        final int a = 10, b = 20;
+        do {
+            SOP("Hello");
+        }while(a < b);
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e SOP("Hii"))
+    </output></pre>
+    <pre><code>
+        final int a = 10, b = 20;
+        do {
+            SOP("Hello");
+        }while(a > b);
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        Hello
+        Hii
+    </output></pre>
+
+    <h5>for loop</h5>
+    <p>1. For loop is most common used loop in java</p>
+    <p>2. If we know number of iterations in advance then for loop is the best choice</p>
+    <p>3. Curly braces are optional and without curly braces we can take only one statement under for loop which should not be declarative statement</p>
+
+    <pre><code>
+        for(int i = 0; true; i++) {
+            SOP("Hello");
+        }
+    </code></pre>
+    
+    <pre><output>
+        Infinite times Hello
+    </output></pre>
+
+    <pre><code>
+        for(int i = 0; i < 10; i++);
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+
+    <pre><code>
+        for(int i = 0; i < 10; i++) 
+            int x = 10;
+        
+    </code></pre>
+    
+    <pre><output>
+        CE: Unresolved compilation problems: 
+        Syntax error, insert ". class" to complete Expression
+        Syntax error, insert "AssignmentOperator Expression" to complete Assignment
+        Syntax error, insert ";" to complete Statement
+        The left-hand side of an assignment must be a variable
+        x cannot be resolved to a variable
+    </output></pre>
+
+    <h6>Initialization section</h6>
+    <p>1. This part will be executed only once in loop life cycle.</p>
+    <p>2. Here we can declare and initialize local variables of for loop</p>
+    <p>3. Here we can declare any number of variables but should be of the same type by mistake if we are trying to declare different
+        data type variables then we will get compile time error</p>
+    <pre><code>
+       int i = 0, j = 0;
+       int i = 0, String s = "durga";
+       int i = 0, int j = 0;
+    </code></pre>
+    
+    <pre><output>
+        valid
+        invalid
+        invalid
+    </output></pre> 
+
+    <pre><code>
+        int i = 0;
+        for(SOP("Hello boss u r sleeping"); i < 3; i++) {
+            SOP("No boss you only sleeping");
+        }
+    </code></pre>
+    
+    <pre><output>
+        Hello boss u r sleeping
+        No boss you only sleeping
+        No boss you only sleeping
+        No boss you only sleeping
+    </output></pre>
+
+    <p>4. In the Initialization section we can take any valid java statement including SOP</p>
+    
+    <h6>Conditional check</h6>
+    <pre><code>
+        for(int i = 0; <span class="bg-danger text-white">true</span>; i++) {
+            
+        }
+    </code></pre>
+    
+    <p>1. Here we can take any valid java expression but should be of the type boolean</p>
+    <p>2. This part is optional and if we are not taking anything then compiler will always place true</p>
+    
+    <h6>Increment or decrement section</h6>
+    <pre><code>
+        int i = 0;
+        for(SOP("Hello"); i < 3; SOP("Hii")) {
+            i++;
+        }
+    </code></pre>
+    
+    <pre><output>
+        Hello
+        Hii
+        Hii
+        Hii 
+    </output></pre>
+
+    <p>In the Incrementor decrement section we can take any valid java statement including SOP</p>
+
+    <pre><code>
+        for( ; ; ) {
+            SOP("Hello");
+        }
+    </code></pre>
+    
+    <pre><output>
+        Infinite times Hello
+    </output></pre>
+    <pre><code>
+        for( ; ; );
+    </code></pre>
+    
+    <pre><output>
+        Infinite times execution
+    </output></pre>
+
+    <mark class="bg-primary text-white">All three parts of for loop are independent of each other and optional</mark>
+
+    <pre><code>
+        for(int i = 0; true; i++) {
+            SOP("Hello");
+        }
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e SOP("Hii"))
+    </output></pre>
+
+    <pre><code>
+        for(int i = 0; false; i++) {
+            SOP("Hello");
+        }
+        SOP("Hii")
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e for loop first curly brace)
+    </output></pre>
+
+    <pre><code>
+        for(int i = 0; ; i++) {
+            SOP("Hello");
+        }
+        SOP("Hii")
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e SOP("Hii"))
+    </output></pre>
+
+    <pre><code>
+        int a = 10, b = 20;
+        for(int i = 0; a < b; i++) {
+            SOP("Hello");
+        }
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        Hello infinite times
+    </output></pre>
+
+    <pre><code>
+        int a = 10, b = 20;
+        for(int i = 0; a > b; i++) {
+            SOP("Hello");
+        }
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        Hii
+    </output></pre>
+
+    <pre><code>
+        final int a = 10, b = 20;
+        for(int i = 0; a < b; i++) {
+            SOP("Hello");
+        }
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e SOP("Hii"))
+    </output></pre>
+
+    <pre><code>
+        final int a = 10, b = 20;
+        for(int i = 0; a > b; i++) {
+            SOP("Hello");
+        }
+        SOP("Hii");
+    </code></pre>
+    
+    <pre><output>
+        CE: unreachable code(i.e for loop first curly brace)
+    </output></pre>
+
+    <h5>for-each loop(Enhanced for loop came into 1.5v)</h5>
+    <p>It is specially designed loop to retrieve elements of arrays and collections</p>
+
+    <h6>case 1: To print elements of 1D array</h6>
+    <pre><code>
+        int[] x = {10, 20, 30, 40};
+    </code></pre>
+
+    <p class="bg-primary text-white">Using normal for loop</p>
+    <pre><code>
+        for(int i = 0; i < x.length; i++) {
+            SOP(x[i]);
+        }
+    </code></pre>
+
+    <p class="bg-primary text-white">Using enhanced for loop</p>
+    <pre><code>
+        for(int x1 : x) {
+            SOP(x1);
+        }
+    </code></pre>
+
+    <h6>case 2: To print elements of 2D array</h6>
+    <pre><code>
+        int[][] x = {{10, 20, 30}, {40, 50}};
+    </code></pre>
+
+    <p class="bg-primary text-white">Using normal for loop</p>
+    <pre><code>
+        int[][] x = {{10, 20, 30}, {40, 50}};
+        for(int i = 0; i < x.length; i++) {
+            for(int j = 0; j < x[i].length; j++) {
+                System.out.println(x[i][j]);
+             }
+        }
+    </code></pre>
+
+    <p class="bg-primary text-white">Using enhanced for loop</p>
+    <pre><code>
+        int[][] x = {{ 10, 20, 30 }, { 40, 50 }};
+		for (int x1[] : x) {
+			for(int x2 : x1) {
+				System.out.println(x2);
+			}
+		}
+    </code></pre>
+
+    <h6>case 3: To print elements of 3D array</h6>
+    <pre><code>
+        int[][][] x = {{{10, 20, 30}, {40, 50}}, {{60, 70}, {80, 90}}};
+    </code></pre>
+
+    <p class="bg-primary text-white">Using enhanced for loop</p>
+    <pre><code>
+        int[][][] x = {{{10, 20, 30}, {40, 50}}, {{60, 70}, {80, 90}}};
+		for (int x1[][] : x) {
+			for (int x2[] : x1) {
+				for (int x3 : x2) {
+					System.out.println(x3);
+				}
+			}
+		}
+    </code></pre>
+
+    <p>for each loop is the best choice to retrieve elements of arrays and collections but its limitation
+        is it is applicable only for arrays and collections and it is not a general purpose loop</p>
+    <p>By using normal for loop we can print array elements either in original order or in reverse order but using for loop
+        we can print array elements only in original order but not in reverse order
+    </p>
+
+    <pre><code>
+        int[] x = {10, 20, 30, 40, 50};
+        for(int i = x.length - 1; i >= 0; i--) {
+            SOP(x[i]);
+        }
+    </code></pre>
+
+    <h5>Iterable(I) came in 1.5v</h5>
+    <pre><code>
+        for(eachitem x : target) {
+
+        }
+    </code></pre>
+    <p>1. The target element in for each loop should be iterable object</p>
+    <p>2. An object is said to be iterable iff corresponding class implements java.lang.Iterable interface</p>
+    <p>3. Iterable interface introduced in 1.5v and it contains only one method iterator()</p>
+    <h6>Syntax of iterator method</h6>
+    <pre><code>
+        public Iterator iterator()
+    </code></pre>
+    <p>4. All array related classes and collection implemented classes already implement iterable interface.
+        Being a programmer we are not required to do anything just we should aware the point
+    </p> 
+
+    <h6>Differences between Iterator and Iterable</h6>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Iterator(I)</th>
+                <th>Iterable(I)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>It is related to collections</td>
+                <td>It is related to for-each loop</td>
+            </tr> 
+            <tr>
+                <td>We can use to retrieve the elements of collections one by one</td>
+                <td>The target element in for-each loop should be Iterable</td>
+            </tr>
+            <tr>
+                <td>java.util package</td>
+                <td>java.lang package</td>
+            </tr>
+            <tr>
+                <td>There are three methods in this interface<br>1. hasNext()
+                <br>2. next()<br>3. remove()</td>
+                <td>Only one method present<br>1. iterator()</td>
+            </tr>
+        </tbody>
+</table>
+    
+    <h5>Transfer Staements</h5>
+    <h6>break</h6>
+    <p>We can use break statement in the following places</p>
+    <p>1. Inside switch to stop fall through</p>
+    <p>2. Inside loops to break loop execution based on some condition</p>
+    <p>3. Inside labeled blocks to break block execution based on some condition</p>
+
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+                int x = 10;
+                l1: {
+                    System.out.println("begin");
+                    if(x == 10) 
+                        break l1;
+                    System.out.println("end");
+                }
+                System.out.println("Hello");
+                
+            }
+        
+        }
+    </code></pre>
+    
+    <pre><output>
+        begin
+        Hello
+    </output></pre>
+    <mark>These are the only placse where we can use break statement if we are using anywhere else we will et compile time error
+        saying break outside switch or loop
+    </mark>
+
+    <pre><code>
+        public class Test {
+
+            public static void main(String[] args) {
+                int x = 10;
+                if(x == 10) 
+                    break;
+                System.out.println("Hello");
+            }
+        
+        }
+    </code></pre>
+    <pre><output>
+        Unresolved compilation problem: 
+	break cannot be used outside of a loop or a switch
+    </output></pre>
+
+    <h5>continue</h5>
+    <p>1. We can use continue statement inside loops to skip current iteration and continue for the next iteration</p>
+    <pre><code>
+        for (int i = 0; i < 10; i++) {
+            if(i % 2 == 0) 
+                continue;
+            System.out.println(i);
+        }
+    </code></pre>
+    <pre><output>
+        1
+        3
+        5
+        7
+        9
+    </output></pre>
+
+    <p>2. We can use continue Staement only inside loops if we are using anywhere else we will get 
+        compile time error saying continue outside of loop</p>
+        <pre><code>
+            int x = 10;
+            if(x == 10) 
+                continue;
+            System.out.println("Hello");
+        </code></pre>
+        <pre><output>
+            Unresolved compilation problem: 
+	continue cannot be used outside of a loop
+        </output></pre>
+
+    <h5>labeled break and continue</h5>
+    <p>We can use labeled break and continue to break or continue a particular lopp in nested loops</p>
+    <pre><code>
+        l1: 
+        for() {
+            l2:
+            for() {
+                l3:
+                for() {
+                    break l1;
+                    break l2;
+                    break;
+                }
+            }
+        }
+    </code></pre>
+
+    <pre><code>
+        public class Test {
+            public static void main(String[] args) {
+                l1: for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (i == j)
+                            break;
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        }
+    </code></pre>
+    <pre><output>
+        1 0
+        2 0
+        2 1
+    </output></pre>
+
+    <pre><code>
+        public class Test {
+            public static void main(String[] args) {
+                l1: for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (i == j)
+                            break l1;
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        }
+    </code></pre>
+    <pre><output>
+        No output
+    </output></pre>
+
+    <pre><code>
+        public class Test {
+            public static void main(String[] args) {
+                l1: for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (i == j)
+                            continue;
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        }
+    </code></pre>
+    <pre><output>
+        0 1
+        0 2
+        1 0
+        1 2
+        2 0
+        2 1
+    </output></pre>
+    <pre><code>
+        public class Test {
+            public static void main(String[] args) {
+                l1: for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (i == j)
+                            continue l1;
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        }
+    </code></pre>
+    <pre><output>
+        1 0
+        2 0
+        2 1
+    </output></pre>
+
+    <h5>do-while() vs continue</h5>
+    <pre><code>
+        public class Test {
+            public static void main(String[] args) {
+                int x = 0;
+                do {
+                    x++;
+                    System.out.println(x);
+                    if(++x < 5) 
+                        continue;
+                    x++;
+                    System.out.println(x);
+                }while(++x < 10);
+            }
+        }
+    </code></pre>
+    <pre><output>
+        1
+        4
+        6
+        8
+        10
+    </output></pre>
+</body>
+</html>
