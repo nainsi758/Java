@@ -1,0 +1,2815 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>Java</title>
+<style>
+h1 {
+    color: red;
+}
+h3 {
+    color: darkblue;
+}
+h6 {
+    color:crimson; 
+}
+h5 {
+    color:darkmagenta;
+}
+</style>
+</head>
+<body>
+    <h1>Declarations and Access Modifiers</h1>
+    <h3>1. Java source file structure</h3>
+    <p>A java program can contain any number of classes but atmost one class can be declared as public</p>
+    <p>If there is a public class then name of the program and name of the public class must be matched o/w
+        we will get compile time error</p>
+    <pre><code>
+        class A {
+
+        }
+        public class B {
+
+        }
+        class C {
+
+        }
+    </code></pre>
+
+    <p>Now we can save this program as B.java only</p>
+    <h5>Example 1:</h5>
+    <h6>case 1:</h6>
+    
+    
+<pre><output>
+    A.java
+    B.java
+    C.java
+    Durga.java
+</output></pre>
+<p>If there is no public class then we can use any name and there are no restrictions</p>
+
+    <h6>Case 2:</h6>
+    <p>If class B is public then name of the class should be B.java o/w we will get CE saying
+        class B is public, should be declared in a file named B.java
+    </p>
+
+    <h6>case 3:</h6>
+    <p>If class B and C declared as public and name of the program is B.java then we will get compile time error saying class C is public,
+        should be declared in a file named C.java</p>
+    
+    <h5>Example 2:</h5>
+    <pre><code>
+        class A {
+            public static void main(String[] args) {
+                System.out.println("A class main");
+            }
+        }
+        class B {
+            public static void main(String[] args) {
+                System.out.println("B class main");
+            }
+        }
+        class C {
+            public static void main(String[] args) {
+                System.out.println("C class main");
+            }
+        }
+        class D {
+            
+        }
+    </code></pre>
+
+    <p>Now we have saved this file with name Test .java</p>
+    <img src="images/ss16.png" alt="ss12" width="800" height="300">
+    <p>Here we can see that Test.class not created because that is not a class inside Test just the name 
+        of the program</p>
+    
+<pre><output>
+    javac Test.java
+    java A<kbd>enter</kbd>
+    A class main
+    java B<kbd>enter</kbd>
+    B class main
+    java C<kbd>enter</kbd>
+    C class main
+    java D<kbd>enter</kbd>
+    CE: Error: Main method not found in class D, please define the main method as:
+    java Test<kbd>enter</kbd>
+    CE: Error: Could not find or load main class Test
+    Caused by: java.lang.ClassNotFoundException: Test
+    (old version - NoClassDefFoundError)
+</output></pre>
+
+    <h6>Conclusions</h6>
+    <p>1. Whenever we are compiling a java program, for every class present in the program a separate .class file
+        will be generated</p>
+    <p>2. We can compile a java program(java source file) but we can run a java .class file</p>
+    <p>3. Whenever we are executing a java class the corresponding class method will be executed. If the class doesnt
+        contain main mehtod then we will get RE saying NoSuchMethodError: main</p>
+    <p>4. If the corresponding .class file not available then we will get RE saying NoClassDefFoundError</p>
+    <p>5. It is not recommended to declare multiple classes in a single source file. It is highly recommended to declare 
+        only one class per source file and name of the program we have to keep same as class name. The main advantage of this approach is
+        readibility and maintainability of the code will be improved</p>
+
+    <h5>Import statement</h5>
+    <pre><code>
+        class Test {
+            public static void main(String[] args) {
+                ArrayList l = new ArrayList();
+            }
+        }
+    </code></pre>
+    
+<pre><output>
+    CE error: cannot find symbol
+                ArrayList l = new ArrayList();
+</output></pre>
+
+<p>We can slolve this problem by using fully qualified name</p>
+<pre><code>
+    class Test {
+        public static void main(String[] args) {
+            <span class="bg-primary text-white">java.util.ArrayList</span> l = java.util.new ArrayList();
+        }
+    }
+</code></pre>
+<p>The problem with usage of fully qualified name everytime is it increases length of the code and reduces readibility. We can solve this problem by using import statement</p>
+<p>Whenever we are writing import statement it is not required to use fully qualified name everytime. We can use shortname directly</p>
+
+<pre><code>
+import java.util.ArrayList;
+
+class Test {
+	public static void main(String[] args) {
+		ArrayList l = new ArrayList();
+	}
+}
+</code></pre>
+
+<p>Hence import statement acts as typing shortcut</p>
+
+<h6>Case 1: Types of import statements</h6>
+<p>There are two types of import statements</p>
+<h5>1. Explicit class Import</h5>
+<h6>Example: </h6>
+<p>import java.util.ArrayList</p>
+<p>It is highly recommended to use Explicit class import because it improves readibility of the code.
+    Best suitable for Hi-Tech city where readibility is important</p>
+
+<h5>2. Implicit class Import</h5>
+<h6>Example: </h6>
+<p>import java.util.*</p>
+<p>Not recommended to use because it reduces readibility of the code. Best suitable for amerpet where typing is important</p>
+
+<h6>Case 2:</h6>
+<p>Which of the following import statements are meaningful</p> 
+<pre><code>
+    import java.util.ArrayList;
+    import java.util.ArrayList.*;
+    import java.util.*;
+    import java.util;
+</code></pre>
+
+<pre><output>
+    meaningful
+    not meaningful
+    meaningful
+    not meaningful
+</output></pre>
+
+<h6>Case 3: </h6>
+<p>Consider the following code</p>
+<pre><code>
+    class myObject extends java.rmi.UnicastRemoteObject {
+
+    }
+</code></pre>
+    
+<pre><output>
+    The code compiles fine even though we are not writing import statement
+      because we used fully qualified name
+</output></pre>
+
+<mark>Whenever we are using fully qualified name it is not required write import statement.
+    Similarily Whenever we are writing import statement it is not required to use fully qualified name
+</mark>
+
+<h6>Case 4: </h6>
+<pre><code>
+    import java.util.*;
+    import java.sql.*;
+    class Test {
+        public static void main(String[] args) {
+            Date d = new Date();
+        }
+    }
+</code></pre>
+
+<pre><output>
+    CE:  reference to Date is ambiguous
+</output></pre>
+
+<mark>Note: Even in the case of list also we may get same ambiguity problem because it is available
+    in both util and awt packages</mark>
+
+    <h6>Case 5: </h6>
+    <mark class="bg-primary text-white">While resolving class names compiler will always gives a precedence in the following order</mark>
+    <h5>1. Explicit class import</h5>
+    <h5>2. Classes present in current working directory(default package)</h5>
+    <h5>3. Implicit class import</h5>
+    <pre><code>
+        import java.util.Date;
+        import java.sql.*;
+        class Test {
+            public static void main(String[] args) {
+                Date d = new Date();
+                System.out.println(d.getClass().getName());
+            }
+        }
+    </code></pre>
+    <pre><output>
+        java.util.Date
+    </output></pre>
+    <p>In the above example util package date got considered</p>
+
+    <h6>Case 6: </h6>
+    <mark>Whenever we are importing a java package all classes and Interfaces present in that package by default available but not
+        subpackage classes. If we want to use subpackage class compulsory we should write import statement until subpackage level</mark>
+    <h6>Example: </h6>
+    <p>java.util.regex.Pattern;</p>
+    <p>To use pattern class in our program which import statement is required</p>
+    <pre><code>
+        import java.*;
+        import java.util.*;
+        import java.util.regex.*;
+        No import required
+    </code></pre>
+    
+    <pre><output>
+        import java.util.regex.*; is required
+    </output></pre>
+
+    <h6>Case 7: </h6>    
+    <p>All classes and Interfaces present in the following packages are by default available to every java program.
+        Hence we are not required to write import statement
+    </p>
+    <p>1. java.lang package</p>
+    <p>2. default package(CWD)</p>
+ 
+    <h6>Case 8: </h6>
+    <p>Import statements is totally compile time related concepts if more number of imports then more will be the compile time but there is
+        no effect on execution time(run time)</p>
+
+    <h6>Case 9: </h6>
+    <p>Difference between c language #include and java language import statement</p>
+    <p>In the case of c language #include all input output header files will be loaded at beginning only(at translation time).
+        Hence it is static include.</p>
+    <p>But in the case of java import statement no .class file will be loaded at the beginning. Whenever we are using a particular class then only
+        corresponding .class file will be loaded. This is like dynamic include or load on demand or load on fly
+    </p>  
+
+    
+    <h5>1.5v new features</h5>
+    <p>1. for-each loop</p>
+    <p>2. var-args methods</p>
+    <p>3. Autoboxing and Autounboxing</p>
+    <p>4. Generics</p>
+    <p>5. co-varient return types</p>
+    <p>6. Queue</p>
+    <p>7. Annotations</p>
+    <p>8. enum</p>
+    <p>9. static import</p>
+
+    <h5>Static import</h5>
+    <p>Introduced in 1.5v. According to SUN usage of static import reduces the length of the code and improves readibility but According
+        to world wide programming experts(like us) usage of static import creates confusion and reduces readibility . Hence if there is no specific
+        requirement then its not recommended to use static import</p>
+        
+    <p>Usually we can access static members by using class name but Whenever we are writing static import we can access static members directly without class name</p>
+
+    <h6>Without static import</h6>
+    <pre><code>
+class Test {
+    public static void main(String[] args) {
+        System.out.println(Math.sqrt(4));
+        System.out.println(Math.max(4, 2 ));
+        System.out.println(Math.random());
+    }
+}
+    </code></pre>
+
+    <h6>With static import</h6>
+    <pre><code>
+import static java.lang.Math.*;
+class Test {
+    public static void main(String[] args) {
+        System.out.println(sqrt(4));
+        System.out.println(max(4, 2 ));
+        System.out.println(random());
+    }
+}
+    </code></pre>
+
+    <div class="container">
+        <p class="bg-warning text-white">Explain about System.out.println()?</p>
+        <pre><code>
+class Test {
+    static String s = "durga";
+    public static void main(String[] args) {
+        System.out.println(Test.s.length());
+    }
+}
+        </code></pre>
+
+        <p>Test is class name</p>
+        <p>s is a static  variable present in Test class of the type java.lang.String</p>
+        <p>length() is a method present in String class</p>
+        <pre><code>
+import java.io.PrintStream;
+public class System {
+	static PrintStream out; 
+	public static void main(String[] args) {
+		System.out.println();
+	}
+}   
+ </code></pre>
+    <p>System is a class present in java.lang package</p>
+    <p>'out' is a static variable present in System class of the type PrintStream</p>
+    <p>println() is a method present in PrintStream class</p>
+
+    <h6>With static import</h6>
+   
+<p>out is a static variable present in System class hence we can access by using class name System but
+    Whenever we are writing static import its not required to use class name and we can access out directly</p> 
+    <pre><code>
+        import static java.lang.System.out;
+        public class System { 
+            public static void main(String[] args) {
+                out.println("Hello");
+            }
+        }
+    </code></pre>
+    </div>
+
+    <pre><code>
+import static java.lang.Integer.*;
+import static java.lang.Byte.*;
+class Test {
+
+    public static void main(String[] args) {
+        System.out.println(MAX_VALUE);
+    }
+}
+    </code></pre>
+    
+    <pre><output>
+        CE :Error: Unresolved compilation problem: 
+        The field MAX_VALUE is ambiguous
+    </output></pre>
+
+    <mark class="bg-primary text-white">While resolving static members compiler will always consider the precendence in the following order</mark>
+    <p>1. Current class static members</p>
+    <p>2. Explicit static import</p>
+    <p>3. Implicit staic import</p>
+
+        <pre><code>
+import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Byte.*;
+class Test {
+    static int MAX_VALUE=999;
+    public static void main(String[] args) {
+        System.out.println(MAX_VALUE);
+    }
+}
+    </code></pre>
+    
+    <pre><output>
+        999
+    </output></pre>
+
+        <pre><code>
+import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Byte.*;
+class Test {
+    //static int MAX_VALUE=999;
+    public static void main(String[] args) {
+        System.out.println(MAX_VALUE);
+    }
+}
+    </code></pre>
+    
+    <pre><output>
+        2147483647
+    </output></pre>
+
+<pre><code>
+//import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Byte.*;
+class Test {
+    //static int MAX_VALUE=999;
+    public static void main(String[] args) {
+        System.out.println(MAX_VALUE);
+    }
+}
+</code></pre>
+    
+<pre><output>
+    127
+</output></pre>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Normal import</th>
+            <th>Static import</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1.Explicit Import</td>
+            <td>1. Explicit static import</td>
+        </tr> 
+        <tr>
+            <td>Syntax: <br>import packagename.classname;</td>
+            <td>Syntax: <br>import static packagename.classname.staticmember;</td>
+        </tr> 
+        <tr>
+            <td>Example</td>
+            <td>Example</td>
+        </tr> 
+        <tr>
+            <td>import java.util.ArrayList;</td>
+            <td>import static java.lang.Math.sqrt;<br>
+            import static java.lang.System.out;</td>
+        </tr> 
+        <tr>
+            <td>2. Implicit Import</td>
+            <td>2. Implicit static import</td>
+        </tr> 
+        <tr>
+            <td>Syntax: <br>import packagename.*;</td>
+            <td>Syntax: <br>import static packagename.classname.*;</td>
+        </tr> 
+        <tr>
+            <td>Example</td>
+            <td>Example</td>
+        </tr> 
+        <tr>
+            <td>import java.util.*;</td>
+            <td>import static java.lang.Math.*;<br>
+            import static java.lang.System.*;</td>
+        </tr> 
+    </tbody>
+</table>
+
+<div class="container">
+    <p class="bg-warning text-white">Which of the following import statements are valid?</p>
+    <pre><code>
+        import java.lang.Math.*;
+        import static java.lang.Math.*;
+        import java.lang.Math.sqrt;
+        import static java.lang.Math.sqrt();
+        import java.lang.Math.sqrt.*;
+        import static java.lang.Math.sqrt;
+        import java.lang;
+        import static java.lang;
+        import java.lang.*;
+        import static java.lang.*;
+    </code></pre>
+    
+    <pre><output>
+        invalid
+        valid
+        invalid
+        invalid
+        invalid
+        valid
+        invalid
+        invalid
+        valid
+        invalid
+    </output></pre>
+</div>
+
+<mark>Two packages contains a class or interface with the same name is very rare and hence
+    ambiguity problem is also very rare in normal import.
+</mark><br>
+
+<mark>But two classes or interfaces contain a variable or method with the same name is very common and hence 
+    ambiguity problem is also very common problem in static import
+</mark>
+
+<p>Usage of staic import reduces readibility and creates confusion and hence if there is no specific requirement then it is not recommended to
+    use static import.
+</p>
+
+<h6>Difference between normal import and static import</h6>
+<p>We can use normal import to import classes and interfaces of a particular package. Whenever we are using normal import it is
+    not required to use fully qualified name and we can use short names directly
+</p>
+<p>We can use static import to import static members of a particular class or interface. Whenever we are writing static import it is Not
+    required to use class name to access static members and we can access directly</p>
+
+<h5>packages</h5>
+<p>It is an encapsulation mechanism to group related classes and interfaces into a single unit which is nothing but package</p>
+<h6>Example 1:</h6>
+<p>All classes and interfaces which are required for database operations are grouped into a single package which is nothing but java.sql package</p>
+<h6>Example 2:</h6>
+<p>All classes and interfaces which are useful for file io operations are grouped into a separate package which is nothing but java.io package</p>
+
+<p>The main advantages of package are</p>
+<p>1. To resolve naming conflicts(unique identification of our components)</p>
+<p>2. It improves modularity of the application</p>
+<p>3. It improves maintainability of the application</p>
+<p>4. It provides security for our components</p>
+
+<p>There is one universally accepted naming convention for packages i.e to use internet domain name in reverse</p>
+<h6>Example: </h6>
+<p>com.icicibank.loan.housing.Account</p>
+<p>com.icicibank is client's internet domian name in reverse</p>
+<p>module name</p>
+<p>submodule name</p>
+<p>class name</p>
+
+<h6>Example 3:</h6>
+<pre><code>
+package com.durgasoft.scjp;
+import java.sql.Date;
+class Test {
+	public static void main(String[] args) {
+		
+		System.out.println("package demo");
+	}
+}
+</code></pre>
+
+<pre><output>
+    javac Test.java<kbd>enter</kbd>
+    generated .class file will be placed in current working directory
+    javac -d . Test.java<kbd>enter</kbd>
+     Here -d is destination to place generated .class files, . means CWD
+</output></pre>
+<img src="images/ss18.png" alt="ss12" width="300" height="300">
+<p>Generated .class file will be placed in corresponding package structure</p>
+<p>If the corresponding package structure not already available then this command itself will create corresponding package
+    structure
+</p>
+
+<p>As destination instead of . we can take any valid directory name</p>
+
+<pre><output>
+    javac -d F: Test.java<kbd>enter</kbd>
+</output></pre>
+<img src="images/ss17.png" alt="ss12" width="300" height="300">
+
+<h6>Conclusions</h6>
+<p>1. In any java source file there can be atmost one package statement i.e more than one package statements is not allowed o/w 
+    we will get CE: class, interfaces or enum expected
+</p>2. In any java program the first non comment statements should be package statement(if it is available) o/w we will get CE: class, interface
+or enum expected</p>
+
+    <h3>2. Class level modifiers</h3>
+    <p>Whenever we are writing our own classes we have to provide some information about our class to the JVM like whether this class can be accessible
+        from anywhere or not, whether child class creation is possible or not, whether object creation is possible or not etc We can specify this information 
+        by using appropriate modifier
+    </p>
+
+    <p>The only applicable modifiers for top level classes are</p>
+    <p>1. public</p>
+    <p>2. &ltdefault></p>
+    <p>3. final</p>
+    <p>4. abstract</p>
+    <p>5. strictfp</p>
+
+    <p>But for inner classes the applicable modifiers are</p>
+    <p>1. public</p>
+    <p>2. &ltdefault></p>
+    <p>3. final</p>
+    <p>4. abstract</p>
+    <p>5. strictfp</p>
+    <p>+</p>
+    <p>6. private</p>
+    <p>7. protected</p>
+    <p>8. static</p>
+
+    <pre><code>
+        private class Test {
+            public static void main(String[] args) {
+                
+                System.out.println("package demo");
+            }
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: modifier private not allowed here
+    </output></pre>
+
+    <pre><code>
+        private class A {
+
+        }
+    
+        static class B {
+    
+        }
+    
+        public static void main(String[] args) {
+    
+            System.out.println("package demo");
+        }
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+   
+    <h6>Access specifiers vs Access modifiers</h6>
+    <p>public private protected default are considered as specifiers except these remaining are considered as modifiers but
+        this rule is applicable only for old languages like C++ but not in java.
+    </p>
+    <p>In java all are considered as modifier only. There is no word like specifier</p>
+    <h1>1. public modifier</h1>
+    <h5>public classes</h5>
+    <p>If a class declared as public then we can access that class from anywhere</p>
+    <pre><code>
+package com.cts.pack1;
+public class A {
+	public void m1() {
+		System.out.println("Hello");
+	}
+}
+package com.cts.pack2;
+import com.cts.pack1.A;
+public class B {
+	public static void main(String[] args) {
+		A a = new A();
+		a.m1();
+	}
+
+}
+    </code></pre>
+    
+    <pre><output>
+        javac -d . B.java<kbd>enter</kbd>
+        java pack2.B<kbd>enter</kbd>
+        Hello
+    </output></pre>
+
+    <p>If class A is not public then while compiling B class we will get CE saying pack1.A is not public in pack1; cant be accessed from outside package</p>
+
+    <h1>2. default modifier</h1>
+    <h5>default classes</h5>
+    <p>If a class declared as default then we can access that class only within the current package i.e from outside package we cant access. Hence
+        default access is also known as package level access
+    </p>
+
+    <h1>3. final modifier</h1>
+    <h5>final modifier</h5>
+    <p>Final is a modifier applicable for classes, methods and variables</p>
+    <h6>final method</h6>
+    <p>Whatever method parents has by default available to the child through inheritance, if the child not satisfied with parent method implementation then child
+        is allowed to redefine that method based on its requirement. This process is called overriding.
+    </p>
+    <p>If the parent class method is declared as final then we cant override that method in the child class because its implementation is final</p>
+
+    <pre><code>
+        public class P {
+            public void property() {
+                System.out.println("cash + land + gold");
+            }
+            public final void marry() { 
+                System.out.println("Subbalakshmi");
+            }
+        }
+        public class C extends P{
+            public void marry() {
+                System.out.println("Isha + 9tara + kareen");
+            }
+        
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: 
+        error: marry() in C cannot override marry() in P
+                public void marry() {
+                            ^
+          overridden method is final
+        
+    </output></pre>
+
+    <h6>final class</h6>
+    <p>If a class declared as final, we cant extend functionality of that class i.e we cant create child class for that class i.e
+        inheritance is not possible for final classes</p>
+        <pre><code>
+            final class P {
+                public void property() {
+                    System.out.println("cash + land + gold");
+                }
+                public final void marry() { 
+                    System.out.println("Subbalakshmi");
+                }
+            }
+            public class C extends P{
+                public void marry() {
+                    System.out.println("Isha + 9tara + kareen");
+                }
+            
+            }
+        </code></pre>
+        
+        <pre><output>
+            CE: 
+            error: cannot inherit from final P
+        </output></pre>
+
+<mark class="bg-primary text-white">Note: Every method present inside final class is always final bydefault but every variable present
+    inside final class need not be final.<br>
+</mark>
+<mark>The main advantage of final keyword is we can achieve security and we can provide unique implementation but the main disadvantage of
+    final keyword is we are missing key benefits of oops: Inheritance(because of final classes) and polymorphism(because of final methods).
+    Hence if there is no specific requirement then its not recommended to use final keyword
+</mark>
+
+    <h1>4. Abstract modifier</h1>
+    <h5>Abstract modifiers</h5>
+    <p>Abstract is a modifier applicable for classes and methods but not for variables</p>
+    <h6>Abstract method</h6>
+    <p>Even though we dont know about implementation still we can declare a method with abstract modifier i.e for abstract methods only declaration is available
+        but not implementation
+    </p>
+    <p>Abstract method declaration should ends with ;</p>
+
+    <pre><code>
+        public abstract void m1(); (valid)
+        public abstract void m1() {} (invalid)
+    </code></pre>
+    <p>Child class is responsible to provide implementation for parent class abstract methods</p>
+    
+    <pre><code>
+        abstract class Vehicle {
+            abstract public int getNoOfWheels();
+        }
+        class Bus extends Vehicle {
+            public int getNoOfWheels() {
+                return 7;
+            }
+        }
+        class Auto extends Vehicle {
+            public int getNoOfWheels() {
+                return 3;
+            }
+        }
+    </code></pre>
+    
+    <p>By declaring abstract class in the parent class we can provide guidelines to the child classes such that which methods compulsory child has to implement</p>
+    <p>Abstract method never talks about implementation if any modifier talks about implementation then it forms illegal combination with abstract modifier.</p>
+    <p>The following are various illegal combination of modifiers for methods with respect to abstract</p>
+    <img src="images/ss19.png" alt="ss12" width="300" height="500"><br>
+    <mark class="bg-primary text-white">final h ki synchronized(occur at the same time or rate.) strict rhenge native pr jo static h(lacking in movement) private jeevan nhi hoga unka koi</mark>
+    <h6>Example : </h6>
+    <pre><code>
+        abstract final void m1();
+    </code></pre>
+    <pre><output>
+       CE error: illegal combination of modifiers: abstract and final
+    </output></pre>
+
+    <mark>For any java class if we are not allowed to create an object(because of partial implementation) such type of class we have to declare with abstract modifiers
+        i.e for abstract classes instantiation is not possible.
+    </mark>
+
+    <pre><code>
+        abstract class Test {
+            public static void main(String[] args) {
+               Test t = new Test();
+           }
+       }
+    </code></pre>
+    <pre><output>
+        Test is abstract; cannot be instantiated
+    </output></pre>
+
+    <h6>Abstract class vs Abstract method</h6>
+    <p>1. If a class contains atleast one abstract method then compulsory we should declare class as abstract o/w we will get CE</p>
+    <p>Reason: If a class contains atleast one abstract method then implementation is not complete and hence it is not recommended to create an object. To restrict object instantiation 
+        compulsory we should declare class as abstract</p>
+    <p>Example: If we brought vehile object in the market then people will ask noOfWheels in your vehicle but since we dont have implementation then we wont be in a position to tell </p>
+
+    <p>2. Even though class doesnt contain any abstract method still we can declare class as abstract if we dont want instantiation i.e abstract class can conatin 0 number of abstract methods also</p>
+    <p>Example 1: HTTP servlet class is abstract but it doesnt contain any abstract methods</p>
+    <p>Example 2: Every adapter class is recommended to declare as abstract but it doesnt contain any abstract method</p>
+
+    <pre><code>
+        class Test {
+            public void m1();
+       }
+    </code></pre>
+    
+<pre><output>
+    CE error: missing method body, or declare abstract
+</output></pre>
+
+<pre><code>
+    class Test {
+        public abstract void m1() {}
+   }
+</code></pre>
+
+<pre><output>
+CE  error: Test is not abstract and does not override abstract method m1() in Test
+class Test {
+^
+Test.java:2: error: abstract methods cannot have a body
+</output></pre>
+
+<pre><code>
+    class Test {
+        public abstract void m1();
+   }
+</code></pre>
+
+<pre><output>
+CE error: error: Test is not abstract and does not override abstract method m1() in Test
+</output></pre>
+
+<mark>If we are extending abstract class then for each and every abstract method of parent class we should provide implementation o/w we
+    have to declare child class as abstract.
+</mark>
+
+<p>In this case next level child class is responsible to provide implementation</p>
+
+<pre><code>
+    abstract class P {
+        public abstract void m1();
+        public abstract void m2();
+   }
+   class C extends P {
+       public void m1() {}
+   }
+</code></pre>
+
+<pre><output>
+CE  error: C is not abstract and does not override abstract method m2() in P
+</output></pre>
+
+<h6>final vs abstract</h6>
+<p>1. Abstract methods compulsory we should override in child classes to provide implementation whereas we cant override final methods.
+    Hence final abstract combination is illegal combination for methods</p>
+<p>2. For final classes we cant create child class whereas for abstract classes we should create child class to provide implementation. Hence
+    final abstract combination is illegal for classes</p>
+
+    <mark>Abstract class can contain final method whereas final class cant contain abstract method</mark>
+
+    <pre><code>
+        abstract class Test {
+            public final void m1() {
+
+            }
+        }
+    </code></pre>
+    
+    <pre><output>
+        valid
+    </output></pre>
+
+    <p>Final method inside abstract class is allowed</p>
+    
+    <pre><code>
+        final class Test {
+            public abstract void m1();
+        }
+    </code></pre>
+    
+    <pre><output>
+        illegal combination
+    </output></pre>
+
+    <p>Abstract method inside final class is not allowed</p>
+ 
+    <mark>Note: It is highly recommended to use abstract modifier because it promotes several OOPS features like inheritance and polymorphism</mark>
+    
+    <h1>5. strictfp modifier</h1>
+    <h5>strictfp modifier(strict floating point came in 1.2 version)</h5>
+    <p>1. Introduced in 1.2v</p>
+    <p>2. We can use strictfp for classes and methods but not for variables</p>
+    <p>3. Usually the result of floating point arithmetic is varied from platform to platform if we want platform independent results for floating point arithmetic
+        then we should go for strictfp modifier</p>
+
+    <h6>strictfp method</h6>
+    <p>If a method declared as strictfp all floating point calculations in that method has to follow IEEE754 standard so that we will get platform independent results</p>
+    <p>Abstract modifier never talks about implementation whereas strictfp method always talks about implementation. Hence abstract strictfp combination is illegal for methods</p>
+
+    <h6>strictfp class</h6>
+    <p>If a class declared as strictfp then every floating point calculation present in every <span class="bg-primary text-white">concrete</span> method has to follow
+        IEEE754 standard so that we will get platform independent results</p>
+    
+    <p>We can declare abstract strictfp combination for classes i.e abstract strictfp combination is legal for classes but illegal for methods</p>
+    <pre><code>
+        abstract strictfp class Test {
+            
+        }
+    </code></pre>
+    
+    <pre><output>
+        legal
+    </output></pre>
+
+    <pre><code>
+        abstract strictfp class Test {
+            abstract strictfp void m1();
+     }     
+    </code></pre>
+    
+    <pre><output>
+        CE: illegal combination of modifiers: abstract and strictfp
+    </output></pre>
+    
+    <h3>3. Member level modifiers</h3>
+     <h5>Member modifiers(method or variable level modifiers)</h5>
+    <h6>Public members</h6>
+    <p>If a member declared as public then we can access that member from anywhere</p>
+    <p>But corresponding class should be visible i.e before checking member visibility we have to check class visibility</p>
+    <pre><code>
+        package pack1;
+        class A {
+            public void m1() {
+                SOP("A class method");
+            }
+        }
+
+        package pack2;
+        import pack1.A;
+        class S {
+            public static void main(String[] args) {
+                A a = new A();
+                a.m1();
+            }
+        }
+    </code></pre>
+    
+    <pre><output>
+        javac -d . A.java<kbd>enter</kbd>
+        javac -d . S.java<kbd>enter</kbd>
+        CE: error: P is not public in pack1; cannot be accessed from outside package
+    </output></pre>
+
+     <p>In the above example even though m1() method is public we cant access from outside package because corresponding class A is not public i.e if both class and method 
+         are public then only we can access the method from outside package</p>
+    
+         <pre><code>
+            package pack1;
+            public class A {
+                public void m1() {
+                    SOP("A class method");
+                }
+            }
+    
+            package pack2;
+            import pack1.A;
+            class S {
+                public static void main(String[] args) {
+                    A a = new A();
+                    a.m1();
+                }
+            }
+        </code></pre>
+        
+        <pre><output>
+            javac -d . A.java<kbd>enter</kbd>
+            javac -d . S.java<kbd>enter</kbd>
+            java pack2.C<kbd>enter</kbd>
+            A class method
+        </output></pre>
+
+        <h6>default members</h6>
+        <p>If a member declared as default then we can access that member only within the current package i.e from outside of the package we cant access. Hence default access is also known as 
+            package level access</p>
+
+        <h1>6.private modifier</h1>
+        <h6>private members</h6>
+        <p>If a member is private then we can access that member only within the class i.e from outside of the class we cant access.</p> 
+        <p>Abstract methods should be available to the child classes to provide implementation whereas private methods are not available to the child classes.
+        Hence private abstract combination is illegal for methods.</p>
+        
+        <h1>7. protected modifier</h1>
+        <h6>protected members(the most misunderstood modifier in java)</h6>
+        <p>If a member declared as protected then we can access that member anywhere within the current package but only in child classes of outside package</p>
+        <p>protected = &ltdefault> + kids</p>
+
+        <pre><code>
+            package pack1;
+            public class A {
+                protected void m1() {
+                    SOP("The most misunderstood modifier");
+                }
+            }
+    
+            class B extends A {
+                public static void main(String[] args) {
+                    A a = new A();
+                    a.m1();  
+                    B b = new B();
+                    b.m1();
+                    A a1 = new B();
+                    a1.m1();              
+                }
+            }
+        </code></pre>
+        
+        <pre><output>
+            javac -d . A.java<kbd>enter</kbd>
+            java pack1.B<kbd>enter</kbd>
+            The most misunderstood modifier
+            The most misunderstood modifier
+            The most misunderstood modifier
+        </output></pre>
+
+        <mark>We can access protected members within the current package anywhere either by using parent reference or by using child reference</mark>
+        <br>
+        <mark>But we can access protected members in outside package only in child classes and we should use child reference only i.e parent reference can not be used to access 
+            protected members from outside package
+        </mark>
+
+        <pre><code>
+            package pack1;
+            public class A {
+                protected void m1() {
+                    SOP("The most misunderstood modifier");
+                }
+            }
+    
+            class B extends A {
+                public static void main(String[] args) {
+                    A a = new A();
+                    a.m1();  
+                    B b = new B();
+                    b.m1();
+                    A a1 = new B();
+                    a1.m1();              
+                }
+            }
+
+            package pack2;
+            import pack1.A;
+            class C extends A {
+                public static void main(String[] args) {
+                    A a = new A();(invalid)
+                    a.m1();
+                    C c = new C();
+                    c.m1();
+                    A a1 = new C();(invalid)
+                    a.m1();
+                }
+            }
+        </code></pre>
+
+        <pre><output>
+            javac -d . A.java<kbd>enter</kbd>
+            java pack1.B<kbd>enter</kbd>
+            The most misunderstood modifier
+            The most misunderstood modifier
+            The most misunderstood modifier
+            javac -d . C.java<kbd>enter</kbd>
+            CE:  error: m1() has protected access in P
+        </output></pre>
+
+        <pre><code>
+            package pack1;
+            public class A {
+                protected void m1() {
+                    SOP("The most misunderstood modifier");
+                }
+            }
+    
+            class B extends A {
+                public static void main(String[] args) {
+                    A a = new A();
+                    a.m1();  
+                    B b = new B();
+                    b.m1();
+                    A a1 = new B();
+                    a1.m1();              
+                }
+            }
+            
+            package pack2;
+            import pack1.A;
+            class C extends A {
+                public static void main(String[] args) {
+                    C c = new C();
+                    c.m1(); 
+                }
+            }
+        </code></pre>
+
+        <pre><output>
+            javac -d . A.java<kbd>enter</kbd>
+            java pack1.B<kbd>enter</kbd>
+            The most misunderstood modifier
+            The most misunderstood modifier
+            The most misunderstood modifier<br>
+            javac -d . C.java<kbd>enter</kbd>
+            java pack2.C;<kbd>enter</kbd>
+            The most misunderstood modifier
+        </output></pre>
+
+        <mark>We can access protected members from outside package only in child classes and we should use that child class reference only
+            For example: From D class if we want to access we should use D class reference only</mark>
+        
+            <pre><code>
+                package pack1;
+                public class A {
+                    protected void m1() {
+                        SOP("The most misunderstood modifier");
+                    }
+                }
+        
+                class B extends A {
+                    public static void main(String[] args) {
+                        A a = new A();
+                        a.m1();  
+                        B b = new B();
+                        b.m1();
+                        A a1 = new B();
+                        a1.m1();              
+                    }
+                }
+                
+                package pack2;
+                import pack1.A;
+                class C extends A {
+                    
+                }
+                class D extends C {
+                    public static void main(String[] args) {
+                        A a = new A();  (invalid)
+                        a.m1();
+                        C c = new C();  (invalid)
+                        c.m1();
+                        D d = new D();  (valid)
+                        d.m1();
+                        A a1 = new C(); (invalid)
+                        a1.m1();
+                        A a1 = new D(); (invalid)
+                        a1.m1();
+                        C c1 = new D(); (invalid)
+                        c1.m1();
+                    }
+                }
+            </code></pre>
+    
+            <pre><output>
+                CE: m1() has protected access in pack1.A
+            </output></pre>
+
+            <h6>Summary table of private protected &ltdefault> public modifiers</h6>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Visibility</th>
+                        <th>private</th>
+                        <th>&ltdefault></th>
+                        <th>protected</th>
+                        <th>public</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Within the same class</td>
+                        <td class="bg-success text-white">visible</td>
+                        <td class="bg-success text-white">visible</td>
+                        <td class="bg-success text-white">visible</td>
+                        <td class="bg-success text-white">visible</td>
+                    </tr> 
+                    <tr>
+                        <td>From child class of same package</td>
+                        <td class="bg-danger text-white">not visible</td>
+                        <td class="bg-success text-white">visible</td>
+                        <td class="bg-success text-white">visible</td>
+                        <td class="bg-success text-white">visible</td>
+                    </tr>
+                    <tr>
+                        <td>From non child class of same package</td>
+                        <td class="bg-danger text-white">not visible</td>
+                        <td class="bg-success text-white">visible</td>
+                        <td class="bg-success text-white">visible</td>
+                        <td class="bg-success text-white">visible</td>
+                    </tr>
+                    <tr>
+                        <td>From child class of outside package</td>
+                        <td class="bg-danger text-white">not visible</td>
+                        <td class="bg-danger text-white">not visible</td>
+                        <td class="bg-success text-white">visible(we should use child reference only)</td>
+                        <td class="bg-success text-white">visible</td>
+                    </tr>
+                    <tr>
+                        <td>From non-child class of outside package</td>
+                        <td class="bg-danger text-white">not visible</td>
+                        <td class="bg-danger text-white">not visible</td>
+                        <td class="bg-danger text-white">not visible</td>
+                        <td class="bg-success text-white">visible</td>
+                    </tr>
+                </tbody>
+        </table>
+
+        <mark>The most restricted modifier is private</mark>
+        <br>
+        <mark>The most accessible modifier is public</mark>
+
+        <p>private < default < protected < public</p>
+
+        <p>Recommended modifier for data member(variable) is private but recommended modifier for methods is public</p>
+ 
+
+    <h5>final variables</h5>
+    <h6>final instance variables</h6>
+    <p>1. If the value of a variable is varied from object to object, such type of variables are called instance variables</p>
+    <p>2. For every object a separate copy of instance variables will be created</p>
+    <p>3. For instance variables we are not required to perform initialization explicitly. JVM will always provide default values</p>
+    <pre><code>
+        class Test {
+            int x;
+            public static void main(String[] args) {
+                Test t = new Test();
+                SOP(t.x);
+            }
+        } 
+    </code></pre>
+    
+    <pre><output>
+        0
+    </output></pre>
+
+    <p>4. If the instance variable declared as final then compulsory we have to perform initialization explicitly whether we are using or not
+        and JVM wont provide default values.
+    </p>
+    <pre><code>
+        class Test {
+            final int x;
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: variable x might not have been initialized
+    </output></pre>
+
+    <h6>Rule</h6>
+    <p>For final instance variables compulsory we should perform initialization before constructor completion i.e the following are various places for initialization</p>
+    <h6>At the time of declaration : </h6>
+    <pre><code>
+        class Test {
+            final int x = 10;
+        }
+    </code></pre>
+
+    <h6>Inside instance block : </h6>
+    <pre><code>
+        class Test {
+            final int x;
+            {
+                x = 10;
+            }
+        }
+    </code></pre>
+
+    <p>Instance block gets executed before constructor</p>
+    <h6>Inside constructor : </h6>
+    <pre><code>
+        class Test {
+            final int x;
+            Test() {
+                x = 10;
+            }
+        }
+    </code></pre>
+
+    <p>These are the only possible places to perform initialization for final variables, if we are trying to perform
+        initialization anywhere else then we will get CE</p>
+
+        <pre><code>
+            class Test {
+                final int x;
+                public void m1() {
+                    x = 10;
+                }
+            }
+        </code></pre>
+        
+        <pre><output>
+            CE error: cannot assign a value to final variable x
+        </output></pre>
+
+    <h6>final static variables</h6>
+     <p>If the value of a variable is not varied from object to object such type of variables are not recommended to declare as 
+         instance variables. We have to declare those variables at class level by using static modifier</p>
+
+    <p>In the case of instance variables a separate copy will be created but in the case of static variables a single copy will be created at class level and 
+        shared by every object of that class</p>
+    <p>For static variables it is not required to perform initialization explicitly. JVM will always provide default values</p>
+
+    <pre><code>
+        class Test {
+            static int x;
+            public static void main(String[] args) {
+                SOP(x);
+            }
+        } 
+    </code></pre>
+    
+    <pre><output>
+        0
+    </output></pre>
+
+    <p>4. If the static variable declared as final then compulsory we have to perform initialization explicitly whether we are using or not o/w we will get compile time error
+        and JVM wont provide default values.
+    </p>
+
+    <pre><code>
+        class Test {
+            final static int x;
+        } 
+    </code></pre>
+    
+    <pre><output>
+        CE: variable x might not have been initialized
+    </output></pre>
+
+    <h6>Rule</h6>
+    <p>For final static variables compulsory we should perform initialization before class loading completion i.e the following are various places for initialization</p>
+    <h6>At the time of declaration</h6>
+    <pre><code>
+        class Test {
+            final static int x = 10;
+        }
+    </code></pre>
+    
+    <h6>Inside static block</h6>
+    <pre><code>
+        class Test {
+            final static int x;
+            static {
+                x = 10;
+            }
+        } 
+    </code></pre>
+
+    <p>These are the only possible places to perform initialization for final static variables. If we are trying to perform initialization anywhere else
+        then we will get compile time error
+    </p>
+
+    <pre><code>
+        class Test {
+            final static int x;
+            public void m1() {
+                x = 10;
+            }
+        } 
+    </code></pre>
+    
+    <pre><output>
+        CE: error: cannot assign a value to final variable x
+    </output></pre>
+
+    <h6>final local variables</h6>
+    <p>Sometimes to meet temporary requirements of the programmer we can declare variables inside a method or block or constructor such type of 
+        variables are called local variables or temporary variables or automatic variables or stack variables</p>
+
+    <p>For local variables jvm wont provide default values compulsory we should perform initialization explicitly before using that variable 
+        i.e if we are not using then it is not required to perform initialization</p>
+    
+        <pre><code>
+            class Test {
+                p s v m(String[] args) {
+                  int x;
+                  SOP("Hello");
+                }
+              }
+        </code></pre>
+        
+        <pre><output>
+            Hello
+        </output></pre>
+
+        <pre><code>
+            class Test {
+                p s v m(String[] args) {
+                  int x;
+                  SOP(x);
+                }
+              }
+        </code></pre>
+        
+        <pre><output>
+            CE: variable x might not have been initialized
+        </output></pre>
+
+        <pre><code>
+            class Test {
+                p s v m(String[] args) {
+                  final int x;
+                  SOP("Hello");
+                }
+              }
+        </code></pre>
+        
+        <pre><output>
+            Hello
+        </output></pre>
+
+        <p>Even though local variables is final, before using only we have to perform initialization
+            i.e if we are not using then it is not required to perform initialization even though it is final</p>
+
+        <p>The only applicable modifier for local variables is final. By mistake if we are trying to apply any other modifier then we will get compile time error</p>
+
+        <pre><code>
+            class Test {
+                p s v m(String[] args) {
+                  public int x = 10;
+                  private int x = 10;
+                  protected int x = 10;
+                  static int x = 10;
+                  transient x = 10;
+                  volatile x = 10;
+                  final int x = 10;
+                }
+              }
+        </code></pre>
+        
+        <pre><output>
+            CE: Illegal start of expression
+        </output></pre>
+        <img src="images/ss4.png" alt="ss12" width="700" height="400">
+   
+    <p>If we are not declaring with any modifier then by default it is default but this rule is applicable only for instance and static variables but not for local variables</p>
+   
+    <p>Formal parameters of a method simply acts as local variables of that method hence formal parameter can be declared as fianl</p>
+    <p>If formal parameter declared as final then within a method we cant perform reassignment</p>
+    
+    <pre><code>
+    class Test {
+        p s v m(String[] args) {
+          m1(10, 20);
+        }
+        public static void m1(final int x, int y) {
+            x = 100;
+            y = 200;
+            SOP(x + "    " + y);
+        }
+    }
+    </code></pre>
+    
+    <pre><output>
+        CE: cannot assign a value to final variable x
+    </output></pre>
+
+    <h1>8. static modifier</h1>
+    <h5>static modifiers</h5>
+    <p>Static is a modifier applicable for methods and variables but not for classes</p>
+    <p>We cant declare top level class with static modifier but we can declare inner class as static(such type of ineer classes are called
+        static inner classes)</p>
+
+    <p>In the case of instance variables for every object a separate copy will be created but in the case of static variable
+        a single copy will be created at class level and shared by every object of that class</p>
+
+        <pre><code>
+            class Test {
+                static int x = 10;
+                int y = 20;
+                p s v m (String[] args) {
+                  Test t1 = new Test();
+                  t1.x = 888;
+                  t1.y = 999;
+                  Test t2 = new Test();
+                  SOP(t2.x + " " + t2.y);
+                }
+              }
+        </code></pre>
+        
+        <pre><output>
+            888 20
+        </output></pre>
+
+        <p>We cant access instance members directly from static area but we can access from instance area directly</p>
+        <p>We can access static members from both instance and static areas directly</p>
+
+        <div class="container">
+            <p class="bg-warning text-white">Consider the following Declarations</p>
+            <pre><code>
+                1. int x = 10;
+                2. static int x = 10;
+                3. public void m1() {
+                    SOP(x);
+                }
+                4. public static void m1() {
+                    SOP(x);
+                }
+            </code></pre>
+            <p>Which of the 4 options we can take simultaneously</p>
+            <pre><output>
+                a) 1 & 2
+                b) 1 & 4(CE: non-static variable c cannot be referenced from a static context)
+                c) 2 & 3
+                d) 2 & 4
+                e) 1 & 2(CE: variable x is already defined in Test)
+                f) 3 & 4(CE: m1() is already defined in Test)
+            </output></pre>
+        </div>
+
+        <p>Overloading concept applicable for static methods including main method but JVM can always call String[] argument main method only</p>
+
+        <pre><code>
+            class Test {
+                public static void main(String[] args) {
+                  SOP("String[]");
+                }
+                public static void main(int[] args)  {
+                  SOP("int[]");
+                }
+              }
+        </code></pre>
+        
+        <pre><output>
+            String[]
+        </output></pre>
+
+        <p>Other overloaded method we have to call just like a normal method</p>
+
+        <p>Inheritance concept applicable for static methods including main method hence while executing child class if child doesn't 
+            contain main method then parent class main method will be executed.</p>
+
+            <pre><code>
+                class P {
+                    public static void main(String[] args) {
+                      SOP("Parent main");
+                    }
+                  }
+                  class C extends P {
+                
+                  }
+            </code></pre>
+            
+            <pre><output>
+                javac P.java
+                java P
+                Parent main
+                java C
+                Parent main
+            </output></pre>
+
+            <p>It seems overriding concept applicable for static methods but it is not overriding and it is method hiding</p>
+        
+            <pre><code>
+                class P {
+                    public static void main(String[] args) {
+                      SOP("Parent main");
+                    }
+                  }
+                  class C extends P {
+                    public static void main(String[] args) {
+                      SOP("child main");
+                    }
+                  }
+            </code></pre>
+            
+            <pre><output>
+                javac P.java
+                java P
+                Parent main
+                java C
+                Child main
+            </output></pre>
+
+    <mark>Note: For static methods inheritance and overloading concepts are applicable but overriding concept is not applicable. But instead of overriding, method hiding is applicable</mark>
+   
+    <p>Inside method implementation if we are using atleast one Instance variable then that method talks about a particular object. Hence we should declare method
+        as instance method</p>
+
+    <p>Inside method implementation if we are not using any instance variable then this method is no where related to a 
+        particular object. Hence we have to declare such type of method as static method irrespective of whether we are using
+        static variables or not</p>
+
+        <pre><code>
+            public class Student {
+                private int rollno;
+                private String name;
+                private int marks;
+                private static String cname;
+                
+                //We are using instance variable so declare as instance method
+                public String getStudentInfo() {
+                    return name + "    " + marks;
+                }
+                
+                //We are not using any instance variables so declare as final
+                public static String getCollegeInfo() {
+                    return cname;
+                }
+
+                //We are not using any instance variables so declare as final
+                public static double getAverage(int x, int y) {
+                    return x + y / 2;
+                }
+
+                //We are using instance variable so declare as instance method
+                public String getCompleteInfo() {
+                    return name + "  " + rollno + "  " + marks + "  " + cname;
+                }
+            }
+        </code></pre>
+
+        <p>For static methods implementation should be available whereas for abstract methods implementation is not available.
+            Hence abstract static combination is illegal for methods</p>
+
+        <h1>9. synchronized modifier</h1>
+        <h5>synchronized modifier</h5> 
+        <p>synchronized is a modifier applicable for methods and blocks but not for classes and variables</p>
+        
+        <p>If multiple threads trying to operate simultaneously on the same java object then there may be a chance of data inconsistency problem.
+            This is called race condition. We can overcome this problem by using synchronized keyword</p>
+
+        <p>If a method or block declared as synchronized then at atime only one thread is allowed to execute that method or block or the given object
+            so that data inconsistency problem will be resolved</p>
+        <p>But the main disadvantage of the synchronized keyword is it increases waiting time of threads and creates performance problem.
+            Hence if there is no specific requirement then it is not recommended to use synchronized keyword</p>
+
+        <p>synchronized method should compulsory contain implementation whereas abstract method doesnt conatin any implementation. Hence abstract synchronized
+            is illegal combination of modifiers for methods
+        </p>
+
+    <h1>10. native modifier</h1>
+    <h5>native modifier</h5>
+    <p>native is a modifier applicable only for methods and we cant apply anywhere else</p>
+    <p>The methods which are implemented in non-java mostly C or C++ are called native methods or foreign methods</p>
+
+    <p>The main objectives of the native keyword are</p>
+    <p>1. To improve performance of the system</p>
+    <p>2. To achieve machine level or memory level communication</p>
+    <p>3. To use already existing legacy non-java code</p>
+    
+    <h6>psuedocode to use native keyword in java</h6>
+    <pre><code>
+        class Native {
+            static {
+                //load native libraries
+                System.loadLibrary("native library path");
+            }
+            //declare a native method
+            public native void m1();
+        }
+        class Client {
+            public static void main(String[] args) {
+                Native n = new Native();
+                //invoke a native method
+                n.m1();
+            }
+        }
+    </code></pre>
+    
+    <p>4. For native methods implementation is already available in old languages like C or C++ and we are not
+        responsible to provide implementation. Hence native method declaration should ends with semicolon</p>
+
+        <pre><code>
+            public native void m1();
+            public native void m1() {}
+        </code></pre>
+
+        
+<pre><output>
+    CE: native methods cant have a body
+</output></pre>
+
+<p>5. For native methods implementation is already available in old languages but for abstract methods implementation should not
+    be available. Hence we cant declare native method as abstract i.e native abstract combination is illegal combination for methods</p>
+
+<p>6. We cant declare native methods as strictfp because there is no guarantee that old languages follow IEEE754 standard. Hence native strictfp is
+    illegal combination for methods</p>
+
+<p>7. The main advantage of native keyword is performance will be improved. But main disadvantage of native keyword is it breaks platform independent 
+    nature of java</p>
+     
+<h1>11. transient keyword</h1>
+<h5>transient keyword</h5>
+<p>transient is a modifiers applicable only for variables. We can use transient keyword in serialization context</p>
+<p>At the time of serialization if we dont want to save the value of a particular variables to meet security constraint then we should declare that variables as transient</p>
+<p>At the time of serialization JVM ignores original value of transient variables and save default value to the file. Hence transient means not to serialize</p>
+<img src="images/ss20.png" alt="ss12" width="600" height="600">
+
+<h1>12. volatile modifier</h1>
+<h5>volatile modifier</h5>
+<p>1. volatile is a modifiers applicable only for variables and we cant apply anywhere else</p>
+<p>2. If the value of a variable keep on changing by multiple threads then there may be a chance of data inconsistency problem. We can solve this problem by using volatile modifier</p>
+<p>3. If a variable declared as volatile then for every thread JVM will create a separate local copy. Every modification performed by the thread will takes place in local copy.
+    So that there is no effect on remaining threads</p>
+<p>4. The main advantage of volatile keyword is we can overcome data inconsistency problem but the main disadvantage of volatile keyword is creating and maintaining a separate copy
+    for every thread increases complexity of programming and creates performance problems. Hence if there is no specific requirement then it is never recommended to use volatile keyword 
+    and it is almost depricated keyword</p>
+<p>5. Final variables means the value never changes whereas volatile variable means the value keep on changing. Hence volatile final is illegal combination for variables</p>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>modifier</th>
+            <th colspan="2" style="text-align: center;">classes</th>
+            <th>methods</th>
+            <th>variables</th>
+            <th>blocks</th>
+            <th colspan="2" style="text-align: center;">interfaces</th>
+            <th colspan="2" style="text-align: center;">enum</th>
+            <th>constructors</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th style="text-align: center;">outer</th>
+            <th style="text-align: center;">inner</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th style="text-align: center;">outer</th>
+            <th style="text-align: center;">inner</th>
+            <th style="text-align: center;">outer</th>
+            <th style="text-align: center;">inner</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>public</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+        </tr>
+        <tr>
+            <td>private</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+        </tr> 
+        <tr>
+            <td>protected</td>
+            <td>&#10060</span></td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+        </tr> 
+        <tr>
+            <td>&ltdefault></td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+        </tr> 
+        <tr>
+            <td>final</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+        </tr> 
+        <tr>
+            <td>abstract</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+        </tr> 
+        <tr>
+            <td>static</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+        </tr> 
+        <tr>
+            <td>synchronized</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+        </tr> 
+        <tr>
+            <td>native</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+        </tr> 
+        <tr>
+            <td>strictfp</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+        </tr> 
+        <tr>
+            <td>transient</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+        </tr> 
+        <tr>
+            <td>volatile</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+        </tr> 
+    </tbody>
+</table>
+
+<p>1. The only applicable modifier for local variable is final</p>
+<p>2. The only applicable modifiers for constructor are public, private, protected and default</p>
+<p>3. The modifiers which are applicable only for methods are native</p>
+<p>4. The modifiers which are applicable only for variables are volatile and transient</p>
+<p>5. The modifiers which are applicable for classes but not for interfaces are final</p>
+<p>6. The modifiers which are applicable for classes but not for enum are final and abstract</p>
+
+
+
+
+    
+<h3>4. Interfaces</h3>
+<h5>1. Introduction</h5>
+<h5>2. Interface declaration and implementation</h5>
+<h5>3. extends vs implements</h5>
+<h5>4. interface methods</h5>
+<h5>5. interface variables</h5>
+<h5>6. interface naming conflicts</h5>
+<h6>1. methods naming conflicts</h6>
+<h6>2. variable naming conflicts</h6>
+<h5>7. marker interface</h5>
+<h5>8. Adapter classes</h5>
+<h5>interface vs abstract class vs concrete class</h5>
+<h5>Difference between interfaces and abstract class</h5>
+<h5>Conclusions</h5>
+
+<h5>1. Introduction</h5>
+<p>Definition 1: Any service requirement specification(SRS) is considered as an interface</p>
+<p>Example 1: JDBC API acts as requirement specification to develop database driver. Database vendor is responsible to implement JDBC API</p>
+<img src="images/ss21.png" alt="ss12" width="500" height="500">
+
+<p>SUN people responsible to define JDBC API. Database vendor is responsible to implement database to develop their own driver classes/p>
+
+<p>Example 2: Servlet API acts as requirement specification to develop web server. Web server vendor is responsible to implement servlet API</p>
+<img src="images/ss22.png" alt="ss12" width="500" height="500">
+
+<p>Definition 2: From client point of view an interface defines the set of services what he is expecting</p>
+<p>From service provider point of view an interface defines the set of services what he is offering.</p>
+<p>Hence any contract between client and service provider is considered as an interface</p>
+
+<p>Example</p>
+<p>Through bank ATM GUI screen bank people are highlighting the set of services what they are offering, at the same time the same GUI screen represents 
+    the set of services what customer is expecting. Hence this GUI screen acts as contract between customer and bank people</p>
+
+    <img src="images/ss23.png" alt="ss12" width="500" height="500">
+
+<p>Definition 3: Inside interface every method is always abstract whether we are declaring or not hence interface is considered as 100% pure abstract class</p>
+
+<p>Summary Definition : Any service requirement specification or any contract between client and service provider or 100% pure abstract class
+    is nothing but interface</p>
+
+<h5>2. Interface declaration and implementation</h5>
+<pre><code>
+    interface Interf {
+        void m1();
+        void m2();
+    }
+    class ServiceProvider implements Interf {
+        void m1() {
+        
+        }
+    }
+</code></pre>
+
+<pre><output>
+    CE error: ServiceProvider is not abstract and does not override abstract
+     method m2() in Interf
+    error: m1() in ServiceProvider cannot implement m1() in Interf
+        void m1() {
+             ^
+  attempting to assign weaker access privileges; was public
+2 errors
+</output></pre>
+
+<pre><code>
+    interface Interf {
+        void m1();
+        void m2();
+    }
+    class ServiceProvider implements Interf {
+        public void m1() {
+        
+        }
+    }
+</code></pre>
+
+<pre><output>
+    CE error:  error: ServiceProvider is not abstract and does not override
+     abstract method m2() in Interf
+</output></pre>
+
+<pre><code>
+    interface Interf {
+        void m1();
+        void m2();
+    }
+    abstract class ServiceProvider implements Interf {
+        public void m1() {
+        
+        }
+    }
+</code></pre>
+
+<pre><output>
+    compiling fine
+</output></pre>
+
+<pre><code>
+    interface Interf {
+        void m1();
+        void m2();
+    }
+    <span style="color: red;">abstract</span> class ServiceProvider <span style="color: red;">implements</span> Interf {
+        <span style="color: red;">public</span> void m1() {
+        
+        }
+    }
+    class SubServiceProvider <span style="color: red;">extends</span> ServiceProvider  {
+        <span style="color: red;">public</span> void m2() {
+
+        }
+    }
+</code></pre>
+
+<pre><output>
+    compiling fine
+</output></pre>
+
+<p>1. Whenever we are implementing an interface, for each and evry method of that interface we have to provide implementation o/w 
+    we have to declare class as abstract then next level child class is responsible to provide implementation
+</p>
+<p>2. Every interface method is always public and abstract whether we are declaring or not . Hence whenever we are implementing an interface method
+    compulsory we should declare as public o/w we will get compile time error</p> 
+ 
+    <h5>3. extends vs implements</h5>
+    <p>1. A class can extend only one class at a time</p>
+    <p>2. An interface can extend any number of interface simultaneously</p>
+    <pre><code>
+        interface A {
+
+        }
+        interface B {
+
+        }
+        interface C extends A, B {
+
+        }
+    </code></pre>
+    <p>3. A class can implement any number of interfaces simultaneously</p>
+    <p>4. A class can extend another class and can implement any number of interfaces simultaneously</p>
+    <pre><code>
+        class A extends B implements c, D, E {
+
+        }
+    </code></pre>
+
+    <div class="container">
+        <p class="bg-warning text-white">Which of the following is valid?</p>
+        
+        <pre><code>
+        <p>1. A class can extend any number of classes at a time.</p>
+        <p>2. A class can implement only one interface at a time</p>
+        <p>3. An interface can extend only one interface at a time</p>
+        <p>4. An interface can implement any number of interfaces simultaneously</p>
+        <p>5. A class van extend another class or can implement an interface 
+            but not both simultaneously</p>
+        <p>6. None of the above</p>
+        </code></pre>
+        
+        <pre><output>
+            None of the above
+        </output></pre>
+    </div>
+
+    <div class="container">
+        <p class="bg-warning text-white">Consider the following expression <span class="bg-primary text-white">X extends Y</span>. For which of the
+            following possibilities of X and Y the above expression is valid? 
+            <pre><code>
+                1. Both X and Y should be classes
+                2. Both X and Y should be interfaces
+                3. Both X and Y can be either classes or interfaces
+                4. No restrictions
+            </code></pre>
+            
+            <pre><output>
+                Both X and Y can be either classes or interfaces
+            </output></pre>
+        </p>
+    </div>
+
+    <pre><code>
+        X extends Y, Z
+    </code></pre>
+    
+    <pre><output>
+        X, Y, z should be interfaces
+    </output></pre>
+
+    <pre><code> 
+        X implements Y, Z
+    </code></pre>
+    
+    <pre><output>
+        X should be class and Y, Z should be interfaces
+    </output></pre>
+
+    <pre><code>
+        X extends Y implements Z
+    </code></pre>
+    
+    <pre><output>
+        X should be class and Y should be class and Z should be interface
+    </output></pre>
+
+    <pre><code>
+        X implements Y extends z
+    </code></pre>
+    
+    <pre><output>
+        CE: because we have to take extends first followed by interface
+    </output></pre>
+
+    <h5>4. interface methods</h5>
+    <p>1. Every method present inside interface is always public and abstract whether we are declaring or not</p>
+    <pre><code>
+        interface Interf {
+            void m1();
+        }
+    </code></pre>
+
+    <p>2. Why interface methods is always public?<br> To make that method available
+        to every implementation class</p>
+    <p>3. Why interface methods is always abstract?<br> Implementation class is responsible to provide implementation</p>
+
+    <p>Hence inside interface the following method Declarations are equal</p>
+    <pre><code>
+        void m1();
+        public void m1();
+        abstract void m1();
+        public abstract void m1();
+    </code></pre>
+
+    <p>4. As every interface method is always public and abstract we cant declare interface method with the following modifiers</p>
+    <img src="images/ss24.png" alt="ss12" width="400" height="600"><br><br><br>
+
+    <div class="container">
+        <p class="bg-warning text-white">Which of the following method declarations are allowed inside interface</p>
+            <pre><code>
+                public void m1() {}
+                private void m1();
+                protected void m1();
+                static void m1();
+                public abstract native void m1();
+                abstract public void m1();
+            </code></pre>
+            
+            <pre><output>
+                allowed
+                not allowed
+                not allowed
+                not allowed
+                not allowed
+                allowed
+            </output></pre>    
+    </div>
+
+
+    <h5>5. interface variables</h5>
+    
+    <p>1. An interface can contain variables, the main purpose of interface variable is to define requirement level constants</p>
+    <p>Every interface variable is always public, static, final whether we are declaring or not</p>
+    <pre><code>
+        interface Interf {
+            int x = 10;
+        }
+    </code></pre>
+    
+    <p>Why interface variables is always public?<br>To make this variable available to every implementation class</p>
+    <p>Why interface variables is always static?<br>We cant create object of interfce. Without existing object also, implementation class
+        has to access this variable</p>
+    <p>Why interface variable is always final?<br>If one implementation class changes value then remaining implementation classes will be affected.
+        To restrict this every interface variable is always final.</p>
+    
+    <p>Hence within the interface the following variable declarations are equal</p>
+    <pre><code>
+        int x = 10;
+        public int x = 10;
+        static int x = 10;
+        final int x = 10;
+        public static int x = 10;
+        public final int x = 10;
+        static final int x = 10;
+        public static final int x = 10;
+    </code></pre>
+
+    <p>As every interface variable is always public static final we cant declare with the following modifiers</p>
+    <img src="images/ss25.png" alt="ss12" width="400" height="600">
+
+    <p>For interface it is not possible to create object. If the object is not there serialization concept is not there. serialization
+        means saving state of an object. Object itself is not there, serialization is not there. If serialization not there then there is no requirement 
+        of transient keyword</p>
+    </p>
+
+    <p>For interface variables compulsory we should perform initialization at the time of declaration o/w we will get compile time erroe</p>
+    <pre><code>
+        interface Interf { 
+            int x;
+        }
+    </code></pre>
+    
+    <pre><output>
+        CE: = expected
+    </output></pre>
+
+    <div class="container">
+        <p class="bg-warning text-white">Inside interface which of the following declarations are allowed</p>
+        <pre><code>
+            int x;
+            private int x = 10;
+            protected int x = 10;
+            volatile int x = 10;
+            transient int x = 10;
+            public static int x =10;
+        </code></pre>
+        
+        <pre><output>
+            not allowed
+            not allowed
+            not allowed
+            not allowed
+            not allowed
+            allowed
+        </output></pre>
+    </div>
+
+    <p>Inside implementation class we can access interface variables but we cant modify values</p>
+    <pre><code>
+        interface Interf {
+            int x = 10;
+        }        
+        class Test implements Interf{
+
+            public static void main(String[] args) {
+                x = 777;
+                System.out.println(x);
+            }
+        }
+        
+    </code></pre>
+    
+    <pre><output>
+        CE: cant assign a value to final variable x
+    </output></pre>
+
+    <pre><code>
+        interface Interf {
+            int x = 10;
+        }        
+        class Test implements Interf{
+
+            public static void main(String[] args) {
+                int x = 777;
+                System.out.println(x);
+            }
+        }
+    </code></pre>
+    
+    <pre><output>
+        777
+    </output></pre>
+
+    <h5>6. interface naming conflicts</h5>
+
+    <h6>1. methods naming conflicts</h6>
+    <p>case 1: If two interface conatins a method with same signature and same return type then in the implementation class we have to provide
+        implementation for only one method</p>
+        <pre><code>
+            interface Left {
+                public void m1();
+            }
+            interface Right {
+                public void m1();
+            }
+            class Test implements Left, Right {
+                public void m1() {
+
+                }
+            }
+        </code></pre>
+        
+    <p>case 2: If two interfaces contains a method with same name but different arguments types then in the implementation class
+        we have to provide implementation for both methods and these methods acts as overloaded methods</p>
+    
+        <pre><code>
+            interface Left {
+                public void m1();
+            }
+            interface Right {
+                public void m1(int i);
+            }
+            class Test implements Left, Right {
+                public void m1() {
+
+                }
+                public void m1(int i) {
+
+                }
+            }
+        </code></pre> 
+
+    <p>case 3: If two interfaces contains a method with same signature but different return types then it is impossible to implement
+        both interfaces simultaneously(if return types are not co-varient)</p>
+        <pre><code>
+            interface Left {
+                public void m1();
+            }
+            interface Right {
+                public int m1();
+            }
+            class Test implements Left, Right {
+                public void m1() {
+
+                }
+                public int m1() {
+
+                }
+            }
+        </code></pre> 
+        <pre><output>
+            We cant write any java class which implements both interfaces  
+        </output></pre>
+
+        <div class="container">
+            <p class="bg-warning text-white">Is a java class can implement any number of interfaces simultaneously.</p>
+            <p>Yes. Except a particular case. If two interfaces contains a method with same signature but different return types then it is
+                impossible to implement both interfaces simultaneously</p>
+        </div>
+
+    
+    <h6>2. variable naming conflicts</h6>
+    <p>Two interfaces can contain a variable with the same name and there may be a chance of variable naming conflicts but we can 
+        solve this problem by using interface names</p>
+    <pre><code>
+        interface Left {
+            int x = 777;
+        }
+        interface Right {
+            int x = 888;
+        }
+        class Test implements Left, Right {
+            public static void main(String[] args) {
+                <span style="color: red;">//SOP(x); //CE: reference to x is ambiguous</span>
+                SOP(Left.x);
+                SOP(Right.x);
+            }
+        }
+    </code></pre> 
+    <pre><output>
+        777
+        888  
+    </output></pre>
+
+    <h5>7. marker interface</h5>
+    <p>If an interfaec doent contain any methods and by implementing that interface if our objects will get some ability, such type of interfaces are called 
+        marker interfaces or ability interface or tag interface</p>
+    <p>Example:</p>
+    <pre><code>
+        Serializable(I)
+        Clonable(I)
+        RandomAccess(I)
+        SingleThreadModel(I)
+            .
+            .
+            .
+            .
+    </code></pre>
+    <p>These are marked for some ability</p>
+
+    <p>Example 1: By implementing Serializable interface our objects can be saved to the file and can 
+        travel across a network.</p>
+    <p>Example 2: By implementing Clonable interface our objects are in a position to produce exactly duplicate cloned objects</p>
+
+    <div class="container">
+        <p class="bg-warning text-white">Without having any methods how the objects will get some ability in marker interfaces</p>
+        <p>Internally JVM is responsible to provide required ability.</p>
+    </div>
+    <div class="container">
+        <p class="bg-warning text-white">Why JVM is providing required ability in marker interfaces</p>
+        <p>To reduce complexity of programming and to make java language as simple.</p>
+    </div>
+    <div class="container">
+        <p class="bg-warning text-white">Is it possible to create our own marker interfaces?</p>
+        <p>Yes. But customization of JVM is required.</p>
+    </div>
+
+
+
+
+    <h5>8. Adapter classes</h5>
+    <p>1. Adapter class is a simple java class that implements an interface with only empty implementation</p>
+    <p>If we implement an interface for each and every method of that interface compulsory we should provide implementation 
+        whether it is required or not
+    </p>
+    <pre><code>
+        public interface Interf {
+            void m1();
+            void m2();
+            void m3();
+            void m4();
+            void m5();
+            void m6();
+            void m7();
+            void m8();
+            void m9();
+        }
+        class Test implements Interf {
+
+            @Override
+            public void m1() {
+            
+            }
+            @Override
+            public void m2() {
+                
+            }
+            @Override
+            public void m3() {
+                
+            }
+            @Override
+            public void m4() {
+                
+            }
+            @Override
+            public void m5() {
+                
+            }
+            @Override
+            public void m6() {
+                
+            }
+            @Override
+            public void m7() {
+                
+            }        
+            @Override
+            public void m8() {
+
+            }
+            @Override
+            public void m9() {
+                
+            }
+        }
+        
+    </code></pre>
+    <p>The problem in this approach is it increases length of the code and reduces readibility. We can solve this problem by 
+        using adapter classes. Instead of implementing interface if we extend adapter class we have to provide implementation only for required 
+        methods and we are not responsible to provide implementation for each and every method of the interface so that length of the code will be reduced</p>
+    </p>
+
+    <pre><code>
+        public interface Interf {
+            void m1();
+            void m2();
+            void m3();
+            void m4();
+            void m5();
+            void m6();
+            void m7();
+            void m8();
+            void m9();
+        } 
+        <span style="color: red;">abstract</span> public class AdapterInterf implements Interf {
+            @Override
+            public void m1() {
+            
+            }
+            @Override
+            public void m2() {
+                
+            }
+            @Override
+            public void m3() {
+                
+            }
+            @Override
+            public void m4() {
+                
+            }
+            @Override
+            public void m5() {
+                
+            }
+            @Override
+            public void m6() {
+                
+            }
+            @Override
+            public void m7() {
+                
+            }        
+            @Override
+            public void m8() {
+
+            }
+            @Override
+            public void m9() {
+                
+            }
+        }     
+        public class Test extends AdapterInterf {
+	
+            public void m5() {
+        
+            }
+        
+        }          
+        public class Sample extends AdapterInterf {
+
+            public void m1() {
+        
+            }
+        }
+        public class Demo extends AdapterInterf{
+
+            public void m7() {
+        
+            }
+        }                
+    </code></pre>
+    <img src="images/ss26.png" alt="ss12" width="400" height="600">
+
+    <p>We can develop a servlet in the following 3 ways</p>
+    <p>1. By implementing Servelt(I)
+    <p>2. By extending GenericServlet(AI)
+    <p>3. By extending HttpServlet(AI)</p>
+    <img src="images/ss27.png" alt="ss12" width="400" height="600">
+
+    <p>If we implement servlet interface for each and evry method of that interface we should provide implementation 
+        It increases length of the code and reduces readibility.</p>
+    <p>Instead of implementing servlet interface directly if we extend GenericServlet we have to provide implementation only 
+        for service() method and for ALL remaining methods we are not required to provide implementation. Hence more or less GenericServlet acts 
+        as Adapter class for Servlet(I) interface</p>
+
+    <mark>Note: Marker interface and adapter classes simplifies complexity of programming and these are best utilites to the 
+        programmer and programmer life will become simple.
+    </mark>
+
+    <h5>interface vs abstract class vs concrete class</h5>
+    <p>1. If we dont know anything about implementation just we have requirement specification then we should go for interface</p>
+    <p>Example : Servlet(I)</p>
+
+    <p>2. If we are talking about implementation but not completely(partial implementation) then we should go for abstract class</p>
+    <p>Example : GenericServlet, HttpServlet</p>
+
+    <p>3. If we are talking about implementation completely and ready to provide service then we should go for concrete class</p>
+    <p>Example : myOwnServlet</p>
+
+    <img src="images/ss28.png" alt="ss12" width="600" height="700">
+
+
+    <h5>Difference between interfaces and abstract class</h5>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>interface</th>
+                <th>Abstract class</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr>
+                <td>If we dont know anything about implementation and just we have requirement specification then we should go for interface</td>
+                <td>If we are talking about implementation but not completely(partial implementation) then we should go for abstract class</td>
+            </tr> 
+            <tr>
+                <td>Inside interface every method is always public and abstract whether we are declaring or not. Hence interface is considered as 100% pure 
+                    abstract class.
+                </td>
+                <td>Every method present inside abstract class need not be public and abstract and we can take concrete mthods also.</td>
+            </tr>
+            <tr>
+                <td>As every interface method is always public and abstract and hence we cant declare with the following modifiers(private, protected 
+                    final, static, synchronized, native and strictfp)</td>
+                <td>There are no restrictions on abstract class modifiers</td>
+            </tr>
+            <tr>
+                <td>Every variables present inside interface is always public static final whether we are declaring or not</td>
+                <td>Every variable present inside abstract class need not be public static final</td>
+            </tr>
+            <tr>
+                <td>AS every interface variables is always public static final we cant declare with the following modifiers(private protected volatile and transient)</td>
+                <td>There are no restrictions on abstract class variables modifiers</td>
+            </tr>
+            <tr>
+                <td>For interface variables compulsory we should perform initialization at the time of declaration only o/w we will get CE</td>
+                <td>For abstract class variables we are not required to perform initialization at the time of declaration</td>
+            </tr>
+            <tr>
+                <td>Inside interface we cant declare static and instance blocks</td>
+                <td>Inside abstract class we can declare static and instance blocks</td>
+            </tr>
+            <tr>
+                <td>Inside interface we cant declare constructors</td>
+                <td>Inside abstract class we can declare constructors</td>
+            </tr>
+        </tbody>
+</table>
+
+<div class="container">
+    <p class="bg-warning text-white">Anyway we cant create object for abstract class but abstract class can contain constructor. What is the need?</p>
+    <p>Abstract class constructors will be executed whenever we are creating child class object to perform initialization of child class object</p>
+</div>
+<p>Approach 1 : Without having constructor in abstract class</p>
+<pre><code>
+    abstract class Person {
+        String name;
+        int age;
+            .
+            . 
+            . 
+            . 
+            .(100 properties)
+    }
+    class Student extends Person {
+        int rollno;
+        Student(String name, int age, ......(101 properties)) {
+            this.name = name;
+            this.age = age;
+                . 
+                . 
+                . 
+                .(100 properties)
+            this.rollno = rollno;
+        }
+    }
+    Student s1 = new Student(101 properties);
+    class Teacher extends Person {
+        String subject;
+        Teacher(String name, int age, ......(101 properties)) {
+            this.name = name;
+            this.age = age;
+                . 
+                . 
+                . 
+                .(100 properties)
+            this.subject = subject;
+        } 
+    }
+    Teacher t = new Teacher(101 properties);
+                . 
+                . 
+                . 
+                .(1000 child classes)
+    (More code, code redundancy)
+</code></pre>
+
+<p>Approach 2: With constructor inside abstract class</p>
+<pre><code>
+    abstract class Person {
+        String name;
+        int age;
+            .
+            . 
+            . 
+            . 
+            .(100 properties)
+            //This constructor will work for every child object initialization
+        Person(String name, int age.........(100 properties)) {
+            this.name = name;
+            this.age = age;
+                . 
+                . 
+                . 
+                .(100 properties)
+        }
+        
+    }
+    class Student extends Person {
+        int rollno;
+        Student(String name, int age, ......(101 properties)) {
+            super(100 properties);
+            this.rollno = rollno;
+        }
+    }
+    Student s1 = new Student(101 properties);
+    class Teacher extends Person {
+        String subject;
+        Teacher(String name, int age, ......(101 properties)) {
+            super(100 properties);
+            this.subject = subject;
+        } 
+    }
+    Teacher t = new Teacher(101 properties);
+                . 
+                . 
+                . 
+                .(1000 child classes)
+
+    (less code and code reusability)
+</code></pre>
+
+<mark> Note: 1. Either directly or indirectly we cant create object for abstract class</mark>
+<br><br>
+<div class="container">
+    <p class="bg-warning text-white">Anyway we cant create objects for abstract class and interface but abstract class can contain constructor 
+        but interface doesnt contain constructor. What is the reason?</p>
+    <p>The main purpose of constructor is to perform initialization for the instance variables</p>
+    <p>Abstract class can contain instance variables which are required for child object. To perform initialization of those instance variables
+        constructor is required for abstract class</p>
+    <p>But every variable present inside interface is public static final whether we are declaring or not and there is no chance of existing instance 
+        variables inside interface. Hence constructor concept not required for interface
+</div>
+
+<p>Whenever we are creating child class object, parent object wont be created just parent class constructor will be executed for the child object 
+    purpose only</p>
+
+    <pre><code>
+        class P {
+            P() {
+                System.out.println(this.hashCode() + " Inside Parent");
+            }
+        }
+        class C extends P {
+            C() {
+                System.out.println(this.hashCode() + " Inside Child");
+            }
+        }
+        public class Test {
+            public static void main(String[] args) {
+                C c = new C();
+                System.out.println(c.hashCode() + " Inside Test");
+            }
+        }
+    </code></pre>
+    
+<pre><output>
+2055281021 Inside Parent
+2055281021 Inside Child
+2055281021 Inside Test
+</output></pre>
+
+<div class="container">
+    <p class="bg-warning text-white">Inside interface every method is always abstract and we can take only abstract methods in abstract also then what is the difference between interface and 
+        abstract class? i.e Is it possible to replace interface with abstract class?</p>
+    <p>We can replace interface with abstract class but it is not a good programming practice. This is something like recruiting IAS officer 
+        for sweeping activity/p>
+    <p>If everything is abstract then it is highly recommended to go for interface but not for abstract class</p>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>abstract class</th>
+            <th>interface</th>
+        </tr>
+    </thead> 
+    <tbody>
+        <tr>
+            <td><pre><code>
+                abstract class X {
+
+                }
+            </code></pre>
+            </td>
+            <td>
+                <pre><code>
+                    interface X {
+
+                    }
+                </code></pre>
+            </td>
+        </tr> 
+        <tr>
+            <td><pre><code>
+                class Test extends X {
+
+                }
+            </code></pre>
+            While extending abstract class it is not possible to extend any other class and hence we are missing inheritance benefit
+            </td>
+            <td><pre><code>
+                class Test implements X {
+
+                }
+            </code></pre>
+            While implementing interface we can extend some other class and hence we wont miss any inheritance benefit.
+            </td>
+        </tr>
+        <tr>
+            <td><pre><code>
+                Test t = new Test();(2 min)
+            </code></pre>
+            In this case object creation is costly 
+            </td>
+            <td><pre><code>
+                Test t = new Test();(2 sec)
+            </code></pre>
+            In this case object creation is not costly 
+            </td>
+        </tr>  
+    </tbody>
+</table>
+
+<h5>new and constructor</h5>
+<p>The main objective of new operator is to create an object.</p> 
+<p>The main purpose of constructor is to initialize object</p>
+<p>First object will be created by using new operator with default value and then initialization will be performed by constructor</p>
+
+
+
+    <h5>Conclusions</h5>
+
+</body>
+</html>
