@@ -220,9 +220,14 @@ table {
 <h6>Example 1: </h6>
 
 <pre><code>
-    SOP('a' + 'b');      97 + 98 = 195
-    SOP('a' + 0.89);     97 + 0.89 = 97.89
+    SOP('a' + 'b');      
+    SOP('a' + 0.89);     
 </code></pre>
+
+<pre><output>
+    97 + 98 = 195
+    97 + 0.89 = 97.89
+</output></pre>
 
 <mark>In integral Arithmetic(byte short int long) there is no way to represent infinity hence if infinity is a result we will get Arithmetic exception in integral Arithmetic</mark>
 <pre><code>
@@ -493,7 +498,7 @@ true
     <p>In general we can use == operator for reference comparison(address comparison) and .equals() method for content comparison</p>
     <pre><code>
         String s1 = new String("durga");
-        String s1 = new String("durga");
+        String s2 = new String("durga");
         SOP(s1 == s2);
         SOP(s1.equals(s2));
     </code></pre>
@@ -676,7 +681,7 @@ true
 
     <img src="images/ss12.png" alt="ss12" width="300" height="300">
 
-    <p>So 32bit compliment we have to perform not for just 3 bits or 2 bits</p>
+    <p>So 32bit compliment we have to perform, not for just 3 bits or 2 bits</p>
     <mark>Note: The MSB acts as sign bit. 0 means positive number. 1 means negative number. Positive numbers will be presented directly in a memory whereas negative numbers will be represented indirectly
         in the menory in 2's compliment form
     </mark>
@@ -743,8 +748,8 @@ true
                 <td>Relatively performance is high</td>
             </tr>
             <tr>
-                <td>x && y = y will be evaluated iff x is true i.e if x is false then y won't be evaluated</td>
-                <td>x || y = y will be evaluated iff x is false i.e if x is true. Then y won't be evaluated</td>
+                <td>x && y : y will be evaluated iff x is true i.e if x is false then y won't be evaluated</td>
+                <td>x || y : y will be evaluated iff x is false i.e if x is true. Then y won't be evaluated</td>
             </tr>
             <tr>
                 <td>Applicable for both boolean and integral types</td>
@@ -1359,7 +1364,7 @@ Test.java:5: error: cannot find symbol
                  Example:<br> Test t = new Test();<br>At run time if test.class file is not available then we will get RE saying NoClassDefFoundError : Test</td>
                 <td>For dynamically provided class names at run time if the corresponding .class file is not available then we will get RE saying ClassNotFoundException, which is checked exception
                     <br>Example:<br>
-                    Object 0 = Class.forName(args[0]).newInstance();
+                    Object o = Class.forName(args[0]).newInstance();
                     
                     <br>java Test Student<kbd>enter</kbd><br>
                     At run time if Student .class file not available then we will get RE saying ClassNotFoundException: Student
