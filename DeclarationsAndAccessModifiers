@@ -267,7 +267,7 @@ class Test {
 
     <h6>Case 9: </h6>
     <p>Difference between c language #include and java language import statement</p>
-    <p>In the case of c language #include all input output header files will be loaded at beginning only(at translation time).
+    <p>In the case of c language #include, all input output header files will be loaded at beginning only(at translation time).
         Hence it is static include.</p>
     <p>But in the case of java import statement no .class file will be loaded at the beginning. Whenever we are using a particular class then only
         corresponding .class file will be loaded. This is like dynamic include or load on demand or load on fly
@@ -531,10 +531,10 @@ class Test {
 <p>There is one universally accepted naming convention for packages i.e to use internet domain name in reverse</p>
 <h6>Example: </h6>
 <p>com.icicibank.loan.housing.Account</p>
-<p>com.icicibank is client's internet domian name in reverse</p>
-<p>module name</p>
-<p>submodule name</p>
-<p>class name</p>
+
+
+
+<img src="images/ss48.png" alt="ss12" width="600" height="600">
 
 <h6>Example 3:</h6>
 <pre><code>
@@ -957,7 +957,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
     <pre><output>
         javac -d . A.java<kbd>enter</kbd>
         javac -d . S.java<kbd>enter</kbd>
-        CE: error: P is not public in pack1; cannot be accessed from outside package
+        CE: error: A is not public in pack1; cannot be accessed from outside package
     </output></pre>
 
      <p>In the above example even though m1() method is public we cant access from outside package because corresponding class A is not public i.e if both class and method 
@@ -984,7 +984,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
         <pre><output>
             javac -d . A.java<kbd>enter</kbd>
             javac -d . S.java<kbd>enter</kbd>
-            java pack2.C<kbd>enter</kbd>
+            java pack2.S<kbd>enter</kbd>
             A class method
         </output></pre>
 
@@ -1060,12 +1060,12 @@ CE  error: C is not abstract and does not override abstract method m2() in P
             import pack1.A;
             class C extends A {
                 public static void main(String[] args) {
-                    A a = new A();(invalid)
+                    A a = new A();  &#10060
                     a.m1();
-                    C c = new C();
+                    C c = new C();  &#10004
                     c.m1();
-                    A a1 = new C();(invalid)
-                    a.m1();
+                    A a1 = new C(); &#10060
+                    a1.m1();
                 }
             }
         </code></pre>
@@ -1130,18 +1130,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
                         SOP("The most misunderstood modifier");
                     }
                 }
-        
-                class B extends A {
-                    public static void main(String[] args) {
-                        A a = new A();
-                        a.m1();  
-                        B b = new B();
-                        b.m1();
-                        A a1 = new B();
-                        a1.m1();              
-                    }
-                }
-                
+            
                 package pack2;
                 import pack1.A;
                 class C extends A {
@@ -1149,17 +1138,17 @@ CE  error: C is not abstract and does not override abstract method m2() in P
                 }
                 class D extends C {
                     public static void main(String[] args) {
-                        A a = new A();  (invalid)
+                        A a = new A();  &#10060
                         a.m1();
-                        C c = new C();  (invalid)
+                        C c = new C();  &#10060
                         c.m1();
-                        D d = new D();  (valid)
+                        D d = new D();  &#10004
                         d.m1();
-                        A a1 = new C(); (invalid)
+                        A a1 = new C(); &#10060
                         a1.m1();
-                        A a1 = new D(); (invalid)
+                        A a1 = new D(); &#10060
                         a1.m1();
-                        C c1 = new D(); (invalid)
+                        C c1 = new D(); &#10060
                         c1.m1();
                     }
                 }
@@ -1472,7 +1461,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
     <h1>8. static modifier</h1>
     <h5>static modifiers</h5>
     <p>Static is a modifier applicable for methods and variables but not for classes</p>
-    <p>We cant declare top level class with static modifier but we can declare inner class as static(such type of ineer classes are called
+    <p>We cant declare top level class with static modifier but we can declare inner class as static(such type of inner classes are called
         static inner classes)</p>
 
     <p>In the case of instance variables for every object a separate copy will be created but in the case of static variable
@@ -1513,13 +1502,22 @@ CE  error: C is not abstract and does not override abstract method m2() in P
             </code></pre>
             <p>Which of the 4 options we can take simultaneously</p>
             <pre><output>
-                a) 1 & 2
-                b) 1 & 4(CE: non-static variable c cannot be referenced from a static context)
+                a) 1 & 3
+                b) 1 & 4
                 c) 2 & 3
                 d) 2 & 4
-                e) 1 & 2(CE: variable x is already defined in Test)
-                f) 3 & 4(CE: m1() is already defined in Test)
+                e) 1 & 2
+                f) 3 & 4
             </output></pre>
+            <pre><output>
+                1. valid
+                2. CE: non-static variable x cannot be referenced from a static context
+                3. valid
+                4. valid 
+                5. CE: variable x is already defined in Test
+                6. CE: m1() is already defined in Test
+            </output></pre>
+            
         </div>
 
         <p>Overloading concept applicable for static methods including main method but JVM can always call String[] argument main method only</p>
@@ -1607,12 +1605,12 @@ CE  error: C is not abstract and does not override abstract method m2() in P
                     return name + "    " + marks;
                 }
                 
-                //We are not using any instance variables so declare as final
+                //We are not using any instance variables so declare as static
                 public static String getCollegeInfo() {
                     return cname;
                 }
 
-                //We are not using any instance variables so declare as final
+                //We are not using any instance variables so declare as static
                 public static double getAverage(int x, int y) {
                     return x + y / 2;
                 }
@@ -1696,14 +1694,14 @@ CE  error: C is not abstract and does not override abstract method m2() in P
      
 <h1>11. transient keyword</h1>
 <h5>transient keyword</h5>
-<p>transient is a modifiers applicable only for variables. We can use transient keyword in serialization context</p>
+<p>transient is a modifier applicable only for variables. We can use transient keyword in serialization context</p>
 <p>At the time of serialization if we dont want to save the value of a particular variables to meet security constraint then we should declare that variables as transient</p>
 <p>At the time of serialization JVM ignores original value of transient variables and save default value to the file. Hence transient means not to serialize</p>
 <img src="images/ss20.png" alt="ss12" width="600" height="600">
 
 <h1>12. volatile modifier</h1>
 <h5>volatile modifier</h5>
-<p>1. volatile is a modifiers applicable only for variables and we cant apply anywhere else</p>
+<p>1. volatile is a modifier applicable only for variables and we cant apply anywhere else</p>
 <p>2. If the value of a variable keep on changing by multiple threads then there may be a chance of data inconsistency problem. We can solve this problem by using volatile modifier</p>
 <p>3. If a variable declared as volatile then for every thread JVM will create a separate local copy. Every modification performed by the thread will takes place in local copy.
     So that there is no effect on remaining threads</p>
@@ -1929,7 +1927,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
 <p>Example 1: JDBC API acts as requirement specification to develop database driver. Database vendor is responsible to implement JDBC API</p>
 <img src="images/ss21.png" alt="ss12" width="500" height="500">
 
-<p>SUN people responsible to define JDBC API. Database vendor is responsible to implement database to develop their own driver classes/p>
+<p>SUN people responsible to define JDBC API. Database vendor is responsible to implement database to develop their own driver classes</p>
 
 <p>Example 2: Servlet API acts as requirement specification to develop web server. Web server vendor is responsible to implement servlet API</p>
 <img src="images/ss22.png" alt="ss12" width="500" height="500">
@@ -2062,7 +2060,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
         <p>2. A class can implement only one interface at a time</p>
         <p>3. An interface can extend only one interface at a time</p>
         <p>4. An interface can implement any number of interfaces simultaneously</p>
-        <p>5. A class van extend another class or can implement an interface 
+        <p>5. A class can extend another class or can implement an interface 
             but not both simultaneously</p>
         <p>6. None of the above</p>
         </code></pre>
@@ -2155,7 +2153,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
             </code></pre>
             
             <pre><output>
-                allowed
+                not allowed
                 not allowed
                 not allowed
                 not allowed
@@ -2201,7 +2199,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
         of transient keyword</p>
     </p>
 
-    <p>For interface variables compulsory we should perform initialization at the time of declaration o/w we will get compile time erroe</p>
+    <p>For interface variables compulsory we should perform initialization at the time of declaration o/w we will get compile time error</p>
     <pre><code>
         interface Interf { 
             int x;
@@ -2398,7 +2396,7 @@ CE  error: C is not abstract and does not override abstract method m2() in P
 
     <h5>8. Adapter classes</h5>
     <p>1. Adapter class is a simple java class that implements an interface with only empty implementation</p>
-    <p>If we implement an interface for each and every method of that interface compulsory we should provide implementation 
+    <p>If we implement an interface, for each and every method of that interface compulsory we should provide implementation 
         whether it is required or not
     </p>
     <pre><code>
@@ -2741,10 +2739,10 @@ CE  error: C is not abstract and does not override abstract method m2() in P
 </output></pre>
 
 <div class="container">
-    <p class="bg-warning text-white">Inside interface every method is always abstract and we can take only abstract methods in abstract also then what is the difference between interface and 
+    <p class="bg-warning text-white">Inside interface every method is always abstract and we can take only abstract methods in abstract class also then what is the difference between interface and 
         abstract class? i.e Is it possible to replace interface with abstract class?</p>
     <p>We can replace interface with abstract class but it is not a good programming practice. This is something like recruiting IAS officer 
-        for sweeping activity/p>
+        for sweeping activity</p>
     <p>If everything is abstract then it is highly recommended to go for interface but not for abstract class</p>
 </div>
 
