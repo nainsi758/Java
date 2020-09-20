@@ -359,7 +359,7 @@ h5 {
         CE: Duplicate case label 
     </output></pre>
 
-    <p>Duplicate case labels are not allowed p/w we will get compile time error</p>
+    <p>Duplicate case labels are not allowed o/w we will get compile time error</p>
 
     <h6>Case label</h6>
     <p>1. It should be constant expression</p>
@@ -609,7 +609,7 @@ h5 {
         SOP(10);
         SOP(b);
     </output></pre>
-    <mark class="bg-primary text-white">If every argument is a fianl variable(compile time constant then that operation should be performed at compile time only)</mark>
+    <mark class="bg-primary text-white">If every argument is a final variable(compile time constant then that operation should be performed at compile time only)</mark>
     <pre><code>
         final int a = 10, b = 20;
         int c = 20;
@@ -1050,7 +1050,7 @@ h5 {
 
     <p>for each loop is the best choice to retrieve elements of arrays and collections but its limitation
         is it is applicable only for arrays and collections and it is not a general purpose loop</p>
-    <p>By using normal for loop we can print array elements either in original order or in reverse order but using for loop
+    <p>By using normal for loop we can print array elements either in original order or in reverse order but using enhanced for loop
         we can print array elements only in original order but not in reverse order
     </p>
 
@@ -1107,7 +1107,7 @@ h5 {
         </tbody>
 </table>
     
-    <h5>Transfer Staements</h5>
+    <h5>Transfer Statements</h5>
     <h6>break</h6>
     <p>We can use break statement in the following places</p>
     <p>1. Inside switch to stop fall through</p>
@@ -1136,7 +1136,7 @@ h5 {
         begin
         Hello
     </output></pre>
-    <mark>These are the only placse where we can use break statement if we are using anywhere else we will et compile time error
+    <mark>These are the only places where we can use break statement if we are using anywhere else we will get compile time error
         saying break outside switch or loop
     </mark>
 
@@ -1174,7 +1174,7 @@ h5 {
         9
     </output></pre>
 
-    <p>2. We can use continue Staement only inside loops if we are using anywhere else we will get 
+    <p>2. We can use continue statement only inside loops if we are using anywhere else we will get 
         compile time error saying continue outside of loop</p>
         <pre><code>
             int x = 10;
@@ -1188,7 +1188,7 @@ h5 {
         </output></pre>
 
     <h5>labeled break and continue</h5>
-    <p>We can use labeled break and continue to break or continue a particular lopp in nested loops</p>
+    <p>We can use labeled break and continue to break or continue a particular loop in nested loops</p>
     <pre><code>
         l1: 
         for() {
@@ -1207,7 +1207,8 @@ h5 {
     <pre><code>
         public class Test {
             public static void main(String[] args) {
-                l1: for (int i = 0; i < 3; i++) {
+                l1: 
+                for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
                         if (i == j)
                             break;
