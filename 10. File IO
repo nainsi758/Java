@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+    <title>File IO</title>
+    <style>
+        h1 {
+            color: red;
+        }
+        h3 {
+            color: darkblue;
+        }
+        h6 {
+            color:crimson; 
+        }
+        h5 {
+            color:darkmagenta;
+        }
+        </style>    
+</head>
+<body>
+    <h1>File I/O</h1>
+    <h3>1. File</h3>
+    <pre><code>
+        File f = new File("abc.txt");
+    </code></pre>
+    <p>This line wont create any physical file. First it will check is there any physical file named with abc.txt 
+        is available or not. If it is available then f simply refers that file. If it is not available then we are just creating 
+        java file objects to represent name abc.txt
+    </p>
+    <pre><code>
+        public class Test {
+	
+            public static void main(String[] args) throws IOException {
+                File f = new File("df.txt");
+                System.out.println(f.exists());
+                f.createNewFile();      //physical file created here
+                System.out.println(f.exists());
+                f.exists();
+            }
+        }        
+    </code></pre>
+    <pre><output>
+        1st run--------------
+        false 
+        true 
+
+        2nd run--------------
+        true 
+        true
+    </output></pre>
+
+    <img src="images/ss123.png" alt="ss12" width="400" height="300">
+
+    <p>We can use java file object to represent directory also</p>
+    <pre><code>
+        public class Test {
+	
+            public static void main(String[] args) throws IOException {
+                File f = new File("durga13");
+                System.out.println(f.exists());
+                f.mkdir();
+                System.out.println(f.exists());
+                f.exists();
+            }
+        }
+    </code></pre>
+    <pre><output>
+        1st run--------------
+        false 
+        true 
+
+        2nd run--------------
+        true 
+        true
+    </output></pre>
+
+    <img src="images/ss124.png" alt="ss12" width="300" height="200">
+<br>
+    <mark>Note : In UNIX everything is treated as a file. Java File I/O concept is implemented 
+        based on UNIX operating system hence Java file object can be used to represent both files 
+        and directories.</mark>
+<br><br>    
+<h6>File class constructors</h6>
+<pre><code>
+    1. File f = new File(String name);
+    - creates a java file object to represent name of the file or directory 
+    in current working directory.
+
+    2. File f = new File(String subdirname, String name);
+    - creates a java file object to represent name of the file or directory 
+    present in specified subdirectory.
+
+    3. File f = new File(File subdir, String name);
+</code></pre>
+
+<div class="container">
+    <p class="bg-warning text-white">Write code to create a file named with abc.txt in current working directory.</p>
+    <pre><code>
+        File f = new File("abc.txt");
+        f.createNewFile();
+    </code></pre>
+    <p class="bg-warning text-white">Write code to create directory named with durga123 in current working directory
+        and create a file named with demo.txt in that directory.</p>
+    <pre><code>
+        File f = new File("durga123");
+        f.mkdir();
+        File f1 = new File("durga123", "demo.txt");
+        //File f1 = new File(f, "demo.txt");
+        f1.createNewFile();
+    </code></pre>
+    <img src="images/ss125.png" alt="ss12" width="400" height="300">
+    <p class="bg-warning text-white">Write code to create a file named with abc.txt in E:xyz folder.
+        Assume that E: xyz folder is already available in our system
+    </p>
+    <pre><code>
+        File f = new File("E://xyz", "abc.txt");
+        f.createNewFile();
+    </code></pre>
+
+</div> 
+
+<h6>Important methods present in file class</h6>
+<pre><code>
+    1. boolean exists();
+    - returns true if the specified file or directory available 
+
+    2. boolean createNewFile();
+    - First this method will check whethet the specified file is already 
+    available or not. If it is already available then this method returns 
+    false without creating any physical file. If the file is not already available
+    then this method will creates a new file and returns true.
+
+    3. boolean mkdir();
+
+    4. boolean isFile();
+    - return true if the specified file object pointing to physical file</code>
+
+    5. boolean isDirectory();
+
+    6. String[] list()
+    - this method returns the names of all files and subdirectories present
+    in specified directory.
+
+    7. long length()
+    - returns number of characters present in the specified file 
+
+    8. boolean delete()
+    - to delete specified file or directory
+</code></pre>
+
+<p class="bg-warning text-white">Write a program to display the names of all files and 
+    directories present in E://xyz.</p>
+    <pre><code>
+import java.io.File;
+import java.io.IOException;
+
+public class Test {
+
+	public static void main(String[] args) throws IOException {
+		int count = 0;
+		File f = new File("E://xyz");
+
+		String[] list = f.list();
+
+		for (String s : list) {
+			count++;
+			System.out.println(s);
+		}
+		System.out.println("The total number : " + count);
+	}
+}
+
+    </code></pre>
+    <pre><output>
+        abc.txt
+        def.txt
+        dir1
+        dir2
+        ghi.txt
+        jkl.txt
+        The total number : 6
+    </output></pre>
+
+    <pre><code>
+import java.io.File;
+import java.io.IOException;
+public class Test {
+	public static void main(String[] args) throws IOException {
+		int count = 0;
+		File dir = new File("E://", "xyz");
+		dir.mkdir();
+		File f1 = new File("E://xyz", "abc.txt");
+		File f2 = new File("E://xyz", "def.txt");
+		File f3 = new File("E://xyz", "ghi.txt");
+		File f4 = new File("E://xyz", "jkl.txt");
+		f1.createNewFile();
+		f2.createNewFile();
+		f3.createNewFile();
+		f4.createNewFile();
+		File f5 = new File("E://xyz", "dir1");
+		File f6 = new File("E://xyz", "dir2");
+		f5.mkdir();
+		f6.mkdir();
+		String[] list = dir.list();
+
+		for (String file : list) {
+			count++;
+			System.out.println(file);
+		}
+		System.out.println("The total number : " + count);
+	}
+}
+        
+    </code></pre>
+    <pre><output>
+        abc.txt
+        def.txt
+        dir1
+        dir2
+        ghi.txt
+        jkl.txt
+        The total number : 6
+    </output></pre>
+    <p class="bg-warning text-white">To display only file names.</p>
+    <pre><code>
+    import java.io.File;
+    import java.io.IOException;
+    public class Test {
+
+	public static void main(String[] args) throws IOException {
+		int count = 0;
+		File f = new File("E://xyz");
+
+		String[] list = f.list();
+
+		for (String s : list) {
+			File f1 = new File(f, s);
+			if (f1.isFile()) {
+				count++;
+				System.out.println(s);
+			}
+		}
+		System.out.println("The total number : " + count);
+	}
+}
+
+    </code></pre>
+    <pre><output>
+        abc.txt
+        def.txt
+        ghi.txt
+        jkl.txt
+        The total number : 4
+    </output></pre>
+
+    <p class="bg-warning text-white">To display only directory names.</p>
+    <pre><code>
+        import java.io.File;
+        import java.io.IOException;
+        public class Test {
+
+            public static void main(String[] args) throws IOException {
+                int count = 0;
+                File f = new File("E://xyz");
+        
+                String[] list = f.list();
+        
+                for (String s : list) {
+                    File f1 = new File(f, s);
+                    if (f1.isDirectory()) {
+                        count++;
+                        System.out.println(s);
+                    }
+                }
+                System.out.println("The total number : " + count);
+            }
+        }
+    </code></pre>
+    <pre><output>
+        dir1
+        dir2
+        The total number : 2
+    </output></pre>
+
+
+    <h3>2. FileWriter</h3>
+    <p>We can use FileWriter to write character data to the file.</p>
+
+    <h6>Constructors</h6>
+    <pre><code>
+        1. FileWriter fw = new FileWriter(String fname);
+        2. FileWriter fw = new FileWriter(File f);
+    
+        - The above FileWriters meant for overriding of existing data. Instead 
+        of overriding if we want append operation then we have to create FileWriter 
+        by using the following constructors.
+
+        3. FileWriter fw = new FileWriter(String fname, boolean append);
+        4. FileWriter fw = new FileWriter(File f, boolean append);
+        
+    </code></pre>
+
+    <mark>Note : If the specified file is not already available then all the above constructors 
+        will create that file.</mark><br><br>
+
+        <h6>Methods</h6>
+    <pre><code>
+        1. write(int ch)
+            - To write a single character
+
+        2. write(char[] ch)
+            - To write an array of characters
+
+        3. write(String s)
+            - To write String to the file
+
+        4. flush()  //rice example
+            - To give the guarantee that total data including last character
+            will be written to the file 
+            
+        5. close() 
+            - To close the writer
+    </code></pre>
+
+    <pre><code>
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class FileWriterDemo {
+
+	public static void main(String[] args) throws IOException {
+		FileWriter fw = new FileWriter("abc.txt");
+		fw.write(100);
+		fw.write("urga\nSoftwareSolutions");
+		fw.write('\n');
+		char[] ch1 = {'a', 'b', 'c'};
+		fw.write(ch1);
+		fw.write('\n');
+		fw.flush();
+		fw.close();
+	}
+}
+
+    </code></pre>
+    
+    <pre><output>
+        In abc.txt file -----------------
+        durga
+        SoftwareSolutions
+        abc
+    </output></pre>
+
+    <p>In the above program FileWriter can perform overriding of existing data. 
+        Instead of overriding if we want append operation then we have to create 
+        FileWriter object as follows</p>
+
+        <pre><code>
+            public class FileWriterDemo {
+
+                public static void main(String[] args) throws IOException {
+                    FileWriter fw = new FileWriter("abc.txt", true);
+                    fw.write(100);
+                    fw.write("urga\nSoftwareSolutions");
+                    fw.write('\n');
+                    char[] ch1 = {'a', 'b', 'c'};
+                    fw.write(ch1);
+                    fw.write('\n');
+                    fw.flush();
+                    fw.close();
+                }
+            }
+        </code></pre>
+        
+        <pre><output>
+After running multiple times------------
+durga
+SoftwareSolutions
+abc
+durga
+SoftwareSolutions
+abc
+durga
+SoftwareSolutions
+abc
+durga
+SoftwareSolutions
+abc
+durga
+SoftwareSolutions
+abc
+durga
+SoftwareSolutions
+abc
+durga
+SoftwareSolutions
+abc
+        </output></pre>
+<mark>Note : The main problem with FileWriter is we have to insert line separator 
+    manually which is varied from system to system. It is difficulty to the programmer.
+    We can solve this problem using BufferedWriter and PrintWriter classes</mark>
+    <br><br>
+
+    <h3>3. FileReader</h3>
+<p>We can use FileReader to read character data from the file.</p>
+<h6>Constructors</h6>
+<pre><code>
+    1. FileReader fr = new FileReader(String fname);
+    2. FileReader fr = new FileReader(File f);
+</code></pre>
+
+<h6>Methods</h6>
+<pre><code>
+    1. int read()
+        - It attempts to read next character from the file and returns its 
+        unicode value. If the next character not available then this method 
+        returns -1. As this method returns unicode value(int value), at the time 
+        of printing we have to perform typecasting 
+    
+</code></pre>
+
+<pre><code>
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileReaderDemo {
+
+	public static void main(String[] args) throws IOException {
+		FileReader fr = new FileReader("abc.txt");
+		int i = fr.read();
+		while(i != -1) {
+			System.out.print((char)i);
+			i = fr.read();
+		}
+	}
+}
+
+</code></pre>
+
+<pre><output>
+    durga
+    SoftwareSolutions
+    abc
+</output></pre>
+
+<pre><code>
+    2. int read(char[] ch)
+        - It attempts to read enough characters from the file into char array
+        and returns number of characters copied from the file.
+</code></pre>
+
+<pre><code>
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileWriterDemo {
+
+	public static void main(String[] args) throws IOException {
+		File f = new File("abc.txt");
+		char[] ch = new char[(int)f.length()];
+		FileReader fr = new FileReader(f);
+		fr.read(ch);
+		for(char ch1 : ch) {
+			System.out.print(ch1);
+		}
+	}
+}
+</code></pre>
+
+<pre><output>
+    durga
+    SoftwareSolutions
+    abc
+</output></pre>
+
+<pre><code>
+    3. void close()
+</code></pre>
+<mark>Note : By using FileReader we can read data character by character which is not convenient
+    to the programmer.
+</mark>
+<br><br>
+
+<p style="color: darkblue;"> Usage of FileWriter and FileReader is not recommended because while writing
+data by FileWriter we have to insert line separator(\n) manually which is varied from system to system 
+which is difficult to the programmer. By using FileReader we can read data character by character, which is 
+not convenient to the programmer. <br>
+To overcome these problems we should go for BufferedWriter and BufferedReader.</p>
+
+
+
+<h3>4. BufferedWriter</h3>
+<p>We can use BufferedWriter to write character data to the file</p>
+<h6>Constructors</h6>
+<pre><code>
+    1. BufferedWriter bw = new BufferedWriter(Writer w);
+    2. BufferedWriter bw = new BufferedWriter(Writer w, int buffersize);
+</code></pre>
+
+<mark>Note : BufferedWriter cant communicate directly with the file. It can communicate via 
+    some Writer object.
+</mark><br><br>
+
+<div class="container">
+    <p class="bg-warning text-white">Which of the following are valid?</p>
+    <pre><code>
+1. BufferedWriter bw = new BufferedWriter("abc.txt");
+2. BufferedWriter bw = new BufferedWriter(new File("abc.txt"));
+3. BufferedWriter bw = new BufferedWriter(new FileWriter("abc.txt"));
+4. BufferedWriter bw = new BufferedWriter(new BufferedWriter(new FileWriter("abc.txt")));
+    </code></pre>
+    <pre><output>
+        invalid
+        invalid
+        valid 
+        valid
+    </output></pre>
+</div> 
+
+<h6>Methods</h6>
+<pre><code>
+    1. write(int ch)
+    2. write(char[] ch)
+    3. write(String s)
+    4. flush()
+    5. close()
+    6. newLine()
+        - To insert a line separator
+</code></pre>
+
+<div class="container">
+	<p class="bg-warning text-white">When compared with FileWriter which of the following capability available 
+        extra in method form in BufferedWriter?</p>
+
+        <pre><code>
+            1. writing data to the file
+            2. close the file 
+            3. flushing the file 
+            4. inserting a new line character
+        </code></pre>
+        <pre><output>
+            Inserting a new line character&#10004
+        </output></pre>
+</div> 
+
+<pre><code>
+    import java.io.BufferedWriter;
+    import java.io.FileWriter;
+    import java.io.IOException;
+    
+    public class BufferedWriterDemo {
+    
+        public static void main(String[] args) throws IOException {
+            FileWriter fw = new FileWriter("abc.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(100);
+            bw.newLine();
+            char[] ch1 = {'a', 'b', 'c', 'd'};
+            bw.write(ch1);
+            bw.newLine();
+            bw.write("durga");
+            bw.newLine();
+            bw.write("Software solutions");
+            bw.flush();
+            bw.close();
+        }
+    }
+</code></pre>
+
+<pre><output>
+    d
+    abcd
+    durga
+    Software solutions
+</output></pre>
+
+<mark>Note : Whenever we are closing BufferedWriter automatically internal FileWriter will 
+    be closed and we are not required to close explicitly.</mark>
+<br><br>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td>bw.close();</td>
+            <td>fw.close();</td>
+            <td>bw.close()<br>fw.close()</td>
+        </tr> 
+        <tr>
+            <td>&#10004</td>
+            <td>&#10060</td>
+            <td>&#10060</td>
+        </tr>  
+    </tbody>
+</table>
+
+
+    <h3>5. BufferedReader</h3>
+    <p>We can use BufferedReader to read character data from the file. The main advantage 
+        of BufferedReader when compared with FileReader is we can read data line by line in addition 
+        to character by character.
+    </p>
+
+<h6>Constructors</h6>
+<pre><code>
+    1. BufferedReader br = new BufferedReader(Reader r);
+    2. BufferedReader br = new BufferedReader(Reader r, int buffersize);
+</code></pre>
+<p>BufferedReader cant communicate directly with the file and it can communicate via some Reader object. 
+
+</p>
+<h6>Method</h6>
+<pre><code>
+    1. int read();
+    2. int read(char[] ch);
+    3. void close();
+    4. String readLine();
+        - It attempts to read next line from the file and returns it.
+        If the next line not available then this method returns null.
+</code></pre>
+
+<pre><code>
+    import java.io.BufferedReader;
+    import java.io.FileReader;
+    import java.io.IOException;
+    
+    public class BufferedReaderDemo {
+        public static void main(String[] args) throws IOException {
+            FileReader fr = new FileReader("abc.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            while(line != null) {
+                System.out.println(line);
+                line = br.readLine();
+            }
+            br.close();
+        }
+    }
+    
+</code></pre>
+
+<pre><output>
+    d
+    abcd
+    durga
+    Software solutions    
+</output></pre>
+
+<mark>Note : Whenever we are closing BufferedReader automatically underlying FileReader 
+    will be closed and we are not required to close explicitly</mark><br><br>
+<mark>Note : The most enhanced reader to read character data from the file is BufferedReader.</mark>
+
+<h3>6. PrintWriter</h3>
+<p>It is the most enhanced writer to write character data to the file. The main advantage of PrintWriter 
+    over FileWriter and BufferedWriter is we can write any type of primitive data directly to the file</p>
+
+<h6>Constructors</h6>
+<pre><code>
+    1. PrintWriter pw = new PrintWriter(String fname);
+    2. PrintWriter pw = new PrintWriter(File f);
+    3. PrintWriter pw = new PrintWriter(Writer w);
+</code></pre>
+<mark>Note : PrintWriter can communicate directly with the file and can communicate via some 
+    writer object also</mark><br><br>
+<h6>Methods</h6>
+<pre><code>
+    1. write(int ch)
+    2. write(char[] ch)
+    3. write(String s)
+    4. flush()
+    5. close()
+
+    6. print(char ch)
+    7. print(int i)
+    8. print(double d)
+    9. print(boolean b)
+    10. print(String s)
+
+    11. println(char ch)
+    12. println(int i)
+    13. println(double d)
+    14. println(boolean b)
+    15. println(String s)
+</code></pre>
+
+<pre><code>
+    import java.io.IOException;
+    import java.io.PrintWriter;
+    
+    public class PrintWriterDemo {
+    
+        public static void main(String[] args) throws IOException {
+            FileWriter fw = new FileWriter("abc.txt");
+            PrintWriter out = new PrintWriter(fw);
+            out.write(100);
+            out.println(100);
+            out.println(true);
+            out.println('c');
+            out.println("durga");
+            out.flush();
+            out.close();
+        }
+    
+    }
+    
+</code></pre>
+
+<pre><output>
+    d100
+    true
+    c
+    durga    
+</output></pre>
+
+<div class="container">
+    <p class="bg-warning text-white">What is the difference between write(100) & print(100)?</p>
+    <p>In the case of write(100) the corresponding character d will be added to the file but in the case 
+        of print(100) the int value 100 will be added to the file directly.
+</div> 
+
+<mark>Note : The most enhanced writer to write character data to the file is PrintWriter whereas the most 
+    enhanced reader to read character data from the file is BufferedReader</mark>
+
+<br><br>
+
+<mark>Note : In general we can use Readers and Writers to handle character data(text data) whereas we can use 
+    Streams to handle binary data(like images, pdf, video files, audio files....). We can use OutputStream to write 
+    binary data to the file, InputStream to read binary data from the file</mark> 
+
+<br><br>
+
+<img src="images/ss126.png" alt="ss12" width="700" height="500">
+
+<div class="container">
+    <p class="bg-warning text-white">Write a program to merge data from two files into a third file.</p>
+    <pre><code>
+        import java.io.BufferedReader;
+        import java.io.FileReader;
+        import java.io.IOException;
+        import java.io.PrintWriter;
+        
+        public class FileMerger {
+        
+            public static void main(String[] args) throws IOException {
+                PrintWriter pw = new PrintWriter("file3.txt");
+                BufferedReader br = new BufferedReader(new FileReader("file1.txt"));
+                String line = br.readLine();
+                while (line != null) {
+                    pw.println(line);
+                    line = br.readLine();
+                }
+                br = new BufferedReader(new FileReader("file2.txt"));
+                line = br.readLine();
+                while (line != null) {
+                    pw.println(line);
+                    line = br.readLine();
+                }
+                pw.flush();
+                br.close();
+                pw.close();
+            }
+        
+        }
+    </code></pre>
+    
+    <pre><output>
+        file1.txt--------------------------
+        AAA 
+        BBB 
+        CCC 
+
+        file2.txt-------------------------- 
+        111
+        222
+        333
+
+        file3.txt--------------------------- 
+        AAA
+        BBB
+        CCC
+        111
+        222
+        333        
+    </output></pre>   
+</div> 
+
+<div class="container">
+	<p class="bg-warning text-white">WAP to perform file merge operation where merging
+        should be done line by line alternatively.
+    </p>
+    <pre><code>
+        import java.io.BufferedReader;
+        import java.io.FileReader;
+        import java.io.IOException;
+        import java.io.PrintWriter;
+        
+        public class FileMerger {
+        
+            public static void main(String[] args) throws IOException {
+                PrintWriter pw = new PrintWriter("file3.txt");
+                BufferedReader br1 = new BufferedReader(new FileReader("file1.txt"));
+                BufferedReader br2 = new BufferedReader(new FileReader("file2.txt"));
+                String line1 = br1.readLine();
+                String line2 = br2.readLine();
+                while (line1 != null || line2 != null) {
+                    if (line1 != null) {
+                        pw.println(line1);
+                        line1 = br1.readLine();
+                    }
+                    if (line2 != null) {
+                        pw.println(line2);
+                        line2 = br2.readLine();
+                    }
+                }
+                
+                pw.flush();
+                br1.close();
+                br2.close();
+            }
+        
+        }
+    </code></pre>
+    
+    <pre><output>
+        file1.txt--------------------------
+        AAA 
+        BBB 
+        CCC 
+
+        file2.txt-------------------------- 
+        111
+        222
+        333
+        444
+        555
+        
+        file3.txt-------------------------
+        AAA
+        111
+        BBB
+        222
+        CCC
+        333
+        444
+        555  
+    </output></pre>
+</div> 
+<div class="fluid-container">
+    <p class="bg-warning text-white">WAP to perform file extraction operation.</p>
+    
+    <pre><code>
+        import java.io.BufferedReader;
+        import java.io.FileReader;
+        import java.io.IOException;
+        import java.io.PrintWriter;
+        
+        public class FileExtractor {
+        
+            public static void main(String[] args) throws IOException {
+                PrintWriter pw = new PrintWriter("output.txt");
+                BufferedReader br1 = new BufferedReader(new FileReader("input.txt"));
+                String line = br1.readLine();
+                while(line != null) {
+                    boolean available = false;
+                    BufferedReader br2 = new BufferedReader(new FileReader("delete.txt"));
+                    String target = br2.readLine();
+                    while(target != null) {
+                        if(line.equals(target)) {
+                            available = true;
+                            break;
+                        }
+                        target = br2.readLine();
+                    }
+                    if(available == false) {
+                        pw.println(line);
+                    }
+                    line = br1.readLine();
+                } 
+                pw.flush();
+            }
+        }
+    </code></pre>
+    <img src="images/ss127.png" alt="ss12" width="400" height="600">
+</div> 
+
+<div class="fluid-container">
+    <p class="bg-warning text-white">Write a java program to remove duplicates from the given input file.</p>
+    <pre><code>
+        import java.io.BufferedReader;
+        import java.io.FileReader;
+        import java.io.IOException;
+        import java.io.PrintWriter;
+        
+        public class FileExtractor {
+        
+            public static void main(String[] args) throws IOException {
+                PrintWriter pw = new PrintWriter("output.txt");
+                BufferedReader br1 = new BufferedReader(new FileReader("input.txt"));
+                String line = br1.readLine();
+                while(line != null) {
+                    boolean available = false;
+                    BufferedReader br2 = new BufferedReader(new FileReader("output.txt"));
+                    String target = br2.readLine();
+                    while(target != null) {
+                        if(line.equals(target)) {
+                            available = true;
+                            break;
+                        }
+                        target = br2.readLine();
+                    }
+                    if(available == false) {
+                        pw.println(line);
+                        pw.flush();
+                    }
+                    line = br1.readLine();
+                } 
+                pw.flush();
+            }
+        }
+    </code></pre>
+    <img src="images/ss128.png" alt="ss12" width="400" height="600">
+</div>
+
+</body>
+</html>
