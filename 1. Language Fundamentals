@@ -27,17 +27,100 @@
     </head>
     <body>
         <h1>Language Fundamentals</h1>
-        <h3>1. Identifiers</h3> a name which can be used for identification purpose. It can be class name, function name and label name </p>
+        <h3>1. Identifiers</h3> A name which can be used for identification purpose. It can be method name, variable name, class name and label name </p>
+        <pre>
+          <code>
+            class <span style="background-color:rgb(0, 255, 255);">Test</span> {
+              public static void <span style="background-color:rgb(0, 255, 255);">main</span>(<span style="background-color:rgb(0, 255, 255);">String</span>[] <span style="background-color:rgb(0, 255, 255);">args</span>) {
+                int <span style="background-color:rgb(0, 255, 255);">x</span> = 10;
+              }
+            }
+          </code>
+        </pre>
+        <p>The only allowed characters in java identifiers are </p>
+        <ol>
+          <li>a to z</li>
+          <li>A to Z</li>
+          <li>0 to 9 </li>
+          <li>$</li>
+          <li>_</li>
+        </ol>
+        <p>Which of the following are valid identifiers?</p>
+        <ol>
+          <li>total_number</li>
+          <li>total#</li>
+          <li>123total</li>
+          <li>total123</li>
+          <li>ca$h</li>
+          <li>_$_$_$_$_$_$</li>
+          <li>all@hands</li>
+          <li>Java2Share</li>
+          <li>Integer</li>
+          <li>Int</li>
+          <li>int</li>
+        </ol>
+        <ol>
+          <li>valid</li>
+          <li>invalid</li>
+          <li>invalid</li>
+          <li>valid</li>
+          <li>valid</li>
+          <li>valid</li>
+          <li>invalid</li>
+          <li>valid</li>
+          <li>valid</li>
+          <li>valid</li>
+          <li>invalid</li>
+        </ol>
+        <p>Identifiers should not start with digit.</p>
+        <p>Java Identifiers are case sensitive. Ofcourse java language itself is treated as case sensitive programming language.</p>
+        <pre>
+          <code>
+            class Test {
+                int number = 10;
+                int Number = 20;
+                int NUMBER = 30;
+            }
+          </code>
+        </pre>
+        <p>We can differentiate wrt case.</p>
+        <p>There is no length limit for java identifiers but it is not recommended to take too lengthy identifiers.</p>
+        <pre>
+          <code>
+            int if = 20;  <span>&#10060;</span>
+          </code>
+        </pre>
         <mark>We can't use reserved word as identifiers.
         Predefined class name and interface names can be used as identifiers</mark>
-        
+        <pre>
+          <code>
+            class Test {
+              p s v m(String[] args) {
+                int String = 888;
+                SOP(String);
+              }
+            }
+          </code>
+        </pre>
+        <p>Output <br>888</p>
+        <pre>
+          <code>
+            class Test {
+              p s v m(String[] args) {
+                int Runnable = 999;
+                SOP(String);
+              }
+            }
+          </code>
+        </pre>
+        <p>Output <br>999</p>
         <h3>2. Reserved Words</h3>
         <p>Some words are reserved to represent some meaning or functionality called reserved words.</p>
         <mark>Total 53 reserved words are there.
-             In them 50 are keywords and 3 are reserved literals.
+             In them 50 are keywords and <span class="bg-warning text-white">3 are reserved literals</span>.
         </mark>
         <h5>keyword(Unused keywords - goto const)</h5>
-        <p>If the reserved word associated with functionality. 48 keywords are used keywords and 2 are unused.</p>
+        <p>If the reserved word associated with functionality. <span class="bg-warning text-white">48 keywords are used keywords</span> and <span class="bg-warning text-white">2 are unused.</span></p>
         <p><h5>Reserved literals(true false null)</h5>If the reserved word only to represent value.
         
 
@@ -45,25 +128,38 @@
             <div class="row">
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for data types(8)</h6><p>byte<br>short<br>int<br>long<br>float<br>double<br>boolean<br>char</p></div>                  
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Keywords for flow control(11)</h6><p>if<br>else<br>switch<br>case<br>default<br>while<br>do<br>for<br>break<br>continue<br>return</p></div>
-                <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for modifiers(11)</h6><p>public<br>private<br>protected<br>static<br>final<br>abstract<br>synchronized<br>native<br>strictfp<br>transient<br>volatile</p></div>
-                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Keywords for exception handling(6)</h6><p>try<br>catch<br>finally<br>throw<br>throws<br>assert</p></div>
+                <div class="col-sm-1" style="background-color:lavender;"><h6>Keywords for modifiers(11)</h6><p>public<br>private<br>protected<br>static<br>final<br>abstract<br>synchronized<br>native<br>strictfp(1.2)<br>transient<br>volatile</p></div>
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Keywords for exception handling(6)</h6><p>try<br>catch<br>finally<br>throw<br>throws<br>assert(1.4)</p></div>
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Class related keywors(6)</h6><p>class<br>interface<br>extends<br>implements<br>package<br>import</p></div>
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Object related keywords(4)</h6><p>new<br>instanceof<br>super<br>this</p></div>
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Void return type keyword(1)</h6><p>void</p></div>
-                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Enum Keyword(1)</h6><p>enum</p></div>
+                <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Enum Keyword(1)</h6><p>enum(1.5)</p></div>
                 <div class="col-sm-1" style="background-color:lavender;"><h6>Unused keywords(2)</h6><p>goto<br>const</p></div>
                 <div class="col-sm-1" style="background-color:lavenderblush;"><h6>Reserved literals(3)</h6><p>true<br>false<br>null</p></div>
             </div>
         </div>
+        <p>Goto - Usage of goto created several problems in old languages and hence SUN people banned this keyword in java.</p>
+        <p>const - Use final instead of const.</p>
+        <p>goto and const are unused keywords but if we are trying to use we will get CE.</p>
+        <p>null - default value for object reference.</p>
+        <p>true, false - values for boolean data type.</p>
         <mark>Delete keyword is not there because destruction of the object is responsibility of garbage collector</mark>
-        <p>We can use enum to define a group of named constants</p>
+        <br><br><p>Enum - We can use enum to define a group of named constants</p>
+        <pre>
+          <code>
+            enum month {
+              JAN, FEB,... DEC;
+            }
+          </code>
+        </pre>
+        <p>All 53 reserved words in java contains only lower case alphabet symbols.</p>
         <mark>In java return type is mandatory</mark>
-        <h3>3. Data Types</h3>
+        <br><br><h3>3. Data Types</h3>
         <p>In java every variable and every expression has some type. Each and every datatype is clearly defined. Every assignment should be checked by compiler for type compatibility because of above reasons we can conclude java language is strongly typed  programming language</p>
         <div class="container-fluid">
             <p class="bg-warning text-white">Is java pure oop language or not?</p>
         
-            <p>Java is not considered as pure oop language because several oop feature is not supported by java. Like operator overloading and multiple inheritance etc. We are depending on primitive data types which are non-object</p>
+            <p>Java is not considered as pure oop language because several oop feature is not supported by java. Like operator overloading and multiple inheritance etc. We are depending on primitive data types which are non-objects</p>
         </div>
 
         <h5>Primitive data types(8)</h5>
@@ -71,10 +167,11 @@
         <p>Non-Numeric data types - Data types which can be used to represent non-numeric data like char and boolean</p>
         <p>Except char and boolean remaining data types are signed data types because we can represent both positive and negative numbers.</p>
         <p>0 represents positive number and 1 represents negative number. Positive numers will be represented directly in a memory whereas as negative numbers will be represented in 2's compliment form.</p>
-        <p> If we want to handle data in terms of streams either from the file or from the network. file supported form or the the network supported form is byte data type</p>
+        <p> If we want to handle data in terms of streams either from the file or from the network(file supported form or the the network supported form is byte data type)</p>
         <p>Short is the most rarely used data type in java</p>
-        <p>If we want 5 to 6 decimal places of accuracy go for float. Float follows single precision.</p>
-        <p>If we want 14 to 15 decimal places of accuracy go for double. Double follows double precision</p>
+        <p>Ex:-I want to write data to a file or I want to send data across a network.</p>
+        <p>If we want 5 to 6 decimal places of accuracy go for float. <span class="text-primary">Float follows single precision.</span></p>
+        <p>If we want 14 to 15 decimal places of accuracy go for double. <span class="text-primary">Double follows double precision</span></p>
         <table class="table table-striped" >
             <thead class="thead-dark">
               <tr>
@@ -109,7 +206,8 @@
               </tr>
             </tbody>
           </table>
-
+<p>The number of characters present in a big file may exceed int range, hence the return type of length method is long but not int.</p>
+<code>long l = f.length()</code><br><br>
           <code>
               <pre>
                   int x=1;
@@ -120,15 +218,24 @@
                   }
                 </pre>
              </code>
-             
+             <code>
+               <pre>
+                 boolean b = True;
+
+                 Output:
+                 Can't find symbol
+                 symbol : variable True
+                 location : class Test
+               </pre>
+             </code>
              <p class="text-primary"> This code will give error because this was possible in old languages. Here it is expecting boolean so provide boolean only</p>
              </div>
         <div class="container-fluid">
             <p class="bg-warning text-white">Why java uses 2 byte instead of 1 byte for char?</p>
-            <p>Because java uses unicode, old language uses ascii code</p>
+            <p>Because java uses unicode, old language uses ascii code(1 byte is sufficient to represent 256 bits)</p>
         </div>
 
-        <mark>Null is the default value for object reference so we can't use it for primitive types</mark>
+        <mark>Null is the default value for object reference so we can't use it for primitive types(o/w CE)</mark>
 
         <h3>4. Literals</h3>
 
@@ -165,10 +272,9 @@
         <pre><output>Wrong because assigning 8 byte to 4 byte</output></pre>
 
         <h5>Floating Point Literals</h5>
-
         <pre><code>
         1. float f = 123.456f;
-        2. double d = 0123.456
+        2. double d = 0123.456D
         3. double d = 0x123.456
         4. double d = 0786
         5. double d = 0xFace
@@ -198,16 +304,17 @@
         8. Valid 
         9. Valid
       </output></pre>
+      <p>We can specify floating point literals only in decimal form and we can't specify in octal and hexadecimal forms. O/w CE: malformed floating point literals.</p>
 
         <h5>Boolean Literals</h5>
         <p>Only allowed values for boolean literals are true or false</p>
 
         <h5>Char Literals</h5>
-        <p>We can specify char literal as integral literal which represents unicode value of the character and that integral literal can be specified either in decimat or octal or hexa forms but allowed range is 65535</p>
+        <p>We can specify char literal as integral literal which represents unicode value of the character and that integral literal can be specified either in decimal or octal or hexa decimal forms but allowed range is 65535</p>
         <pre><code>
           1. char ch = "a"
           2. char ch = 'abc'
-          3. char ch = '97'
+          3. char ch = 97
           4. char ch = 65536
         </code></pre>
 
@@ -217,6 +324,7 @@
           3. a
           4. Found int req char
         </output></pre>
+        <p>We can represent char literals in unicode representation which is nothing but '\u0061' (represents a : convert 97 to hexadecimal)</p>
         <table class="table table-striped" >
           <thead class="thead-dark">
             <tr>
@@ -259,7 +367,29 @@
             </tr>
           </tbody>
         </table>
+        <div class="container-fluid">
+          <p class="bg-warning text-white">Which of the following are valid representation?</p>
+          <code>
+            <pre>
+              char ch = 65536;
+              char ch = 0XBeer;
+              char ch = \uface;
+              char ch = '\ubeef';
+              char ch = '\m';
+              char ch = '\iface';
 
+
+              Output:
+              Invalid
+              Invalid
+              Invalid
+              Valid 
+              Invalid
+              Invalid
+            </pre>
+          </code>
+          
+      </div>
         <h5>String Literals</h5>
         <pre><code>string s = "a"</code></pre>
 
@@ -287,10 +417,11 @@
         </output></pre>
 
         <p>We can use underscore symbols only with in the digits</p>
-
+        <img src="images/ss13.png" alt="data representation" width="400" height="
+        500">
         <p>byte(1B)-----> short(2B) ------> int(4B) -----> long(8B) -----> float(4B) -----> double(8B)</p>
         <p>char(2B) -----> int(4B) -----> long(8B) -----> float(4B) -----> double(8B)</p>
-
+        <p>short and char both are having 2B so why we can't assign each other. First both are different data type, Second signed and unsigned, 16 bit char in 15 bit short(1 for sign)</p>
         <p>8 byte long value we can assign to 4 B float variable bcoz both are following diff memory representation internally.</p>
         <h3>5. Arrays</h3>
         <h5>Introduction</h5>
@@ -309,7 +440,7 @@
         <code>int x[];</code><br>
 
         <code>int[6] x;</code>(Invalid)
-        <p>At the time of declaration we cant specify the size o/w we will get compile time error</p>
+        <p><span class="text-primary">At the time of declaration we cant specify the size o/w we will get compile time error</span></p>
 
 
         <h6>2-D array declaration</h6>
@@ -431,6 +562,50 @@
         x[0][2] = new int[3];
         x[1] = new int[2][2];
       </code></pre>
+      <div class="container-fluid">
+        <p class="bg-warning text-white">Which of the following array declarations are valid?</p>
+        <pre><code>
+          int[] a = new int[];
+          int[] a = new int[3];
+          int[][] a = new int[][];
+          int[][] a = new int[3][];
+          int[][] a = new int[][4];
+          int[][] a = new int[3][4];
+          int[][][] a = new int[3][4][5];
+          int[][][] a = new int[3][4][];
+          int[][][] a = new int[3][][5];
+          int[][][] a = new int[][4][5];
+
+
+          Output:- 
+          invalid
+          valid 
+          invalid 
+          valid 
+          invalid 
+          valid 
+          valid 
+          valid 
+          invalid 
+          invalid
+        </code></pre>
+    </div>
+
+    
+      <pre>
+        <code>
+        int[][] x = new int[2][3];
+        SOP(x);
+        SOP(x[0]);
+        SOP(x[0][0]);
+
+        Output:- 
+        [[I@u09a
+        [I@8hr9
+        0
+      </code>
+      </pre>
+    
 
       <mark>Once we creates an array every array element by default initialized by value 0</mark>
       <br><br><mark>Whenever we are trying to print any reference variable, internally toString() method will be called which is implemented by default to return the string in classname@hashcode_in_hexadecimal form</mark>
@@ -447,10 +622,11 @@
         null 
         NullPointerException
       </output></pre>
-      
+      <p>If we don't initialize any object by default it will be initialized with null.</p>
       <p>If we are trying to perform any operation on null then we will get RE by saying NullPointerException</p>
-
-        <h5>Array declaration, Creation and Initialization in a single line</h5>
+      <p>If we are trying to access array element with out of range index(either positive or negative int value) then we will get RE: ArrayIndexOutOfBoundsException.</p>
+      <p>Float value as index : Possible loss of precision becuase index expecting integer value only.</p>
+      <h5>Array declaration, Creation and Initialization in a single line</h5>
         <code>int[] x = {10, 20, 30};</code><br>
         <code>int[][] x = {{10, 20}, {30, 40, 50}};</code><br>
         <code>int[][][] x = {{{10, 20, 30}, {40, 50, 60}}, {{70, 80}, {90, 100}}};</code><br>
@@ -536,7 +712,7 @@
         <p>Sometimes we can declare an array without name such type of nameless arrays are called annonymous arrays</p>
         <p>The main purpose of annonymous arrays is just for instant use(one time usage)</p>
         <p>We can create annonymous arrays as follows- new int[]{10, 20, 30};</p>
-        <p>While creating annonymous arrays we can't create the size o/w we will get compile time error</p>
+        <p><span class="text-primary">While creating annonymous arrays we can't create the size o/w we will get compile time error</span></p>
         
         <code>new int[]{10, 20, 30, 40, 50};</code>Valid<br>
         <code>new int[5]{10, 20, 30, 40, 50};</code>Invalid
@@ -588,7 +764,7 @@
           r[0] = new Thread();
           r[1] = new String("durga");
         </code></pre>
-
+<p>We are not creating Runnable object, just creating Runnable type array object. Interface type array object we can create but interface object we cant create.</p>
         <pre><output>
           incompatible types: String cannot be converted to Runnable
                 r[1] = new String("durga");
@@ -1287,7 +1463,7 @@ it is not required to use class name and we can access directly</p>
     p s v m1(int... x) {
       SOP("int...");
     }
-    p s v m(int[] x) {
+    p s v m1(int[] x) {
        SOP("int[]"); 
     }
   }
@@ -1329,7 +1505,7 @@ it is not required to use class name and we can access directly</p>
 <p>Wherever 1D array present we can replace with var-arg parameter</p>
 <p>m1(int[] x)  ->  m1(int... x)</p>
 
-<p>Main of string array args can be replaced with main(String... x)</p>
+<p>Main of string array args can be replaced with main(String... x)   (From 1.5v onwards)</p>
 <p>main(String[] args)  ->  main(String... x)</p>
 
 <h6>case 2:</h6>
@@ -1548,7 +1724,6 @@ class Test {
 </div>
 
 <h6>Case 1:</h6>
-<p>Overloading of the main method is possible but JVM will always call String[] arg only. The other overloaded method we have to call explicitly like other normal method</p>
 <pre><code>
   class Test {
     public static void main(String[] args) {
@@ -1559,13 +1734,12 @@ class Test {
     }
   }
 </code></pre>
-
 <pre><output>
   String[]
 </output></pre>
+<p>Overloading of the main method is possible but JVM will always call String[] arg only. The other overloaded method we have to call explicitly like other normal method</p>
 
 <h6>Case 2:</h6>
-<p>Inheritance concept applicable for main method hence while executing child class if child doesn't contain main method then parent class main method will be executed.</p>
 <pre><code>
   class P {
     public static void main(String[] args) {
@@ -1576,6 +1750,7 @@ class Test {
 
   }
 </code></pre>
+<p>Inheritance concept applicable for main method hence while executing child class if child doesn't contain main method then parent class main method will be executed.</p>
 
 <img src="images/ss6.png" alt="ss6" width="300" height="300">
 
@@ -1778,7 +1953,7 @@ class Test {
 <p>We can customize behaviour of the main method</p>
 
 <h6>Why command line arguments are always string</h6>
-<p>String is the most common used object thats why some people gave priority to the string type and we can easily convert it into other types also</p>
+<p>String is the most common used object thats why SUN people gave priority to the string type and we can easily convert it into other types also</p>
 
 <h6>Case 1:</h6>
 <pre><code>
@@ -1809,7 +1984,6 @@ class Test {
 </output></pre>
 
 <h6>case 2:</h6>
-<p>Within main method commad line arguments are available in string form</p>
 <pre><code>
   class P {
     public static void main(String[] args) {
@@ -1821,9 +1995,9 @@ class Test {
 java test 10 20
 1020
 </output></pre>
-
+<p>Within main method commad line arguments are available in string form</p>
 <h6>case 3:</h6>
-<p>Usually space itself is the separator between command line arguments. If our command line argument itself contain space then we have to enclose that command line argument within double quotes</p>
+
 <pre><code>
   class P {
     public static void main(String[] args) {
@@ -1836,7 +2010,7 @@ java test 10 20
   javac Test "Note Book"
   Note Book
 </output></pre>
-
+<p>Usually space itself is the separator between command line arguments. If our command line argument itself contain space then we have to enclose that command line argument within double quotes</p>
 <h3>10. java coding standards</h3>
 <p>Whenever we are writing java code it is highly recommended to follow coding standards. Whenever we are writing any component its name should reflect the purpose of that component(functionality)</p>
 <p>The main advantage of this approach is readibility and the maintainability of the code will be improved</p>
@@ -1957,18 +2131,18 @@ java test 10 20
 <h6>Case 1: To register a listener</h6>
 <p>Method name should be prefixed with add.</p>
 <pre><code>
-  public void addMyActionListener(myActionListener l); <span style="color:green">valid</span>
-  public void registerMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
-  public void addMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
+  public void addMyActionListener(MyActionListener l); <span style="color:green">valid</span>
+  public void registerMyActionListener(MyActionListener l); <span style="color:red">Invalid</span>
+  public void addMyActionListener(ActionListener l); <span style="color:red">Invalid</span>
 </code></pre>
 
 <h6>Case 2: To unregister a listener</h6>
 <p>Method name should be prefixed with remove</p>
 <pre><code>
-  public void removeMyActionListener(myActionListener l); <span style="color:green">valid</span>
-  public void unRegisterMyActionListener(myActionListener l); <span style="color:red">Invalid</span>
+  public void removeMyActionListener(MyActionListener l); <span style="color:green">valid</span>
+  public void unRegisterMyActionListener(MyActionListener l); <span style="color:red">Invalid</span>
   public void removeMyActionListener(ActionListener l); <span style="color:red">Invalid</span>
-  public void deleteMyActionListener(ActionListener l); <span style="color:red">Invalid</span>
+  public void deleteMyActionListener(MyActionListener l); <span style="color:red">Invalid</span>
 </code></pre>
 
 
