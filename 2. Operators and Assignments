@@ -153,9 +153,7 @@ table {
     </output></pre>
 
     <h6>Difference between b++ and b = b + 1;</h6>
-    <p class="bg-primary text-white">If we apply any Arithmetic operator between two variables a and b the result type is always max(int, type of a, type of b)
-        but in the case of increment and decrement operators internal typecasting will be performed automatically b = (type of b)(b + 1);
-    </p>
+    
     <pre><code>
         byte b = 10;
         b = b + 1;
@@ -164,7 +162,9 @@ table {
     <pre><output>
         CE: incompatible types: possible lossy conversion from int to byte
     </output></pre>
-
+    <p class="bg-primary text-white">If we apply any Arithmetic operator between two variables a and b the result type is always max(int, type of a, type of b)
+        but in the case of increment and decrement operators internal typecasting will be performed automatically b = (type of b)(b + 1);
+    </p>
     <pre><code>
         byte b = 10;
         b = (byte)(b + 1);
@@ -355,7 +355,7 @@ true
 <p>3. The only operator which cause AE are / and %</p>
 
     <h3>3. String concatenation operator(+)</h3>
-    <p>The only overloaded operator in java is + operator. Sometimes it acts as arithmetic addition operator and Sometimes it acts as string concatenation
+    <p><span style="color:red">The only overloaded operator in java is + operator.</span> Sometimes it acts as arithmetic addition operator and Sometimes it acts as string concatenation
         operator</p>
 <p>If atleast one argument is string type then + operator acts as concatenation operator and if both arguments are number type then +
     operator acts as arithmetic addition operator</p>
@@ -398,8 +398,7 @@ true
     
 
     <h3>4. Relational operators(<,  <=,  >,  >=)</h3>
-    <mark>We can apply relational operators for every primitive type except boolean</mark>
-    <pre><code>
+        <pre><code>
         SOP(10 < 20);
         SOP('a' < 10);
         SOP('a' < 97.6);
@@ -414,8 +413,9 @@ true
         true
         The operator > is undefined for the argument type(s) boolean, boolean
     </output></pre>
+    <mark>We can apply relational operators for every primitive type except boolean</mark>
 
-    <mark>We cant apply relational operators for object type</mark>
+    
     <pre><code>
         System.out.println("durga" > "durga");
     </code></pre>
@@ -423,18 +423,17 @@ true
     <pre><output>
         The operator > is undefined for the argument type(s) java.lang.String, java.lang.String
     </output></pre>
-
-    <mark>Nesting of relational operators is not allowed o/w we will get compile time error</mark>
-    
+    <mark>We cant apply relational operators for object type</mark>
+        
 <pre><code>
     SOP(10 < 20 < 30);
 </code></pre>
 <pre><output>
     The operator < is undefined for the argument type(s) boolean, int
 </output></pre>
+<mark>Nesting of relational operators is not allowed o/w we will get compile time error</mark>
 
     <h3>5. equality operators(==, !=)</h3>
-    <p>We can apply equality operators for every primitive type including boolean also</p>
     
 <pre><code>
     SOP(10 == 20);
@@ -448,7 +447,7 @@ true
     true(small type will automatically converted to bigger type)
     true
 </output></pre>
-
+<p>We can apply equality operators for every primitive type including boolean also</p>
 <mark>We can apply equality operators for object type also. For object references r1, r2 
     <p>r1 == r2</p>
     returns true if and only if both references pointing to the same object(references comparison or address comparison)
@@ -601,7 +600,7 @@ true
 
     
 <h6>Example 3:</h6>
-<mark>For any class or interface X <span class="bg-primary text-white">null instanceof X</span> is always false</mark>
+
 <pre><code>
     public class Test {
 
@@ -621,7 +620,7 @@ true
     false
     false
 </output></pre>
-
+<mark>For any class or interface X <span class="bg-primary text-white">null instanceof X</span> is always false</mark>
     <h3>7. bitwise operators(&, |, ^)</h3>
     <p>& -> AND = Returns true iff both arguments are true</p>
     <p>| -> OR = Returns true iff atleast one argument is true</p>
@@ -1305,8 +1304,30 @@ Test.java:5: error: cannot find symbol
             </tr>
         </tbody>
     </table>
-
-    <h3>17. instanceof vs isInstance()</h3>
+    <h3>17. ClassNotFoundException vs NoClassDefFoundError</h3>
+    <h6>Difference between ClassNotFoundException and NoClassDefFoundError</h6>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>NoClassDefFoundError</th>
+                <th>ClassNotFoundException</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>For hardcoded class names, at run time if the corresponding .class file is not available then we will get RE saying NoClassDefFoundError which is unchecked<br>
+                 Example:<br> Test t = new Test();<br>At run time if test.class file is not available then we will get RE saying NoClassDefFoundError : Test</td>
+                <td>For dynamically provided class names at run time if the corresponding .class file is not available then we will get RE saying ClassNotFoundException, which is checked exception
+                    <br>Example:<br>
+                    Object o = Class.forName(args[0]).newInstance();
+                    
+                    <br>java Test Student<kbd>enter</kbd><br>
+                    At run time if Student .class file not available then we will get RE saying ClassNotFoundException: Student
+                 </td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>18. instanceof vs isInstance()</h3>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -1348,29 +1369,5 @@ Test.java:5: error: cannot find symbol
 
     <mark>isInstance() is method equivalent of instanceof operator</mark>
     
-
-    <h3>18. ClassNotFoundException vs NoClassDefFoundError</h3>
-    <h6>Difference between ClassNotFoundException and NoClassDefFoundError</h6>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>ClassNotFoundException</th>
-                <th>NoClassDefFoundError</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>For hardcoded class names, at run time if the corresponding .class file is not available then we will get RE saying NoClassDefFoundError which is unchecked<br>
-                 Example:<br> Test t = new Test();<br>At run time if test.class file is not available then we will get RE saying NoClassDefFoundError : Test</td>
-                <td>For dynamically provided class names at run time if the corresponding .class file is not available then we will get RE saying ClassNotFoundException, which is checked exception
-                    <br>Example:<br>
-                    Object o = Class.forName(args[0]).newInstance();
-                    
-                    <br>java Test Student<kbd>enter</kbd><br>
-                    At run time if Student .class file not available then we will get RE saying ClassNotFoundException: Student
-                 </td>
-            </tr>
-        </tbody>
-    </table>
 </body>
 </html>
