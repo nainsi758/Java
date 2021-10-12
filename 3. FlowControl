@@ -181,12 +181,23 @@ h5 {
     </output></pre>
 
     <mark>There is no dangling else problem in java. Every else is mapped to the nearest if statement</mark>
-
+    <p>Earlier example is same as</p>
+    <pre><code>
+        if(true)
+            if(true)
+                SOP("Hello");
+            else
+                SOP("Hii")
+    </code></pre>
+    
+    <pre><output>
+        Hello
+    </output></pre>
     <h5>Switch Statements</h5>
     <p>If several options are available then its not recommended to use nested if esle because it reduces readibility.
         To handle this requirement we should go for switch statement</p>
-    <p>The allowed arguments types for the switch statement are byte short char int until 1.4v but from 1.5v onwards corresponding
-        wrapper classes and enum type also allowed. From 1.7v onwards string type also allowed
+    <p>The allowed arguments types for the switch statement are byte short char int until 1.4v but <span style="color:blue">from 1.5v onwards corresponding
+        wrapper classes and enum type also allowed. From 1.7v onwards string type also allowed</span>
     </p>
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -219,7 +230,7 @@ h5 {
     </table>
 
     <mark>Curly braces are mandatory. Except switch everywhere curly braces are optional</mark>
-    <p>Both case and default are optional i.e an empty switch statement is a valid java syntax</p>
+    <p><span style="color:blue">Both case and default are optional i.e an empty switch statement is a valid java syntax</span></p>
     <pre><code>
         int x = 10;
         swicth(x) {
@@ -242,8 +253,8 @@ h5 {
         Test.java:6: error: case, default, or '}' expected
     </output></pre>
 
-    <p>Inside switch every statements should be under some case or default i.e independent
-        statements are not allowed inside switch o/w we will get compile time error
+    <p><span style="color:blue">Inside switch every statements should be under some case or default i.e independent
+        statements are not allowed inside switch o/w we will get compile time error</span>
     </p>
 
     <pre><code>
@@ -260,7 +271,7 @@ h5 {
     </code></pre>
     
     <pre><output>
-        CE: case expressions must be constant expressions
+        <span style="color:red">CE: case expressions must be constant expressions</span>
     </output></pre>
 
     <pre><code>
@@ -840,7 +851,9 @@ h5 {
         invalid
         invalid
     </output></pre> 
-
+    <p>If we want to speciify type once again, compulsory we have to use semicolon between these and if we 
+        are taking semicolon then it would be treated as Conditional check so 3rd one is invalid.
+    </p>
     <pre><code>
         int i = 0;
         for(SOP("Hello boss u r sleeping"); i < 3; i++) {
